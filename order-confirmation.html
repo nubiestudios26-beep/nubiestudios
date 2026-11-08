@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order confirmed | Nubie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="confirmation-page">
+
+    <div class="confirmation-container">
+        <!-- Checkmark Icon -->
+        <div class="confirmation-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+
+        <h1>Thank you for your order</h1>
+        <p class="confirmation-subtitle" data-i18n="confirmation.subtitle">
+            Your order has been placed successfully.<br>
+            We'll send you a confirmation email shortly.
+        </p>
+
+        <!-- Order Details -->
+        <div class="confirmation-details" id="order-details">
+            <div class="detail-row">
+                <span class="label">Order number</span>
+                <span class="value" id="conf-order-id">—</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Payment method</span>
+                <span class="value" id="conf-payment-method">—</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Email</span>
+                <span class="value" id="conf-email">—</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Total</span>
+                <span class="value" id="conf-total">—</span>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="confirmation-actions">
+            <a href="index.html">
+                <button class="btn btn-dark btn-pill btn-auth-width">Continue shopping</button>
+            </a>
+            <a href="account/orders.html" style="font-size: 13px; color: #888; text-decoration: underline; margin-top: 5px;">
+                View my orders
+            </a>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // Populate from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderData = JSON.parse(localStorage.getItem('nubie_last_order') || '{}');
+
+            if (orderData.order_number) {
+                document.getElementById('conf-order-id').textContent = orderData.order_number;
+            }
+            if (orderData.payment_method) {
+                const methodLabels = {
+                    card: 'Credit / Debit card',
+                    promptpay: 'PromptPay QR',
+                    truemoney: 'TrueMoney Wallet'
+                };
+                document.getElementById('conf-payment-method').textContent = methodLabels[orderData.payment_method] || orderData.payment_method;
+            }
+            if (orderData.email) {
+                document.getElementById('conf-email').textContent = orderData.email;
+            }
+            if (orderData.amount) {
+                document.getElementById('conf-total').textContent = `฿ ${Number(orderData.amount).toLocaleString('th-TH', { minimumFractionDigits: 2 })}`;
+            }
+
+            // Clear cart after successful order
+            localStorage.removeItem('nubie_cart');
+        });
+    </script>
+
+</body>
+</html>

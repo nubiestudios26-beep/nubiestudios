@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | The Future of Fragrance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="home"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-background" style="background-image: url('hero_fragrance.png');"></div>
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="home.heroTitle">The Future of Fragrance</h1>
+                <p class="hero-subtitle" data-i18n="home.heroSubtitle">Born from instinct. Crafted for the rebel.</p>
+                <div class="hero-actions">
+                    <a href="product.html?id=discovery-set" class="btn btn-dark btn-pill" data-i18n="home.shopNow">Shop Now</a>
+                    <a href="story.html" class="btn btn-outline btn-pill" data-i18n="nav.ourStory">Our Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creations Section -->
+        <section class="carousel-section">
+            <div class="carousel-header">
+                <span class="overline accent-red" data-i18n="home.creationsOverline">New Arrivals</span>
+                <h2 data-i18n="home.creationsTitle">Fresh From The Archive</h2>
+            </div>
+            <div class="carousel-container">
+                <div id="creations-container" class="creations-grid">
+                    <!-- Dynamic content injected via script.js -->
+                    <div class="loading-state" data-i18n="home.loading">Initializing archival retrieval...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day One Club Section -->
+        <section class="club-section club-section-video" id="dayone-video-stage">
+            <div class="club-content-refined" id="dayone-glass"></div>
+            <div class="club-content-refined dayone-glass-content">
+                <span class="overline accent-red" data-i18n="home.dayOneClub">Day One Club</span>
+                <h2 class="section-title" data-i18n="home.foundingMember">Become a Founding Member</h2>
+                <p class="section-text" data-i18n="home.clubText">Access the Day One Club for exclusive archival entries and priority procurement.
+                </p>
+                <div class="club-form-horizontal">
+                    <div class="club-input-wrapper">
+                        <input type="email" id="club-video-email-input" placeholder="Registry Email"
+                            class="club-input-underline" data-i18n-placeholder="home.registryEmail">
+                    </div>
+                    <button id="club-video-subscribe-btn" class="club-btn-refined">
+                        <span data-i18n="footer.subscribe">Subscribe</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Archive Section (Social Proof) -->
+        <section class="community-section">
+            <div class="community-header">
+                <div class="community-header-left">
+                    <h2 class="community-title" data-i18n="home.communityTitle">Words of affirmation<br>from our favorite humans.</h2>
+                </div>
+                <div class="community-header-right">
+                    <div class="community-meta">
+                        <span class="meta-label" data-i18n="home.communityMetaLabel">SHH...</span>
+                        <span class="meta-value" data-i18n="home.communityMetaValue">SECRETS OUT</span>
+                    </div>
+                    <a href="story.html" class="community-more-btn">
+                        <span data-i18n="home.communityMore">IN THE GOOD WAY, SEE MORE</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="community-carousel-wrapper">
+                <div class="community-track">
+                    <!-- Influencer Card 1 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer1.png" alt="Alexa V" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-girl-in-a-white-shirt-spraying-perfume-40011-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote1">"My secret to feeling composed and powerful."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jeremyfragrance/" target="_blank" class="influencer-name">@ALEXA_V</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SIREN</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 2 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer2.png" alt="Julian K" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-man-spraying-perfume-on-his-neck-40010-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote2">"Unforgettable tension in a bottle."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jusderose/" target="_blank" class="influencer-name">@JULIAN_K</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SWEET CHAOS</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 3 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer3.png" alt="Mia G" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-spraying-perfume-on-her-neck-and-shoulders-40012-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote3">"The fresh beginning I didn't know I needed."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/schoolofscent/" target="_blank" class="influencer-name">@MIA_G</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">AFTER SOUR</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 4 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer4.png" alt="Leo Archive" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-woman-spraying-perfume-40013-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote4">"Archiving every mood, one scent at a time."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/scentland/" target="_blank" class="influencer-name">@LEO_ARCHIVE</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">DISCOVERY SET</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 5 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer1.png" alt="Scent Guru" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-applying-perfume-on-her-neck-40015-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote5">"An olfactory masterpiece that defies trends."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jeremyfragrance/" target="_blank" class="influencer-name">@SCENT_GURU</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SIREN</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 6 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer2.png" alt="Nose Chronicles" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-man-applying-scent-on-his-wrist-40016-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote6">"The ultimate mood lifter for the modern rebel."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jusderose/" target="_blank" class="influencer-name">@NOSE_CHRONICLES</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SWEET CHAOS</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 7 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer3.png" alt="Aroma Archive" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-spraying-perfume-in-the-air-40017-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote7">"Sophistication in every spray. Pure luxury."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/schoolofscent/" target="_blank" class="influencer-name">@AROMA_ARCHIVE</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">AFTER SOUR</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 8 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer4.png" alt="Fragrance Finder" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-bottle-spraying-perfume-40018-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote8">"My daily dose of confidence and allure."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/scentland/" target="_blank" class="influencer-name">@FRAGRANCE_FINDER</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SIREN</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 9 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer1.png" alt="Essence Enthusiast" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-spraying-perfume-on-a-paper-strip-40019-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote9">"Bottled rebellion. It's unlike anything else."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jeremyfragrance/" target="_blank" class="influencer-name">@ESSENCE_ENTHUSIAST</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">SWEET CHAOS</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Influencer Card 10 -->
+                    <div class="community-card">
+                        <div class="card-visual">
+                            <img src="influencer2.png" alt="The Scent Story" draggable="false">
+                            <video class="hover-video" muted loop playsinline preload="metadata" draggable="false">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-man-spraying-perfume-on-his-suit-40020-large.mp4" type="video/mp4">
+                            </video>
+                            <div class="play-indicator">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="card-quote" data-i18n="home.quote10">"Timeless yet modern. A true signature scent."</p>
+                            <div class="card-footer">
+                                <a href="https://www.instagram.com/jusderose/" target="_blank" class="influencer-name">@THE_SCENT_STORY</a>
+                                <span class="used-product"><span data-i18n="home.used">USED</span> <span class="accent-red">DISCOVERY SET</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Modal Overlay -->
+        <div id="videoModal" class="video-modal">
+            <div class="modal-overlay" onclick="closeVideoModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeVideoModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div id="videoContainer" class="video-container">
+                    <!-- Instagram Embed will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Values Ticker (Moved to last) -->
+        <section class="values-ticker">
+            <div class="ticker-track">
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+                <div class="ticker-content">
+                    <span>Cruelty Free</span> <span class="ticker-dot">•</span>
+                    <span>Vegan</span> <span class="ticker-dot">•</span>
+                    <span>Paraben Free</span> <span class="ticker-dot">•</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Core Dependencies -->
+    <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Project Components -->
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="cart.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

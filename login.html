@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+
+
+    <main class="auth-container">
+        <!-- Login Section -->
+        <section class="auth-section">
+            <h2>If you have an account</h2>
+            <form class="auth-form" id="login-form">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <i class="fas fa-eye-slash password-toggle-icon" id="toggle-password"></i>
+                    </div>
+                </div>
+                <div class="auth-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">I forgot my password</a>
+                </div>
+                <button type="submit" class="btn btn-dark btn-pill btn-auth-width">Sign In</button>
+            </form>
+        </section>
+
+        <!-- Register Section -->
+        <section class="auth-section">
+            <h2>New Customer</h2>
+            <p class="register-info">
+                Create an account and save time later. You can consult all your orders, track deliveries and create a wishlist.
+            </p>
+            <a href="register.html">
+                <button class="btn btn-outline-dark btn-pill btn-auth-width">Register</button>
+            </a>
+        </section>
+    </main>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Custom Scripts -->
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

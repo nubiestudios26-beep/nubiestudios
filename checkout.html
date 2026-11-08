@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Nubie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Link your existing stylesheet: -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+   BASE  (mirrors style.css variables & resets)
+═══════════════════════════════════════════════════════════ */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --color-dark: #111;
+            --color-white: #FFFFFF;
+            --color-grey: #666;
+            --color-light: #f9f9f9;
+            --transition-standard: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-heading: 'Manrope', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+            --page-margin: 64px;
+            --mobile-margin: 20px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-dark);
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        button {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   HEADER  (from style.css .checkout-header)
+═══════════════════════════════════════════════════════════ */
+        .checkout-page {
+            background-color: #FFFFFF;
+            color: #111;
+            min-height: 100vh;
+        }
+
+        .checkout-header {
+            height: 90px;
+            padding: 0 var(--page-margin);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #E3DFD9;
+            background-color: #FFFFFF;
+        }
+
+        .header-inner {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
+
+        .back-link {
+            justify-self: start;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-link i {
+            font-size: 10px;
+        }
+
+        .back-link:hover {
+            color: #111;
+        }
+
+        .checkout-page .brand-logo {
+            justify-self: center;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: #111;
+            display: flex;
+            align-items: center;
+        }
+
+        .checkout-page .logo-image {
+            height: 26px;
+            filter: none !important;
+            display: block;
+        }
+
+        .checkout-actions.header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            justify-content: flex-end;
+        }
+
+        .header-action {
+            display: flex;
+            align-items: center;
+            color: #111;
+            transition: color 0.3s ease;
+        }
+
+        .header-action:hover {
+            color: #D9291C;
+        }
+
+        .header-action:hover .icon-svg-minimal {
+            stroke: #D9291C !important;
+        }
+
+        .icon-svg-minimal {
+            stroke: #111;
+            transition: stroke 0.3s ease;
+        }
+
+        .secure-checkout {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            padding-left: 24px;
+            border-left: 1px solid #E3DFD9;
+        }
+
+        .secure-checkout i {
+            font-size: 10px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════ */
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px 100px;
+        }
+
+        .checkout-layout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 100px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   STEP SECTIONS  (from style.css .step-section)
+═══════════════════════════════════════════════════════════ */
+        .checkout-steps {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-section {
+            padding-bottom: 40px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #E3DFD9;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .step-icon-wrapper {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #E3DFD9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .step-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .step-check-icon {
+            display: none;
+            font-size: 10px;
+            color: #FFFFFF;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            margin-bottom: 0;
+            color: #333;
+            flex: 1;
+        }
+
+        .step-edit {
+            margin-left: auto;
+            font-size: 10px;
+            text-decoration: underline;
+            color: #333;
+            background: none;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-weight: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* completed */
+        .step-section.completed .step-icon-wrapper {
+            background: #000;
+            border-color: #E3DFD9;
+        }
+
+        .step-section.completed .step-number {
+            display: none;
+        }
+
+        .step-section.completed .step-check-icon {
+            display: block;
+        }
+
+        .step-section.completed .step-edit {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .step-section.completed .step-title {
+            color: #333;
+            opacity: 1;
+        }
+
+        /* inactive */
+        .step-section:not(.active):not(.completed) .step-title {
+            opacity: 0.4;
+        }
+
+        .step-section:not(.active):not(.completed) .step-icon-wrapper {
+            opacity: 0.4;
+        }
+
+        /* content */
+        .step-content {
+            padding: 30px 0 30px 48px;
+            display: none;
+        }
+
+        .step-section.active .step-content {
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   FORM ELEMENTS  (matching auth page style)
+═══════════════════════════════════════════════════════════ */
+        .form-label {
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            color: #888;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 44px;
+            border: none;
+            border-bottom: 1px solid #E3DFD9;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333;
+            padding: 5px 0;
+            background: transparent;
+            transition: border-color 0.3s ease;
+            border-radius: 0;
+            -webkit-appearance: none;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: #E3DFD9;
+        }
+
+        .form-input.input-err {
+            border-bottom-color: #D9291C !important;
+        }
+
+        select.form-input {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 5px center;
+            background-size: 12px;
+            padding-right: 22px;
+            background-color: transparent;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-group {
+            /* no extra margin — gap on parent handles spacing */
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .form-row.three {
+            grid-template-columns: 1fr 2fr 2fr;
+        }
+
+        /* Wrapper-border technique for stable layout */
+        .form-group-line {
+            border-bottom: 1px solid #E3DFD9;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+        }
+
+        .form-group-line .form-label {
+            margin-bottom: 5px;
+        }
+
+        .form-group-line .form-input {
+            border-bottom: none !important;
+            padding: 10px 0 !important;
+            height: auto !important;
+            min-height: 38px !important;
+        }
+
+        /* Phone row (matches .phone-box from auth) */
+        .phone-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #E3DFD9;
+            transition: border-color 0.3s ease;
+        }
+
+        .phone-row:focus-within {
+            border-bottom-color: #E3DFD9;
+        }
+
+        .phone-prefix-select {
+            flex: 0 0 110px;
+            border: none !important;
+            outline: none !important;
+            background: transparent !important;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            height: 44px;
+            padding: 8px 8px 8px 0;
+            border-right: 1px solid #E3DFD9 !important;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .phone-number-input {
+            flex: 1;
+            border: none !important;
+            outline: none !important;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333;
+            background: transparent !important;
+            padding: 8px 12px;
+            height: 44px;
+        }
+
+        /* Inline error (matches .inline-alert from auth) */
+        .inline-err {
+            font-size: 12px;
+            color: #D9291C;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .inline-err.show {
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   BUTTONS  (matches .btn-dark, .btn-pill, .btn-auth-width)
+═══════════════════════════════════════════════════════════ */
+        .btn {
+            padding: 14px 32px;
+            letter-spacing: 1px;
+            transition: var(--transition-standard);
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-family: var(--font-body);
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-dark {
+            background-color: #111;
+            color: #FFFFFF;
+        }
+
+        .btn-dark:hover {
+            background-color: transparent !important;
+            border-color: #D9291C !important;
+            color: #D9291C !important;
+        }
+
+        .btn-dark:disabled {
+            background-color: #999;
+            border-color: #E3DFD9;
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-pill {
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        .btn-auth-width {
+            width: 100%;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   STEP 1 — CONTACT
+═══════════════════════════════════════════════════════════ */
+        .guest-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .logged-in-info {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .logged-in-info p {
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .logged-in-email {
+            font-weight: 500;
+            color: #333;
+            display: block;
+        }
+
+        /* auth state helpers (same pattern as style.css) */
+        .step-section.auth-loggedin #logged-in-info {
+            display: block !important;
+        }
+
+        .step-section.auth-loggedin #guest-email-group {
+            display: none !important;
+        }
+
+        .step-section.auth-loggedin #contact-intro-text {
+            display: none !important;
+        }
+
+        .step-section.auth-guest #logged-in-info {
+            display: none !important;
+        }
+
+        .step-section.auth-guest #guest-email-group {
+            display: block !important;
+        }
+
+        .step-section.auth-guest #contact-intro-text {
+            display: block !important;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   STEP 2 — GIFT  (from style.css .gift-selection-container)
+═══════════════════════════════════════════════════════════ */
+        .gift-selection-container {
+            max-width: 600px;
+        }
+
+        .gift-subtitle {
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .gift-choice-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            min-height: 120px;
+        }
+
+        .choice-input-cell {
+            width: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .choice-img-cell {
+            width: 140px;
+            height: 140px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+        }
+
+        .choice-img-cell img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .choice-text-cell {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .choice-label {
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .choice-price {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* custom radio / checkbox (mirrors auth page) */
+        .choice-radio,
+        .choice-checkbox {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #E3DFD9 !important;
+            background: transparent !important;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            outline: none !important;
+            transition: all 0.2s ease;
+            border-radius: 2px !important;
+        }
+
+        .choice-radio {
+            border-radius: 50% !important;
+        }
+
+        .choice-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 45%;
+            width: 4px;
+            height: 8px;
+            border: solid #E3DFD9;
+            border-width: 0 1.5px 1.5px 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .choice-radio:checked::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .gift-extra-options {
+            margin-top: 40px;
+        }
+
+        .gift-option-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .gift-message-wrapper {
+            margin-top: 30px;
+        }
+
+        .gift-message-textarea {
+            width: 100%;
+            height: 180px;
+            border: 1px solid #E3DFD9;
+            border-radius: 8px;
+            padding: 30px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            text-align: center;
+            resize: none;
+            outline: none;
+        }
+
+        .gift-message-textarea::placeholder {
+            color: #bbb;
+            font-weight: 300;
+        }
+
+        .gift-message-textarea:focus {
+            border-color: #E3DFD9;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   STEP 4 — PAYMENT  (from style.css Omise Payment Styles)
+═══════════════════════════════════════════════════════════ */
+        .payment-selection-container {
+            max-width: 600px;
+        }
+
+        /* Card details sub-panel */
+        .card-details-form {
+            padding: 0 0 30px 48px;
+        }
+
+        .card-section-label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .card-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #E3DFD9;
+            padding-bottom: 3px;
+            transition: border-color 0.3s ease;
+        }
+
+        .card-input-wrapper:focus-within {
+            border-bottom-color: #E3DFD9;
+        }
+
+        .card-input-wrapper .form-input {
+            border-bottom: none !important;
+            padding: 0;
+            height: 40px;
+            flex: 1;
+        }
+
+        .card-brand-icon {
+            width: 38px;
+            height: 24px;
+            border: 1px solid #E3DFD9;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            font-size: 14px;
+            color: #ccc;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .card-brand-icon img {
+            display: none;
+            height: 14px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .card-brand-icon i {
+            transition: opacity 0.2s ease;
+        }
+
+        /* PromptPay QR  (from style.css .promptpay-qr-container) */
+        .promptpay-qr-area {
+            padding: 0 0 30px 48px;
+        }
+
+        .promptpay-qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 25px;
+            border: 1px solid #E3DFD9;
+            border-radius: 8px;
+            background: #fafafa;
+            max-width: 300px;
+        }
+
+        .promptpay-qr-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .promptpay-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .promptpay-timer.expiring {
+            color: #D9291C;
+        }
+
+        /* TrueMoney */
+        .truemoney-area {
+            padding: 0 0 20px 48px;
+        }
+
+        .truemoney-area .card-section-label {
+            margin-bottom: 20px;
+        }
+
+        /* Payment processing overlay  (from style.css) */
+        .payment-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, .88);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-overlay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .payment-spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E3DFD9;
+            border-top-color: #E3DFD9;
+            border-radius: 50%;
+            animation: nubie-spin 0.8s linear infinite;
+        }
+
+        @keyframes nubie-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .payment-overlay-content p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Payment error  (from style.css .payment-error) */
+        .payment-error {
+            font-size: 13px;
+            color: #D9291C;
+            padding: 12px 16px;
+            background: #FFF5F5;
+            border: 1px solid #FED7D7;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        #step-4 {
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   ORDER SUMMARY  (right column, from style.css)
+═══════════════════════════════════════════════════════════ */
+        .order-summary-section {
+            position: sticky;
+            top: 40px;
+        }
+
+        .summary-title {
+            font-size: 15px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #111;
+            letter-spacing: 1.5px;
+        }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 24px;
+        }
+
+        .summary-item-img {
+            width: 140px;
+            height: 140px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .summary-item-img img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .summary-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .summary-item-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .summary-item-info {
+            flex: 1;
+        }
+
+        .summary-item-category {
+            font-size: 10px;
+            color: #999;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .summary-item-title {
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .summary-item-meta {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .summary-item-price {
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .summary-empty {
+            font-size: 13px;
+            color: #999;
+            padding: 10px 0;
+        }
+
+        /* ── Promo / Gift  (from style.css .summary-promo-container) ── */
+        .summary-promo-container {
+            background-color: #FFFFFF;
+            padding: 30px;
+            margin-bottom: 50px;
+            border-radius: 12px;
+            border: 1px solid #E3DFD9;
+        }
+
+        .promo-header {
+            font-size: 12px;
+            color: #111;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .promo-fields-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .promo-input-field {
+            display: flex;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #E3DFD9;
+            padding: 0;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            height: 44px;
+            align-items: center;
+        }
+
+        .promo-input-field:focus-within {
+            border-bottom-color: #E3DFD9;
+        }
+
+        .promo-input-field.promo-error {
+            border-bottom-color: #D9291C !important;
+            animation: promoShake 0.4s ease;
+        }
+
+        .promo-input-field.promo-success {
+            border-bottom-color: #E3DFD9 !important;
+            background: transparent;
+        }
+
+        @keyframes promoShake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-4px);
+            }
+
+            75% {
+                transform: translateX(4px);
+            }
+        }
+
+        .promo-input-field input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 13px;
+            color: #333;
+            background: transparent;
+            text-transform: uppercase;
+        }
+
+        .promo-input-field input::placeholder {
+            text-transform: none;
+        }
+
+        .promo-input-field input:disabled {
+            color: #999;
+            cursor: default;
+        }
+
+        .promo-btn-arrow {
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 14px;
+            color: #111;
+            cursor: pointer;
+            padding: 0 0 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .promo-btn-arrow:focus,
+        .promo-btn-arrow:active,
+        .promo-btn-arrow:hover:focus {
+            outline: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: none !important;
+        }
+
+        .promo-btn-arrow:hover {
+            color: #D9291C;
+        }
+
+        .promo-btn-arrow.is-remove {
+            color: #D9291C;
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* feedback under promo fields */
+        .promo-feedback-msg {
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding-left: 4px;
+        }
+
+        .promo-feedback-msg.show {
+            display: flex;
+        }
+
+        .promo-feedback-msg.success {
+            color: #10B981;
+        }
+
+        .promo-feedback-msg.error {
+            color: #D9291C;
+        }
+
+        /* ── Totals  (from style.css .summary-totals) ── */
+        .summary-totals {
+            border-top: 1px solid #E3DFD9;
+            padding-top: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            color: #333;
+        }
+
+        .summary-row.discount-row {
+            color: #10B981;
+        }
+
+        .summary-row.giftcard-row {
+            color: #10B981;
+        }
+
+        .summary-row.total {
+            margin-top: 20px;
+            padding-top: 25px;
+            border-top: 1px solid #E3DFD9;
+            color: #111;
+        }
+
+        .total-label-group span {
+            font-size: 20px;
+        }
+
+        .total-price-group {
+            text-align: right;
+        }
+
+        .total-price-group span {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .summary-vat {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .summary-footer {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .trust-text {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .customer-care {
+            font-size: 12px;
+            color: #111;
+            font-weight: 500;
+        }
+
+        .customer-care a {
+            text-decoration: underline;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .checkout-layout-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .order-summary-section {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --page-margin: 20px;
+            }
+
+            .checkout-container {
+                padding: 40px 20px 80px;
+            }
+
+            .checkout-header {
+                height: 64px;
+                padding: 0 20px;
+            }
+
+            .form-row,
+            .form-row.three {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .gift-choice-row {
+                min-height: auto;
+                gap: 15px;
+            }
+
+            .choice-img-cell {
+                width: 80px;
+                height: 80px;
+                font-size: 36px;
+            }
+
+            .card-details-form {
+                padding-left: 0;
+            }
+
+            .promptpay-qr-area,
+            .truemoney-area {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="checkout-page">
+
+    <!-- ══════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════ -->
+    <header class="checkout-header">
+        <div class="header-inner">
+
+            <a href="index.html" class="back-link">
+                <i class="fas fa-chevron-left"></i>
+                <span>Back to Shopping</span>
+            </a>
+
+            <a href="index.html" class="brand-logo">
+                <img src="logo.png" alt="nubie" class="logo-image">
+            </a>
+
+            <div class="checkout-actions header-right">
+                <a href="login.html" id="user-icon-link" class="header-action" title="Account">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="icon-svg-minimal"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </a>
+                <div class="secure-checkout">
+                    <i class="fas fa-lock"></i>
+                    <span>Secure</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════════════════ -->
+    <main class="checkout-container">
+        <div class="checkout-layout-grid">
+
+            <!-- ══════════════ LEFT — STEPS ══════════════ -->
+            <div class="checkout-steps">
+
+                <!-- ── STEP 1: CONTACT ──────────────────── -->
+                <section class="step-section active auth-guest" id="step-1">
+                    <div class="step-header">
+                        <div class="step-icon-wrapper">
+                            <span class="step-number">1</span>
+                            <i class="fas fa-check step-check-icon"></i>
+                        </div>
+                        <h2 class="step-title">Contact Information</h2>
+                        <button class="step-edit" onclick="reopenStep(1)">Edit</button>
+                    </div>
+                    <div class="step-content">
+
+                        <p class="guest-text" id="contact-intro-text">
+                            Please enter your email to continue as a guest, sign in to your account, or create one.
+                        </p>
+
+                        <div id="logged-in-info" class="logged-in-info" style="display:none;">
+                            <p>Logged in as</p>
+                            <span class="logged-in-email" id="logged-in-email-display"></span>
+                        </div>
+
+                        <div id="guest-email-group" style="margin-bottom:40px;">
+                            <label class="form-label">Email address *</label>
+                            <input type="email" class="form-input" id="guest-email" placeholder="you@example.com">
+                            <p class="inline-err" id="email-error">Please enter a valid email address.</p>
+                        </div>
+
+                        <button id="guest-continue-btn" class="btn btn-dark btn-pill btn-auth-width"
+                            onclick="validateContact()" disabled>
+                            Continue
+                        </button>
+
+                    </div>
+                </section>
+
+                <!-- ── STEP 2: GIFT ──────────────────────── -->
+                <section class="step-section" id="step-2">
+                    <div class="step-header">
+                        <div class="step-icon-wrapper">
+                            <span class="step-number">2</span>
+                            <i class="fas fa-check step-check-icon"></i>
+                        </div>
+                        <h2 class="step-title">Make this a gift</h2>
+                        <button class="step-edit" onclick="reopenStep(2)">Edit</button>
+                    </div>
+                    <div class="step-content">
+                        <div class="gift-selection-container">
+
+                            <h4 class="gift-subtitle">Packaging</h4>
+
+                            <label class="gift-choice-row">
+                                <div class="choice-input-cell">
+                                    <input type="radio" name="packaging" value="gift" class="choice-radio">
+                                </div>
+                                <div class="choice-img-cell">
+                                    <!-- <img src="gift_wrapping_option.png" alt="Gift Wrapping"> -->
+                                    🎁
+                                </div>
+                                <div class="choice-text-cell">
+                                    <span class="choice-label">Gift wrapping</span>
+                                    <span class="choice-price">Free</span>
+                                </div>
+                            </label>
+
+                            <label class="gift-choice-row">
+                                <div class="choice-input-cell">
+                                    <input type="radio" name="packaging" value="standard" checked class="choice-radio">
+                                </div>
+                                <div class="choice-img-cell">
+                                    <!-- <img src="standard_delivery_option.png" alt="Standard Packaging"> -->
+                                    📦
+                                </div>
+                                <div class="choice-text-cell">
+                                    <span class="choice-label">Standard packaging</span>
+                                    <span class="choice-price">Free</span>
+                                </div>
+                            </label>
+
+                            <div class="gift-extra-options">
+                                <label class="gift-option-checkbox-row">
+                                    <input type="checkbox" name="remove_price" class="choice-checkbox">
+                                    <span>Remove price from invoice</span>
+                                </label>
+                                <label class="gift-option-checkbox-row">
+                                    <input type="checkbox" id="toggle-gift-message" class="choice-checkbox">
+                                    <span>Add a gift message</span>
+                                </label>
+                            </div>
+
+                            <div class="gift-message-wrapper" id="gift-message-container" style="display:none;">
+                                <textarea id="gift-message-input" class="gift-message-textarea" maxlength="200"
+                                    placeholder="Write your personal message here"></textarea>
+                                <div class="char-count" id="char-count">200 characters left</div>
+                            </div>
+
+                            <button class="btn btn-dark btn-pill btn-auth-width" style="margin-top:60px;"
+                                onclick="nextStep(3)">
+                                Continue
+                            </button>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── STEP 3: SHIPPING ──────────────────── -->
+                <section class="step-section" id="step-3">
+                    <div class="step-header">
+                        <div class="step-icon-wrapper">
+                            <span class="step-number">3</span>
+                            <i class="fas fa-check step-check-icon"></i>
+                        </div>
+                        <h2 class="step-title">Shipping and Delivery</h2>
+                        <button class="step-edit" onclick="reopenStep(3)">Edit</button>
+                    </div>
+                    <div class="step-content">
+                        <form class="checkout-form" id="shipping-form" onsubmit="return false;">
+
+                            <div>
+                                <label class="form-label">Address *</label>
+                                <input type="text" class="form-input" id="s-address" required
+                                    placeholder="Street name and house number">
+                            </div>
+
+                            <div>
+                                <label class="form-label">Country *</label>
+                                <select id="s-country" class="form-input" required>
+                                    <option value="Thailand" selected>Thailand</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="Cambodia">Cambodia</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="China">China</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">France</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Hong Kong">Hong Kong</option>
+                                    <option value="India">India</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Israel">Israel</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="Kenya">Kenya</option>
+                                    <option value="Korea (Rep. of)">Korea (Rep. of)</option>
+                                    <option value="Kuwait">Kuwait</option>
+                                    <option value="Lao P.D.R.">Lao P.D.R.</option>
+                                    <option value="Lebanon">Lebanon</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Myanmar">Myanmar</option>
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Philippines">Philippines</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Qatar">Qatar</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Russian Federation">Russian Federation</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Sri Lanka">Sri Lanka</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                    <option value="Taiwan">Taiwan</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Ukraine">Ukraine</option>
+                                    <option value="United Arab Emirates">United Arab Emirates</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="United States">United States</option>
+                                    <option value="Uruguay">Uruguay</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                    <option value="Viet Nam">Viet Nam</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row three">
+                                <div>
+                                    <label class="form-label">Prefix *</label>
+                                    <select class="form-input" id="s-prefix" required>
+                                        <option value="" disabled selected>—</option>
+                                        <option>Mr</option>
+                                        <option>Ms</option>
+                                        <option>Mrs</option>
+                                        <option>Dr</option>
+                                        <option>Mx</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-input" id="s-first" required>
+                                </div>
+                                <div>
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" class="form-input" id="s-last" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div>
+                                    <label class="form-label">City / Province *</label>
+                                    <input type="text" class="form-input" id="s-city-text" placeholder="City"
+                                        style="display:none;">
+                                    <select class="form-input" id="s-city-select" required>
+                                        <option value="" disabled selected>Select province</option>
+                                        <option>Bangkok</option>
+                                        <option>Amnat Charoen</option>
+                                        <option>Ang Thong</option>
+                                        <option>Buriram</option>
+                                        <option>Chachoengsao</option>
+                                        <option>Chiang Mai</option>
+                                        <option>Chiang Rai</option>
+                                        <option>Chonburi</option>
+                                        <option>Chumphon</option>
+                                        <option>Kalasin</option>
+                                        <option>Kamphaeng Phet</option>
+                                        <option>Kanchanaburi</option>
+                                        <option>Khon Kaen</option>
+                                        <option>Krabi</option>
+                                        <option>Lampang</option>
+                                        <option>Lamphun</option>
+                                        <option>Loei</option>
+                                        <option>Lopburi</option>
+                                        <option>Mae Hong Son</option>
+                                        <option>Maha Sarakham</option>
+                                        <option>Mukdahan</option>
+                                        <option>Nakhon Nayok</option>
+                                        <option>Nakhon Pathom</option>
+                                        <option>Nakhon Ratchasima</option>
+                                        <option>Nakhon Sawan</option>
+                                        <option>Nakhon Si Thammarat</option>
+                                        <option>Nan</option>
+                                        <option>Narathiwat</option>
+                                        <option>Nong Khai</option>
+                                        <option>Nonthaburi</option>
+                                        <option>Pathum Thani</option>
+                                        <option>Pattani</option>
+                                        <option>Phang Nga</option>
+                                        <option>Phatthalung</option>
+                                        <option>Phetchaburi</option>
+                                        <option>Phitsanulok</option>
+                                        <option>Phra Nakhon Si Ayutthaya</option>
+                                        <option>Phuket</option>
+                                        <option>Prachinburi</option>
+                                        <option>Prachuap Khiri Khan</option>
+                                        <option>Ranong</option>
+                                        <option>Ratchaburi</option>
+                                        <option>Rayong</option>
+                                        <option>Roi Et</option>
+                                        <option>Sa Kaeo</option>
+                                        <option>Sakon Nakhon</option>
+                                        <option>Samut Prakan</option>
+                                        <option>Samut Sakhon</option>
+                                        <option>Saraburi</option>
+                                        <option>Satun</option>
+                                        <option>Sisaket</option>
+                                        <option>Songkhla</option>
+                                        <option>Sukhothai</option>
+                                        <option>Suphan Buri</option>
+                                        <option>Surat Thani</option>
+                                        <option>Surin</option>
+                                        <option>Tak</option>
+                                        <option>Trang</option>
+                                        <option>Trat</option>
+                                        <option>Ubon Ratchathani</option>
+                                        <option>Udon Thani</option>
+                                        <option>Uthai Thani</option>
+                                        <option>Uttaradit</option>
+                                        <option>Yala</option>
+                                        <option>Yasothon</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">Post Code *</label>
+                                    <input type="text" class="form-input" id="s-postcode" required placeholder="10110"
+                                        maxlength="10">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="form-label">Phone *</label>
+                                <div class="phone-row">
+                                    <select class="phone-prefix-select" id="s-phone-prefix">
+                                        <option value="+66">🇹🇭 +66</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                        <option value="+81">🇯🇵 +81</option>
+                                        <option value="+82">🇰🇷 +82</option>
+                                        <option value="+86">🇨🇳 +86</option>
+                                        <option value="+91">🇮🇳 +91</option>
+                                        <option value="+60">🇲🇾 +60</option>
+                                        <option value="+62">🇮🇩 +62</option>
+                                        <option value="+63">🇵🇭 +63</option>
+                                        <option value="+65">🇸🇬 +65</option>
+                                        <option value="+84">🇻🇳 +84</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+33">🇫🇷 +33</option>
+                                        <option value="+39">🇮🇹 +39</option>
+                                        <option value="+34">🇪🇸 +34</option>
+                                        <option value="+61">🇦🇺 +61</option>
+                                        <option value="+64">🇳🇿 +64</option>
+                                        <option value="+971">🇦🇪 +971</option>
+                                    </select>
+                                    <input type="tel" class="phone-number-input" id="s-phone" required
+                                        placeholder="081 234 5678">
+                                </div>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-dark btn-pill btn-auth-width" id="shipping-continue-btn"
+                                    type="button" disabled onclick="submitShipping()">
+                                    Continue
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ── STEP 4: PAYMENT ───────────────────── -->
+                <section class="step-section" id="step-4" style="position:relative;">
+                    <div class="step-header">
+                        <div class="step-icon-wrapper">
+                            <span class="step-number">4</span>
+                            <i class="fas fa-check step-check-icon"></i>
+                        </div>
+                        <h2 class="step-title">Payment</h2>
+                        <button class="step-edit" onclick="reopenStep(4)">Edit</button>
+                    </div>
+                    <div class="step-content">
+
+                        <p style="font-size:13px;color:#666;margin-bottom:20px;">
+                            Please select your payment method.
+                        </p>
+
+                        <div class="payment-selection-container">
+
+                            <!-- Card -->
+                            <label class="gift-choice-row" style="min-height:60px;gap:15px;">
+                                <div class="choice-input-cell">
+                                    <input type="radio" name="payment_method" value="card" checked class="choice-radio"
+                                        onchange="switchPayment()">
+                                </div>
+                                <div class="choice-text-cell" style="justify-content:flex-start;gap:12px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <line x1="2" y1="10" x2="22" y2="10" />
+                                    </svg>
+                                    <span class="choice-label">Card</span>
+                                </div>
+                            </label>
+
+                            <!-- Card details panel -->
+                            <div id="card-details-form" class="card-details-form">
+                                <span class="card-section-label">Card details</span>
+                                <div class="checkout-form" style="gap:25px;">
+
+                                    <div>
+                                        <label class="form-label">Card number</label>
+                                        <div class="card-input-wrapper">
+                                            <input type="text" class="form-input" id="card-number"
+                                                placeholder="4242 4242 4242 4242" maxlength="25"
+                                                autocomplete="cc-number">
+                                            <div class="card-brand-icon" id="card-brand-display">
+                                                <i class="far fa-credit-card" id="default-card-icon"></i>
+                                                <img id="brand-logo-img" src="" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div>
+                                            <label class="form-label">Expiry date</label>
+                                            <input type="text" class="form-input" id="card-expiry" placeholder="MM / YY"
+                                                maxlength="7" autocomplete="cc-exp">
+                                        </div>
+                                        <div style="position:relative;">
+                                            <label class="form-label">Security code</label>
+                                            <input type="text" class="form-input" id="card-cvc" placeholder="CVC / CVV"
+                                                maxlength="4" autocomplete="cc-csc">
+                                            <i class="far fa-question-circle"
+                                                title="3-digit code on the back of your card"
+                                                style="position:absolute;right:0;bottom:12px;color:#ccc;font-size:13px;cursor:help;"></i>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="form-label">Cardholder name</label>
+                                        <input type="text" class="form-input" id="card-name"
+                                            placeholder="Full name as shown on card" autocomplete="cc-name">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- PromptPay -->
+                            <label class="gift-choice-row" style="min-height:60px;gap:15px;margin-top:8px;">
+                                <div class="choice-input-cell">
+                                    <input type="radio" name="payment_method" value="promptpay" class="choice-radio"
+                                        onchange="switchPayment()">
+                                </div>
+                                <div class="choice-text-cell" style="justify-content:flex-start;gap:12px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="7" height="7" />
+                                        <rect x="14" y="3" width="7" height="7" />
+                                        <rect x="14" y="14" width="7" height="7" />
+                                        <rect x="3" y="14" width="7" height="7" />
+                                        <path d="M7 7h.01M17 7h.01M7 17h.01" />
+                                    </svg>
+                                    <span class="choice-label">PromptPay QR</span>
+                                </div>
+                            </label>
+
+                            <div id="promptpay-qr-area" class="promptpay-qr-area" style="display:none;">
+                                <span class="card-section-label">Scan to pay</span>
+                                <div class="promptpay-qr-container">
+                                    <div class="qr-placeholder" data-i18n="checkout.qrPlaceholder">QR code will<br>appear here</div>
+                                    <div class="promptpay-timer" id="qr-timer-wrap">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <polyline points="12 6 12 12 16 14" />
+                                        </svg>
+                                        <span id="promptpay-countdown">Expires in 15:00</span>
+                                    </div>
+                                </div>
+                                <p style="font-size:12px;color:#888;margin-top:15px;">
+                                    Open your banking app and scan this QR code to complete payment.
+                                </p>
+                            </div>
+
+                            <!-- TrueMoney -->
+                            <label class="gift-choice-row" style="min-height:60px;gap:15px;margin-top:8px;">
+                                <div class="choice-input-cell">
+                                    <input type="radio" name="payment_method" value="truemoney" class="choice-radio"
+                                        onchange="switchPayment()">
+                                </div>
+                                <div class="choice-text-cell" style="justify-content:flex-start;gap:12px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
+                                        <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
+                                        <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z" />
+                                    </svg>
+                                    <span class="choice-label">TrueMoney Wallet</span>
+                                </div>
+                            </label>
+
+                            <div id="truemoney-phone-area" class="truemoney-area" style="display:none;">
+                                <span class="card-section-label">TrueMoney details</span>
+                                <div>
+                                    <label class="form-label">Phone number</label>
+                                    <input type="tel" class="form-input" id="truemoney-phone" placeholder="08X XXX XXXX"
+                                        maxlength="12">
+                                </div>
+                            </div>
+
+                        </div><!-- /payment-selection-container -->
+
+                        <div id="payment-error" class="payment-error"></div>
+
+                        <button id="place-order-btn" class="btn btn-dark btn-pill btn-auth-width"
+                            style="margin-top:40px;" onclick="placeOrder()">
+                            Place order
+                        </button>
+
+                    </div>
+
+                    <!-- processing overlay -->
+                    <div id="payment-overlay" class="payment-overlay">
+                        <div class="payment-overlay-content">
+                            <div class="payment-spinner"></div>
+                            <p id="payment-overlay-text">Processing your payment…</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div><!-- /checkout-steps -->
+
+            <!-- ══════════════ RIGHT — ORDER SUMMARY ══════════════ -->
+            <aside class="order-summary-section">
+
+                <h2 class="summary-title">
+                    Order Summary (<span id="cart-count">0</span>)
+                </h2>
+
+                <!-- Items -->
+                <div class="summary-items" id="summary-items">
+                    <p class="summary-empty">Your cart is empty.</p>
+                </div>
+
+                <!-- Promo / Gift card -->
+                <div class="summary-promo-container">
+                    <h3 class="promo-header">Gift card / Promo code</h3>
+                    <div class="promo-fields-wrapper">
+
+                        <div>
+                            <div class="promo-input-field" id="gift-field-wrap">
+                                <input type="text" id="gift-card-input" placeholder="Gift card" autocomplete="off">
+                                <button class="promo-btn-arrow" id="apply-gift-card-btn" onclick="applyGift()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="promo-feedback-msg" id="gift-feedback"></div>
+                        </div>
+
+                        <div>
+                            <div class="promo-input-field" id="promo-field-wrap">
+                                <input type="text" id="promo-code-input" placeholder="Promo code" autocomplete="off">
+                                <button class="promo-btn-arrow" id="apply-promo-btn" onclick="applyPromo()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="promo-feedback-msg" id="promo-feedback"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Totals -->
+                <div class="summary-totals">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">฿ 0.00</span>
+                    </div>
+                    <div class="summary-row discount-row" id="summary-discount-row" style="display:none;">
+                        <span id="summary-discount-label">Discount</span>
+                        <span id="summary-discount-value">- ฿ 0.00</span>
+                    </div>
+                    <div class="summary-row giftcard-row" id="summary-giftcard-row" style="display:none;">
+                        <span id="summary-giftcard-label">Gift card</span>
+                        <span id="summary-giftcard-value">- ฿ 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Taxes (VAT incl.)</span>
+                        <span id="summary-tax">฿ 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Gift option</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row total">
+                        <div class="total-label-group"><span>Total</span></div>
+                        <div class="total-price-group">
+                            <span id="summary-total">฿ 0.00</span>
+                            <p class="summary-vat">(VAT included)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-footer">
+                    <p class="trust-text">
+                        Secure payments · Free shipping · Same-day delivery · 30-day free returns
+                    </p>
+                    <p class="customer-care">
+                        <span>Customer care</span> <a href="tel:+6601234567">+66 (0) 123 456 789</a>
+                    </p>
+                </div>
+
+            </aside>
+
+        </div><!-- /checkout-layout-grid -->
+    </main>
+
+    <!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════ -->
+    <script src="i18n.js"></script>
+    <!-- Supabase SDK — must load before inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js" onerror="void 0"></script>
+
+    <script>
+        /* ─── CONFIG ─── edit promo & gift codes here ─── */
+        const PROMOS = {
+            'SAVE10': { type: 'percent', value: 10, desc: '10% off' },
+            'FLAT200': { type: 'fixed', value: 200, desc: '฿200 off' },
+            'NUBIE15': { type: 'percent', value: 15, desc: '15% off' },
+            'WELCOME': { type: 'percent', value: 5, desc: '5% welcome discount' },
+            'SUMMER20': { type: 'percent', value: 20, desc: '20% summer sale' },
+        };
+        const GIFTS = {
+            'GIFT500': 500,
+            'GIFT1000': 1000,
+            'LUCKY250': 250,
+        };
+
+        /* ─── STATE ─── */
+        let appliedPromo = null;
+        let appliedGift = null;
+        let currentStep = 1;
+        let cartItems = [];
+        let qrInterval = null;
+        let qrSeconds = 900;
+
+        /* ─── UTILS ─── */
+        const $ = id => document.getElementById(id);
+
+        function fmtPrice(n) {
+            return '฿\u00a0' + Number(n).toLocaleString('th-TH', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+        }
+
+        /* ─── CART  (reads localStorage "nubie_cart") ─── */
+        function loadCart() {
+            let items = [];
+            try {
+                const raw = JSON.parse(localStorage.getItem('nubie_cart') || '[]');
+                if (Array.isArray(raw) && raw.length > 0) {
+                    items = JSON.parse(JSON.stringify(raw)); // deep clone to avoid mutating local storage source
+                }
+            } catch (e) { }
+
+            if (items.length === 0) {
+                // Demo data so page is never blank during testing
+                items = [
+                    {
+                        name: 'NUBIE Fragrance Mist', category: '150ml',
+                        variant: 'Founding Member Edition', price: 1250, qty: 1, image: ''
+                    },
+                    {
+                        name: 'Day One Club Membership', category: 'Loyalty Tier',
+                        variant: 'Lifetime', price: 0, qty: 1, image: ''
+                    }
+                ];
+            }
+
+            // Dynamically inject free gift item if a referral gift code is applied
+            if (appliedGift && /^GIFT-(MINI|DISC)-[A-Z0-9]{6}$/.test(appliedGift)) {
+                const isMini = appliedGift.startsWith('GIFT-MINI');
+                const title = isMini ? 'Mini Gift Set' : 'Discovery Set';
+                const image = isMini ? 'mini_gift_set.png' : 'discovery_set.png';
+                items.push({
+                    name: title,
+                    title: title,
+                    category: 'Free Gift',
+                    price: 0,
+                    qty: 1,
+                    quantity: 1,
+                    image: image,
+                    variant: 'Referral Reward'
+                });
+            }
+
+            cartItems = items;
+            return items;
+        }
+
+        /* ─── RENDER ITEMS ─── */
+        function renderSummary() {
+            cartItems = loadCart();
+            const totalQty = cartItems.reduce((s, i) => s + Number(i.qty || i.quantity || 1), 0);
+            $('cart-count').textContent = totalQty;
+
+            const container = $('summary-items');
+            if (!cartItems.length) {
+                container.innerHTML = '<p class="summary-empty">Your cart is empty.</p>';
+                recalcTotals(); return;
+            }
+
+            container.innerHTML = cartItems.map(item => {
+                const qty = Number(item.qty || item.quantity || 1);
+                const price = Number(item.price || 0);
+                const title = item.title || item.name || 'Item';
+                const sizeOrCat = item.size || item.category || '';
+                const imgHtml = item.image
+                    ? `<img src="${item.image}" alt="${title}"
+             style="max-width:90%;max-height:90%;object-fit:contain;"
+             onerror="this.style.display='none'">`
+                    : '';
+                return `
+      <div class="summary-item">
+        <div class="summary-item-img">${imgHtml}</div>
+        <div class="summary-item-details">
+          <div class="summary-item-main">
+            <div class="summary-item-info">
+              ${sizeOrCat ? `<span class="summary-item-category">${sizeOrCat}</span>` : ''}
+              <h3 class="summary-item-title">${title}</h3>
+              ${item.variant ? `<p class="summary-item-meta">${item.variant}</p>` : ''}
+              <p class="summary-item-meta">Qty: ${qty}</p>
+            </div>
+            <span class="summary-item-price">${fmtPrice(price * qty)}</span>
+          </div>
+        </div>
+      </div>`;
+            }).join('');
+            recalcTotals();
+        }
+
+        /* ─── RECALC TOTALS ─── */
+        function recalcTotals() {
+            const subtotal = cartItems.reduce(
+                (s, i) => s + Number(i.price || 0) * Number(i.quantity || 1), 0);
+
+            let promoDisc = 0;
+            if (appliedPromo && PROMOS[appliedPromo]) {
+                const p = PROMOS[appliedPromo];
+                promoDisc = p.type === 'percent'
+                    ? Math.round(subtotal * p.value / 100)
+                    : Math.min(p.value, subtotal);
+            }
+            const afterPromo = subtotal - promoDisc;
+            let giftDisc = 0;
+            if (appliedGift && GIFTS[appliedGift])
+                giftDisc = Math.min(GIFTS[appliedGift], afterPromo);
+
+            const grandTotal = afterPromo - giftDisc;
+            const vat = Math.round(grandTotal * 7 / 107);
+
+            $('summary-subtotal').textContent = fmtPrice(subtotal);
+            $('summary-tax').textContent = fmtPrice(vat);
+            $('summary-total').textContent = fmtPrice(grandTotal);
+
+            const dRow = $('summary-discount-row');
+            if (promoDisc > 0) {
+                dRow.style.display = 'flex';
+                $('summary-discount-label').textContent = `Promo (${appliedPromo})`;
+                $('summary-discount-value').textContent = `- ${fmtPrice(promoDisc)}`;
+            } else { dRow.style.display = 'none'; }
+
+            const gRow = $('summary-giftcard-row');
+            if (giftDisc > 0) {
+                gRow.style.display = 'flex';
+                $('summary-giftcard-label').textContent = `Gift card (${appliedGift})`;
+                $('summary-giftcard-value').textContent = `- ${fmtPrice(giftDisc)}`;
+            } else { gRow.style.display = 'none'; }
+        }
+
+        /* ─── PROMO CODE ─── */
+        async function applyPromo() {
+            const inp = $('promo-code-input');
+            const wrap = $('promo-field-wrap');
+            const raw = (inp.value || '').trim().toUpperCase();
+            clearFB('promo'); wrap.classList.remove('promo-error', 'promo-success');
+
+            if (!raw) { shake(wrap); setFB('promo', 'error', 'Please enter a promo code.'); return; }
+            if (appliedPromo) { setFB('promo', 'error', 'Remove the current code first.'); return; }
+            
+            let pType = 'percent', pVal = 0, pDesc = '';
+            
+            if (PROMOS[raw]) {
+                pType = PROMOS[raw].type;
+                pVal = PROMOS[raw].value;
+                pDesc = PROMOS[raw].desc;
+            } else if (/^SHARE15-[A-Z0-9]{6}$/.test(raw)) {
+                const btn = $('apply-promo-btn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                try {
+                    const { data, error } = await window.supabase.rpc('validate_reward_code', { p_code: raw });
+                    if (error || !data || data.valid === false) {
+                        wrap.classList.add('promo-error');
+                        setFB('promo', 'error', 'That promo code is invalid, used, or expired.'); 
+                        btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                        return;
+                    }
+                    pType = 'percent'; pVal = 15; pDesc = '15% Referral Discount';
+                    PROMOS[raw] = { type: pType, value: pVal, desc: pDesc }; // Register it
+                } catch(e) {
+                    wrap.classList.add('promo-error');
+                    setFB('promo', 'error', 'Error validating code.'); 
+                    btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    return;
+                }
+            } else {
+                wrap.classList.add('promo-error');
+                setFB('promo', 'error', 'That promo code is invalid or expired.'); return;
+            }
+
+            appliedPromo = raw;
+            inp.disabled = true;
+            wrap.classList.add('promo-success');
+            const btn = $('apply-promo-btn');
+            btn.innerHTML = '<i class="fas fa-times"></i>';
+            btn.classList.add('is-remove');
+            btn.onclick = removePromo;
+            setFB('promo', 'success', `${pDesc} applied!`);
+            recalcTotals();
+        }
+        function removePromo() {
+            appliedPromo = null;
+            const inp = $('promo-code-input'), wrap = $('promo-field-wrap'), btn = $('apply-promo-btn');
+            inp.disabled = false; inp.value = '';
+            wrap.classList.remove('promo-success', 'promo-error');
+            btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btn.classList.remove('is-remove'); btn.onclick = applyPromo;
+            clearFB('promo'); recalcTotals();
+        }
+
+        /* ─── GIFT CARD ─── */
+        async function applyGift() {
+            const inp = $('gift-card-input');
+            const wrap = $('gift-field-wrap');
+            const raw = (inp.value || '').trim().toUpperCase();
+            clearFB('gift'); wrap.classList.remove('promo-error', 'promo-success');
+
+            if (!raw) { shake(wrap); setFB('gift', 'error', 'Please enter a gift card code.'); return; }
+            if (appliedGift) { setFB('gift', 'error', 'Remove the current gift card first.'); return; }
+            
+            let gVal = 0, gMsg = '';
+            
+            if (GIFTS[raw]) {
+                gVal = GIFTS[raw];
+                gMsg = `${fmtPrice(gVal)} gift card applied!`;
+            } else if (/^GIFT-(MINI|DISC)-[A-Z0-9]{6}$/.test(raw)) {
+                const btn = $('apply-gift-card-btn');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                try {
+                    const { data, error } = await window.supabase.rpc('validate_reward_code', { p_code: raw });
+                    if (error || !data || data.valid === false) {
+                        wrap.classList.add('promo-error');
+                        setFB('gift', 'error', 'That gift code is invalid, used, or expired.'); 
+                        btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                        return;
+                    }
+                    gVal = 0;
+                    const giftType = raw.startsWith('GIFT-MINI') ? 'Mini Gift Set' : 'Discovery Set';
+                    gMsg = `✓ ${giftType} will be included with this order`;
+                    GIFTS[raw] = gVal; // Register it
+                } catch(e) {
+                    wrap.classList.add('promo-error');
+                    setFB('gift', 'error', 'Error validating code.'); 
+                    btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    return;
+                }
+            } else {
+                wrap.classList.add('promo-error');
+                setFB('gift', 'error', 'That gift card is invalid.'); return;
+            }
+
+            appliedGift = raw;
+            inp.disabled = true;
+            wrap.classList.add('promo-success');
+            const btn = $('apply-gift-card-btn');
+            btn.innerHTML = '<i class="fas fa-times"></i>';
+            btn.classList.add('is-remove');
+            btn.onclick = removeGift;
+            setFB('gift', 'success', gMsg);
+            renderSummary();
+        }
+        function removeGift() {
+            appliedGift = null;
+            const inp = $('gift-card-input'), wrap = $('gift-field-wrap'), btn = $('apply-gift-card-btn');
+            inp.disabled = false; inp.value = '';
+            wrap.classList.remove('promo-success', 'promo-error');
+            btn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            btn.classList.remove('is-remove'); btn.onclick = applyGift;
+            clearFB('gift'); renderSummary();
+        }
+
+        /* feedback helpers */
+        function setFB(id, type, msg) {
+            const el = $(`${id}-feedback`);
+            el.textContent = msg;
+            el.className = `promo-feedback-msg show ${type}`;
+        }
+        function clearFB(id) {
+            const el = $(`${id}-feedback`);
+            el.textContent = ''; el.className = 'promo-feedback-msg';
+        }
+        function shake(el) {
+            el.classList.remove('promo-error'); void el.offsetWidth; el.classList.add('promo-error');
+        }
+
+        /* ─── STEP NAVIGATION ─── */
+        function nextStep(n) {
+            const cur = $(`step-${currentStep}`);
+            if (cur) { cur.classList.remove('active'); cur.classList.add('completed'); }
+            const next = $(`step-${n}`);
+            if (next) {
+                next.classList.remove('completed'); next.classList.add('active');
+                setTimeout(() => next.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+            }
+            currentStep = n;
+        }
+        function reopenStep(n) {
+            for (let i = n + 1; i <= 4; i++) {
+                const s = $(`step-${i}`); if (s) s.classList.remove('active', 'completed');
+            }
+            const t = $(`step-${n}`);
+            if (t) {
+                t.classList.remove('completed'); t.classList.add('active');
+                setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+            }
+            currentStep = n;
+        }
+
+        /* ─── STEP 1 — CONTACT ─── */
+        function validateContact() {
+            // If user is already logged in, skip contact validation and proceed
+            const s1 = $('step-1');
+            if (s1 && s1.classList.contains('auth-loggedin')) {
+                nextStep(2);
+                return;
+            }
+
+            const inp = $('guest-email');
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const err = $('email-error');
+            if (!re.test((inp.value || '').trim())) {
+                inp.classList.add('input-err'); err.classList.add('show'); return;
+            }
+            inp.classList.remove('input-err'); err.classList.remove('show');
+            nextStep(2);
+        }
+        function setupContactStep() {
+            const inp = $('guest-email'), btn = $('guest-continue-btn');
+            if (!inp || !btn) return;
+            inp.addEventListener('input', () => {
+                btn.disabled = inp.value.trim() === '';
+                inp.classList.remove('input-err');
+                $('email-error').classList.remove('show');
+            });
+            inp.addEventListener('keydown', e => {
+                if (e.key === 'Enter' && !btn.disabled) validateContact();
+            });
+        }
+
+        /* ─── STEP 2 — GIFT OPTIONS ─── */
+        function setupGiftStep() {
+            const toggle = $('toggle-gift-message');
+            const wrap = $('gift-message-container');
+            const textarea = $('gift-message-input');
+            const counter = $('char-count');
+            toggle?.addEventListener('change', () => { wrap.style.display = toggle.checked ? 'block' : 'none'; });
+            textarea?.addEventListener('input', () => {
+                const left = 200 - textarea.value.length;
+                counter.textContent = `${left} character${left !== 1 ? 's' : ''} left`;
+            });
+        }
+
+        /* ─── STEP 3 — SHIPPING ─── */
+        function setupShippingStep() {
+            const btn = $('shipping-continue-btn');
+            const country = $('s-country');
+            const cityTxt = $('s-city-text');
+            const citySel = $('s-city-select');
+
+            function syncCity() {
+                if (country.value === 'Thailand') {
+                    cityTxt.style.display = 'none'; cityTxt.removeAttribute('required');
+                    citySel.style.display = ''; citySel.setAttribute('required', '');
+                } else {
+                    cityTxt.style.display = ''; cityTxt.setAttribute('required', '');
+                    citySel.style.display = 'none'; citySel.removeAttribute('required');
+                }
+            }
+            function checkReady() {
+                const fields = document.querySelectorAll('#shipping-form [required]');
+                btn.disabled = !Array.from(fields).every(el => el.value.trim() !== '');
+            }
+            country.addEventListener('change', () => { syncCity(); checkReady(); });
+            document.getElementById('shipping-form').addEventListener('input', checkReady);
+            document.getElementById('shipping-form').addEventListener('change', checkReady);
+            syncCity(); checkReady();
+        }
+        function submitShipping() { nextStep(4); }
+
+        /* ─── STEP 4 — PAYMENT UI ─── */
+        function switchPayment() {
+            const val = document.querySelector('input[name="payment_method"]:checked')?.value;
+            $('card-details-form').style.display = val === 'card' ? 'block' : 'none';
+            $('promptpay-qr-area').style.display = val === 'promptpay' ? 'block' : 'none';
+            $('truemoney-phone-area').style.display = val === 'truemoney' ? 'block' : 'none';
+            if (val === 'promptpay') startQrTimer(); else stopQrTimer();
+        }
+        function startQrTimer() {
+            stopQrTimer(); qrSeconds = 900; updateQrDisplay();
+            qrInterval = setInterval(() => {
+                qrSeconds--;
+                if (qrSeconds <= 0) { stopQrTimer(); $('promptpay-countdown').textContent = 'Expired'; return; }
+                updateQrDisplay();
+                if (qrSeconds < 120) $('qr-timer-wrap')?.classList.add('expiring');
+            }, 1000);
+        }
+        function stopQrTimer() {
+            if (qrInterval) { clearInterval(qrInterval); qrInterval = null; }
+            $('qr-timer-wrap')?.classList.remove('expiring');
+        }
+        function updateQrDisplay() {
+            const m = String(Math.floor(qrSeconds / 60)).padStart(2, '0');
+            const s = String(qrSeconds % 60).padStart(2, '0');
+            const expiresLabel = window.NubieI18n ? window.NubieI18n.t('checkout.expiresIn') : 'Expires in';
+            $('promptpay-countdown').textContent = `${expiresLabel} ${m}:${s}`;
+        }
+
+        /* ─── CARD FORMATTING ─── */
+        function setupCardFormatting() {
+            const numInp = $('card-number'), expInp = $('card-expiry'), cvcInp = $('card-cvc');
+            const brandImg = $('brand-logo-img'), brandIco = $('default-card-icon');
+            const BRANDS = [
+                { re: /^4/, src: 'https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons/flat/visa.svg' },
+                { re: /^5[1-5]|^2/, src: 'https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons/flat/mastercard.svg' },
+                { re: /^3[47]/, src: 'https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons/flat/amex.svg' },
+                { re: /^35/, src: 'https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons/flat/jcb.svg' },
+            ];
+            numInp?.addEventListener('input', function () {
+                const d = this.value.replace(/\D/g, '').slice(0, 16);
+                this.value = d.replace(/(.{4})/g, '$1 ').trim();
+                const m = BRANDS.find(b => b.re.test(d));
+                if (m) { brandImg.src = m.src; brandImg.style.display = 'block'; brandIco.style.display = 'none'; }
+                else { brandImg.style.display = 'none'; brandIco.style.display = 'block'; }
+            });
+            expInp?.addEventListener('input', function () {
+                let v = this.value.replace(/\D/g, '').slice(0, 4);
+                if (v.length >= 3) v = v.slice(0, 2) + ' / ' + v.slice(2);
+                this.value = v;
+            });
+            cvcInp?.addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').slice(0, 4); });
+        }
+
+        /* ─── OMISE VIA SUPABASE EDGE FUNCTION ─── */
+        const SUPABASE_FUNCTION_URL = window.supabaseUrl
+            ? window.supabaseUrl + '/functions/v1/omise-charge'
+            : 'https://qsbrjlhnklnfblqulzwn.supabase.co/functions/v1/omise-charge';
+
+        /* ─── PLACE ORDER ─── */
+        async function placeOrder() {
+            const method = document.querySelector('input[name="payment_method"]:checked')?.value;
+            const errEl = $('payment-error'); errEl.style.display = 'none';
+
+            const totalAmount = getCartTotal();
+            if (!totalAmount || totalAmount <= 0) {
+                return showPayErr('Your cart is empty. Please add items before placing an order.');
+            }
+            const amountSatang = Math.round(totalAmount * 100);
+
+            // Get user info for DB order creation
+            let userEmail = 'guest@example.com';
+            let userId = null;
+            if (window.supabase) {
+                const { data: { user } } = await window.supabase.auth.getUser();
+                if (user) {
+                    userEmail = user.email;
+                    userId = user.id;
+                }
+            }
+
+            // Prepare items for DB
+            const items = loadCart().map(i => ({
+                title: i.title || i.name,
+                price: Number(i.price),
+                quantity: Number(i.qty || i.quantity || 1),
+                size: i.size || i.category || '150ml',
+                image: i.image
+            }));
+
+            // Scrape Shipping Information
+            const sPrefix = $('s-prefix')?.value || '';
+            const sFirst = $('s-first')?.value || '';
+            const sLast = $('s-last')?.value || '';
+            const sCountry = $('s-country')?.value || '';
+            const sCity = (sCountry === 'Thailand') ? $('s-city-select')?.value : $('s-city-text')?.value;
+            const sPhonePrefix = $('s-phone-prefix')?.value || '';
+            const sPhoneNum = ($('s-phone')?.value || '').trim();
+
+            const basePayload = {
+                amount: amountSatang,
+                currency: 'THB',
+                userEmail: userEmail,
+                userId: userId,
+                appliedPromo: appliedPromo,
+                appliedGift: appliedGift,
+                items: items,
+                description: `NUBIE Order - ${userEmail}`,
+                shipping: {
+                    name: `${sPrefix} ${sFirst} ${sLast}`.trim(),
+                    address: ($('s-address')?.value || '').trim(),
+                    city: sCity || '',
+                    postcode: ($('s-postcode')?.value || '').trim(),
+                    country: sCountry,
+                    phone: `${sPhonePrefix}${sPhoneNum}`.replace(/\s/g, '')
+                }
+            };
+
+            if (method === 'card') {
+                const num = ($('card-number')?.value || '').replace(/\s/g, '');
+                const exp = ($('card-expiry')?.value || '');
+                const cvc = ($('card-cvc')?.value || '');
+                const name = ($('card-name')?.value || '').trim();
+                if (num.length < 13 || !/^\d+$/.test(num)) return showPayErr('Please enter a valid card number.');
+                if (!/^\d{2}\s*\/\s*\d{2}$/.test(exp)) return showPayErr('Please enter a valid expiry date (MM / YY).');
+                if (cvc.length < 3) return showPayErr('Please enter a valid security code.');
+                if (!name) return showPayErr('Please enter the cardholder name.');
+
+                const expParts = exp.replace(/\s/g, '').split('/');
+                callEdgeFunction({
+                    ...basePayload,
+                    payment_method: 'card',
+                    card: {
+                        name: name,
+                        number: num,
+                        expiration_month: parseInt(expParts[0], 10),
+                        expiration_year: parseInt('20' + expParts[1], 10),
+                        security_code: cvc
+                    }
+                });
+
+            } else if (method === 'promptpay') {
+                callEdgeFunction({
+                    ...basePayload,
+                    payment_method: 'promptpay',
+                    return_uri: window.location.origin + '/order-confirmation.html'
+                });
+
+            } else if (method === 'truemoney') {
+                const ph = ($('truemoney-phone')?.value || '').replace(/\D/g, '');
+                if (ph.length < 10) return showPayErr('Please enter a valid TrueMoney phone number.');
+                callEdgeFunction({
+                    ...basePayload,
+                    payment_method: 'truemoney',
+                    phone_number: ph,
+                    return_uri: window.location.origin + '/order-confirmation.html'
+                });
+            }
+        }
+
+        /* ─── CALL SUPABASE EDGE FUNCTION ─── */
+        async function callEdgeFunction(payload) {
+            const overlay = $('payment-overlay');
+            overlay.style.display = 'flex';
+            $('payment-overlay-text').textContent = 'Processing payment…';
+
+            try {
+                const resp = await fetch(SUPABASE_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': window.supabaseKey || 'sb_publishable_N9ZhvV24PWSlXIDbDVC5sQ_Ee_3sulV',
+                        'Authorization': 'Bearer ' + (window.supabaseKey || 'sb_publishable_N9ZhvV24PWSlXIDbDVC5sQ_Ee_3sulV')
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const charge = await resp.json();
+                console.log('Omise Charge response:', charge);
+
+                if (!resp.ok || charge.object === 'error') {
+                    overlay.style.display = 'none';
+                    showPayErr(charge.message || 'Payment failed. Please try again.');
+                    return;
+                }
+
+                // Handle 3-D Secure or redirect-based flows (PromptPay QR, TrueMoney)
+                if (charge.authorize_uri) {
+                    $('payment-overlay-text').textContent = 'Redirecting to authorization…';
+                    window.location.href = charge.authorize_uri;
+                    return;
+                }
+
+                // Successful or pending
+                if (charge.status === 'successful' || charge.paid === true || charge.status === 'pending') {
+                    $('payment-overlay-text').textContent = charge.status === 'pending'
+                        ? 'Payment pending — awaiting confirmation…'
+                        : 'Payment successful!';
+
+                    // Save order info for confirmation page
+                    localStorage.setItem('nubie_last_order', JSON.stringify({
+                        order_number: charge.order_number || null,
+                        charge_id: charge.id || null,
+                        amount: charge.amount ? charge.amount / 100 : 0,
+                        payment_method: payload.payment_method,
+                        email: payload.userEmail || 'guest',
+                        status: charge.status,
+                        created_at: new Date().toISOString()
+                    }));
+                    localStorage.removeItem('nubie_cart');
+
+                    const delay = charge.status === 'pending' ? 2000 : 1500;
+                    setTimeout(() => { window.location.href = 'order-confirmation.html'; }, delay);
+                } else {
+                    overlay.style.display = 'none';
+                    showPayErr('Payment was not completed. Status: ' + (charge.failure_message || charge.status));
+                }
+
+            } catch (err) {
+                console.error('Payment error:', err);
+                overlay.style.display = 'none';
+                showPayErr('Network error. Please check your connection and try again.');
+            }
+        }
+
+        /* ─── GET CART TOTAL (for Omise amount) ─── */
+        function getCartTotal() {
+            const items = loadCart();
+            let subtotal = items.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.qty || i.quantity) || 1), 0);
+            let discount = 0;
+            if (appliedPromo) {
+                const p = PROMOS[appliedPromo];
+                discount = p.type === 'percent' ? subtotal * p.value / 100 : p.value;
+            }
+            let giftDiscount = appliedGift ? GIFTS[appliedGift] : 0;
+            return Math.max(0, subtotal - discount - giftDiscount);
+        }
+
+        function showPayErr(msg) {
+            const el = $('payment-error');
+            el.textContent = msg; el.style.display = 'block';
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* ─── PROMO / GIFT INPUT — Enter key + auto uppercase ─── */
+        function setupPromoInputs() {
+            [['gift-card-input', applyGift, 'gift'],
+            ['promo-code-input', applyPromo, 'promo']].forEach(([id, fn, fbId]) => {
+                const inp = $(id); if (!inp) return;
+                inp.addEventListener('keydown', e => { if (e.key === 'Enter') fn(); });
+                inp.addEventListener('input', () => {
+                    const pos = inp.selectionStart;
+                    inp.value = inp.value.toUpperCase();
+                    inp.setSelectionRange(pos, pos);
+                    const wrap = $(fbId === 'gift' ? 'gift-field-wrap' : 'promo-field-wrap');
+                    wrap?.classList.remove('promo-error', 'promo-success');
+                    clearFB(fbId);
+                });
+            });
+        }
+
+        /* ─── AUTH CHECK (Supabase optional) ─── */
+        async function checkAuth() {
+            if (typeof supabase === 'undefined') return;
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (!session?.user) return;
+                const s1 = $('step-1');
+                s1.classList.remove('auth-guest'); s1.classList.add('auth-loggedin');
+                $('logged-in-info').style.display = 'block';
+                $('logged-in-email-display').textContent = session.user.email;
+                $('guest-continue-btn').disabled = false;
+                $('user-icon-link').href = 'account.html';
+            } catch (e) { console.warn('Auth:', e); }
+        }
+
+        /* ─── INIT ─── */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSummary();
+            setupContactStep();
+            setupGiftStep();
+            setupShippingStep();
+            setupCardFormatting();
+            setupPromoInputs();
+            checkAuth();
+            window.addEventListener('storage', e => { if (e.key === 'nubie_cart') renderSummary(); });
+        });
+    </script>
+
+    <!-- Auth -->
+    <script src="auth.js" onerror="void 0"></script>
+
+</body>
+
+</html>

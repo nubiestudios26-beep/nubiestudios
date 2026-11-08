@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | Admin Archive Control</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fcfcfc;
+        }
+        .admin-stats {
+            display: flex;
+            gap: 48px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+        }
+        .admin-stats span b {
+            color: #111;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        
+        /* Archival Table Styling */
+        .admin-table-wrapper {
+            background: #FFFFFF;
+            border: 1px solid #E3DFD9;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-table th {
+            text-align: left;
+            padding: 24px;
+            background: #fafafa;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bbb;
+            border-bottom: 1px solid #E3DFD9;
+            font-weight: 600;
+        }
+        .admin-table td {
+            padding: 24px;
+            border-bottom: 1px solid #E3DFD9;
+            vertical-align: middle;
+            font-size: 13px;
+            color: #444;
+        }
+        
+        .order-id-cell {
+            font-weight: 600;
+            color: #111;
+            font-size: 14px;
+            letter-spacing: -0.01em;
+        }
+        .customer-email {
+            font-size: 11px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        /* Form Elements Consistency */
+        .status-select {
+            padding: 10px 14px;
+            border: 1px solid #E3DFD9;
+            border-radius: 4px;
+            font-size: 11px;
+            background: #FFFFFF;
+            color: #111;
+            cursor: pointer;
+            width: 100%;
+            transition: border-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-select:focus {
+            border-color: #E3DFD9;
+            outline: none;
+        }
+        
+        .tracking-input {
+            padding: 10px 14px;
+            border: 1px solid #E3DFD9;
+            border-radius: 4px;
+            font-size: 11px;
+            width: 100%;
+            margin-bottom: 8px;
+            transition: border-color 0.3s ease;
+        }
+        .tracking-input:focus {
+            border-color: #E3DFD9;
+            outline: none;
+        }
+        
+        .btn-update {
+            background: #111;
+            color: #FFFFFF;
+            border: 1px solid #E3DFD9;
+            padding: 14px 32px;
+            border-radius: 100px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            font-weight: 500;
+        }
+        .btn-update:hover {
+            background: #D9291C;
+            border-color: #D9291C;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(217, 41, 28, 0.25);
+        }
+        .btn-update:disabled {
+            background: #eaeaea;
+            color: #aaa;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Diagnostic Console */
+        .diagnostic-terminal {
+            margin-top: 80px;
+            background: #111;
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #E3DFD9;
+        }
+        .terminal-title {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+        }
+        .debug-content {
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            line-height: 1.6;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .force-sync-btn {
+            background: transparent;
+            border: 1px solid #E3DFD9;
+            color: #FFFFFF;
+            padding: 6px 12px;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .force-sync-btn:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #111;
+            color: #FFFFFF;
+            padding: 18px 32px;
+            border-radius: 4px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transform: translateY(150%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 3000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .toast.active {
+            transform: translateY(0);
+        }
+        
+        .payment-tag {
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #999;
+            background: #f5f5f5;
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        /* Order Drawer System */
+        .order-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(4px);
+            z-index: 4000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .order-drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .order-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50vw;
+            height: 100%;
+            background: #FFFFFF;
+            z-index: 4001;
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .order-drawer.active {
+            transform: translateX(0);
+        }
+        
+        .drawer-header {
+            padding: 40px;
+            border-bottom: 1px solid #E3DFD9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+        .close-drawer {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #aaa;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+        .close-drawer:hover {
+            color: #111;
+        }
+        
+        .drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+        
+        .drawer-section {
+            margin-bottom: 40px;
+        }
+        .drawer-section-title {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #bbb;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .drawer-item-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .drawer-item-img {
+            width: 60px;
+            height: 60px;
+            background: #f9f9f9;
+            object-fit: cover;
+        }
+        .drawer-item-info {
+            flex: 1;
+        }
+        .drawer-item-name {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        .drawer-item-meta {
+            font-size: 11px;
+            color: #999;
+        }
+        .drawer-item-price {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .drawer-field {
+            margin-bottom: 24px;
+        }
+        .drawer-field label {
+            display: block;
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .drawer-field .value {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .drawer-footer {
+            padding: 40px;
+            border-top: 1px solid #E3DFD9;
+            background: #fafafa;
+        }
+        
+        .financial-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        
+        .admin-row:hover {
+            background: #fdfdfd;
+            cursor: pointer;
+        }
+
+        /* Filter System Styling */
+        .admin-filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+        .filter-group {
+            position: relative;
+        }
+        .filter-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid #E3DFD9;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            background: #FFFFFF;
+        }
+        .filter-input:focus {
+            outline: none;
+            border-color: #E3DFD9;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .filter-select {
+            width: 200px;
+            padding: 14px 20px;
+            border: 1px solid #E3DFD9;
+            border-radius: 4px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #FFFFFF;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        .filter-select:focus {
+            outline: none;
+            border-color: #E3DFD9;
+        }
+    </style>
+</head>
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main class="account-container">
+        <nav class="account-tabs">
+            <a href="orders.html" class="tab-link active">Archive Control</a>
+            <a href="#" class="tab-link" style="color: #ccc; cursor: not-allowed;">Catalog</a>
+            <a href="#" class="tab-link" style="color: #ccc; cursor: not-allowed;">Registry</a>
+        </nav>
+
+        <div class="tab-pane active">
+            <div class="account-main">
+                <header class="account-header" style="display: flex; justify-content: space-between; align-items: flex-end; text-align: left; margin-bottom: 60px;">
+                    <div>
+                        <h1 style="font-size: 24px; font-weight: 400; letter-spacing: -0.01em;">Archive Control</h1>
+                        <p style="font-size: 13px; color: #999; margin-top: 8px; font-weight: 300;">Institutional Procurement Management System</p>
+                    </div>
+                    <div class="admin-stats">
+                        <span id="total-orders-stat">Total Records: <b>--</b></span>
+                        <span id="pending-stat">Action Required: <b>--</b></span>
+                    </div>
+                </header>
+
+                <div class="admin-filters">
+                    <div class="filter-group" style="flex: 1;">
+                        <input type="text" id="order-search" class="filter-input" placeholder="Search by Reference, Recipient, or Email..." oninput="handleFilterChange()">
+                    </div>
+                    <div class="filter-group">
+                        <select id="status-filter" class="filter-select" onchange="handleFilterChange()">
+                            <option value="all">All Statuses</option>
+                            <option value="pending">Ordered</option>
+                            <option value="processing">Preparing</option>
+                            <option value="shipped">In Transit</option>
+                            <option value="delivered">Arrived</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="sort-filter" class="filter-select" onchange="handleFilterChange()">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="price-asc">Price: Low to High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Reference</th>
+                        <th style="width: 30%;">Recipient</th>
+                        <th style="width: 20%;">Financials</th>
+                        <th style="width: 15%;">Archival Status</th>
+                        <th style="width: 20%;">Tracking Details</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-orders-list">
+                    <tr><td colspan="5" style="text-align: center; padding: 80px; color: #999; letter-spacing: 2px; font-size: 11px;">INITIALIZING SECURE PROTOCOLS...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <section class="diagnostic-terminal">
+            <div class="terminal-header">
+                <span class="terminal-title">System Diagnostic Log</span>
+                <button class="force-sync-btn" onclick="fetchAdminOrders()">Manual Archive Sync</button>
+            </div>
+            <div id="debug-content" class="debug-content"> [READY] Awaiting archival handshake... </div>
+        </section>
+            </div> <!-- Close account-main -->
+        </div> <!-- Close tab-pane -->
+    </main>
+
+    <div id="toast" class="toast">Entry Synchronized Successfully</div>
+
+    <!-- Order Detail Drawer -->
+    <div class="order-drawer-overlay" id="drawer-overlay" onclick="closeOrderDrawer()"></div>
+    <div class="order-drawer" id="order-drawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title" id="drawer-order-number">Order #---</h2>
+            <button class="close-drawer" onclick="closeOrderDrawer()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="drawer-body" id="drawer-content">
+            <!-- Content will be injected here -->
+        </div>
+        <div class="drawer-footer" id="drawer-footer">
+            <button class="btn-update" id="drawer-update-btn">Update Registry</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../i18n.js"></script>
+    <script src="../navbar.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        function logDebug(msg, data = null) {
+            console.log(`[Admin Debug] ${msg}`, data);
+            const debugContent = document.getElementById('debug-content');
+            if (debugContent) {
+                const timestamp = new Date().toLocaleTimeString();
+                debugContent.innerHTML += `<div>[${timestamp}] ${msg} ${data ? JSON.stringify(data).substring(0, 80) : ''}</div>`;
+                const debugLog = document.getElementById('debug-content');
+                debugLog.scrollTop = debugLog.scrollHeight;
+            }
+        }
+
+        async function fetchAdminOrders() {
+            // --- SECURITY CHECK ---
+            const storageKey = 'sb-qsbrjlhnklnfblqulzwn-auth-token';
+            const storedSession = localStorage.getItem(storageKey);
+            let userEmail = '';
+            if (storedSession) {
+                try {
+                    const sessionData = JSON.parse(storedSession);
+                    userEmail = sessionData.user.email;
+                } catch(e) {}
+            }
+
+            if (userEmail !== 'nattawut2015@gmail.com') {
+                logDebug("SECURITY BREACH: Unauthorized access attempt. Redirecting...");
+                window.location.href = '../index.html';
+                return;
+            }
+            // -----------------------
+
+            logDebug("Initiating secure archival retrieval...");
+            const listContainer = document.getElementById('admin-orders-list');
+            listContainer.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 80px; color: #999; letter-spacing: 1px;">FETCHING ENCRYPTED DATA...</td></tr>';
+
+            try {
+                const sessionData = storedSession ? JSON.parse(storedSession) : null;
+                const token = sessionData ? sessionData.access_token : null;
+
+                // Fetching with order_items
+                const response = await fetch(`${window.supabaseUrl}/rest/v1/orders?select=*,order_items(*)&order=created_at.desc`, {
+                    headers: {
+                        'apikey': window.supabaseKey,
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                logDebug(`Network Handshake: ${response.status}`);
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.message || "Archive Access Denied");
+                }
+
+                const orders = await response.json();
+                logDebug(`Archival Sync Complete. Entries: ${orders.length}`);
+                
+                window.allOrders = orders; // Store globally for filtering
+                renderOrders(orders);
+
+            } catch (err) {
+                logDebug("Surgical Error:", err.message);
+                const listContainer = document.getElementById('admin-orders-list');
+                listContainer.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #D9291C; padding: 80px; letter-spacing: 1px;">
+                    DIAGNOSTIC FAILURE: ${err.message.toUpperCase()}<br>
+                    <button class="btn-update" style="margin-top:24px; width: auto; padding: 12px 32px;" onclick="fetchAdminOrders()">RETRY SECURE SYNC</button>
+                </td></tr>`;
+            }
+        }
+
+        function renderOrders(orders) {
+            const listContainer = document.getElementById('admin-orders-list');
+            
+            if (!orders || orders.length === 0) {
+                listContainer.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 80px; color: #999; letter-spacing: 1px;">NO MATCHING ENTRIES IN ARCHIVE.</td></tr>';
+                document.getElementById('total-orders-stat').innerHTML = `Total Records: <b>0</b>`;
+                document.getElementById('pending-stat').innerHTML = `Action Required: <b>0</b>`;
+                return;
+            }
+
+            document.getElementById('total-orders-stat').innerHTML = `Total Records: <b>${orders.length}</b>`;
+            document.getElementById('pending-stat').innerHTML = `Action Required: <b>${orders.filter(o => o.status === 'pending' || o.status === 'paid').length}</b>`;
+
+            listContainer.innerHTML = '';
+            orders.forEach(order => {
+                const date = new Date(order.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                const status = (order.status || 'pending').toLowerCase();
+                
+                const statusMap = {
+                    'pending': 'ORDERED',
+                    'processing': 'PREPARING',
+                    'shipped': 'IN TRANSIT',
+                    'delivered': 'ARRIVED'
+                };
+                const statusLabel = statusMap[status] || status.toUpperCase();
+                const statusClass = `status-${status}`;
+                
+                const tr = document.createElement('tr');
+                tr.className = 'admin-row';
+                tr.onclick = () => openOrderDrawer(order);
+                tr.innerHTML = `
+                    <td>
+                        <div class="order-id-cell">#${order.order_number}</div>
+                        <div style="font-size: 10px; color: #999; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;">${date}</div>
+                    </td>
+                    <td>
+                        <div class="order-id-cell" style="font-size: 13px;">${order.shipping_name || 'Guest User'}</div>
+                        <div class="customer-email">${order.user_email}</div>
+                    </td>
+                    <td>
+                        <div class="order-id-cell">฿${parseFloat(order.total_amount || 0).toLocaleString()}</div>
+                        <span class="payment-tag">${order.payment_method || 'card'}</span>
+                    </td>
+                    <td>
+                        <span class="order-status-badge ${statusClass}">${statusLabel}</span>
+                    </td>
+                    <td>
+                        <div style="font-size: 12px; font-weight: 500; color: #111;">${order.tracking_number || '---'}</div>
+                        <div style="font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">${order.carrier || 'KERRY EXPRESS'}</div>
+                    </td>
+                `;
+                listContainer.appendChild(tr);
+            });
+        }
+
+        function handleFilterChange() {
+            const searchTerm = document.getElementById('order-search').value.toLowerCase();
+            const statusFilter = document.getElementById('status-filter').value;
+            const sortFilter = document.getElementById('sort-filter').value;
+
+            let filtered = window.allOrders.filter(order => {
+                const matchesSearch = 
+                    order.order_number.toLowerCase().includes(searchTerm) ||
+                    (order.shipping_name && order.shipping_name.toLowerCase().includes(searchTerm)) ||
+                    (order.user_email && order.user_email.toLowerCase().includes(searchTerm));
+                
+                const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            // Apply Sorting
+            filtered.sort((a, b) => {
+                if (sortFilter === 'date-desc') return new Date(b.created_at) - new Date(a.created_at);
+                if (sortFilter === 'date-asc') return new Date(a.created_at) - new Date(b.created_at);
+                if (sortFilter === 'price-desc') return (b.total_amount || 0) - (a.total_amount || 0);
+                if (sortFilter === 'price-asc') return (a.total_amount || 0) - (b.total_amount || 0);
+                return 0;
+            });
+
+            renderOrders(filtered);
+        }
+
+        function openOrderDrawer(order) {
+            const drawer = document.getElementById('order-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const title = document.getElementById('drawer-order-number');
+            const content = document.getElementById('drawer-content');
+            const updateBtn = document.getElementById('drawer-update-btn');
+            
+            title.textContent = `Order #${order.order_number}`;
+            
+            const itemsHtml = (order.order_items && order.order_items.length > 0) 
+                ? order.order_items.map(item => `
+                <div class="drawer-item-row">
+                    <img src="${item.image_url || '../assets/placeholder.jpg'}" class="drawer-item-img" onerror="this.src='../assets/placeholder.jpg'">
+                    <div class="drawer-item-info">
+                        <div class="drawer-item-name">${item.product_title || 'Unknown Product'}</div>
+                        <div class="drawer-item-meta">${item.size || 'Standard'} &times; ${item.quantity || 1}</div>
+                    </div>
+                    <div class="drawer-item-price">฿${parseFloat(item.price || 0).toLocaleString()}</div>
+                </div>
+            `).join('')
+                : '<div style="font-size: 12px; color: #999; padding: 20px 0;">No archival items found for this record.</div>';
+
+            content.innerHTML = `
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">Archival Items</h3>
+                    ${itemsHtml}
+                </div>
+                
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">Financial Breakdown</h3>
+                    <div class="financial-row">
+                        <span>Subtotal</span>
+                        <span>฿${parseFloat(order.subtotal || order.total_amount || 0).toLocaleString()}</span>
+                    </div>
+                    <div class="financial-row">
+                        <span>Discount</span>
+                        <span style="color: #D9291C;">-฿${parseFloat(order.discount_amount || 0).toLocaleString()}</span>
+                    </div>
+                    <div class="financial-row">
+                        <span>Shipping</span>
+                        <span>฿${parseFloat(order.shipping_fee || 0).toLocaleString()}</span>
+                    </div>
+                    <div class="financial-row" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #E3DFD9; font-weight: 500; color: #111;">
+                        <span>Total Paid</span>
+                        <span>฿${parseFloat(order.total_amount || 0).toLocaleString()}</span>
+                    </div>
+                    <div style="font-size: 10px; color: #999; text-transform: uppercase; margin-top: 12px; letter-spacing: 1px;">Payment Method: ${order.payment_method || 'CARD'}</div>
+                </div>
+                
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">Shipping Particulars</h3>
+                    <div class="drawer-field">
+                        <label>Recipient</label>
+                        <div class="value">${order.shipping_name || '--'}<br>${order.user_email || '--'}</div>
+                    </div>
+                    <div class="drawer-field">
+                        <label>Contact</label>
+                        <div class="value">${order.shipping_phone || '--'}</div>
+                    </div>
+                    <div class="drawer-field">
+                        <label>Destination</label>
+                        <div class="value">${order.shipping_address || '--'}<br>${order.shipping_city || ''}, ${order.shipping_postcode || ''}<br>${order.shipping_country || ''}</div>
+                    </div>
+                </div>
+
+                <div class="drawer-section">
+                    <h3 class="drawer-section-title">Fulfillment Controls</h3>
+                    <div class="drawer-field">
+                        <label>Current Status</label>
+                        <select class="status-select" id="drawer-status">
+                            <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Ordered</option>
+                            <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>Preparing</option>
+                            <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>In Transit</option>
+                            <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Arrived</option>
+                        </select>
+                    </div>
+                    <div class="drawer-field">
+                        <label>Archival Tracking ID</label>
+                        <input type="text" class="tracking-input" id="drawer-tracking" value="${order.tracking_number || ''}" placeholder="Enter Tracking Number">
+                    </div>
+                    <div class="drawer-field">
+                        <label>Carrier</label>
+                        <input type="text" class="tracking-input" id="drawer-carrier" value="${order.carrier || 'Kerry Express'}" placeholder="Enter Carrier Name">
+                    </div>
+                </div>
+            `;
+
+            updateBtn.onclick = () => updateOrder(order.id);
+            
+            drawer.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderDrawer() {
+            document.getElementById('order-drawer').classList.remove('active');
+            document.getElementById('drawer-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        async function updateOrder(orderId) {
+            const btn = document.getElementById('drawer-update-btn');
+            const status = document.getElementById('drawer-status').value;
+            const tracking = document.getElementById('drawer-tracking').value;
+            const carrier = document.getElementById('drawer-carrier').value;
+
+            btn.disabled = true;
+            const originalText = btn.textContent;
+            btn.textContent = 'SYNCHRONIZING...';
+
+            try {
+                const storageKey = 'sb-qsbrjlhnklnfblqulzwn-auth-token';
+                const storedSession = localStorage.getItem(storageKey);
+                const sessionData = storedSession ? JSON.parse(storedSession) : null;
+                const token = sessionData ? sessionData.access_token : null;
+
+                const response = await fetch(`${window.supabaseUrl}/rest/v1/orders?id=eq.${orderId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'apikey': window.supabaseKey,
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ 
+                        status: status,
+                        tracking_number: tracking,
+                        carrier: carrier
+                    })
+                });
+
+                if (!response.ok) throw new Error("Sync Failed");
+                
+                showToast("Archive Entry Synchronized");
+                setTimeout(() => {
+                    closeOrderDrawer();
+                    fetchAdminOrders(); // Refresh the list
+                }, 1000);
+            } catch (err) {
+                logDebug("Update Conflict:", err.message);
+                alert("Synchronization failed: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 3000);
+        }
+
+        logDebug("Initializing secure archival protocols...");
+        fetchAdminOrders();
+    </script>
+</body>
+</html>

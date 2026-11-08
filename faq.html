@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | FAQ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #fcfcfc; /* Minimal grey theme */
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        /* Enforce 400 weight and pure black for all specific elements */
+        h1, h2, h3, h4, h5, h6, 
+        .faq-title, .faq-subtitle, 
+        .accordion-header, 
+        .accordion-content, .btn, 
+        .faq-search-input {
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+        
+        .faq-hero {
+            padding: 160px var(--page-margin) 60px;
+            text-align: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .faq-title {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: #111;
+        }
+        
+        .faq-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        /* Search Bar Consistency */
+        .faq-search-wrapper {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 60px;
+            border-bottom: 1px solid #E3DFD9;
+            transition: border-color 0.3s ease;
+        }
+        
+        .faq-search-wrapper:focus-within {
+            border-bottom-color: #E3DFD9;
+        }
+        
+        .faq-search-input {
+            width: 100%;
+            height: 50px;
+            padding: 12px 0;
+            padding-left: 40px;
+            border: none;
+            border-radius: 0;
+            font-size: 16px;
+            font-family: inherit;
+            background: transparent;
+            color: #111;
+        }
+        
+        .faq-search-input:focus {
+            outline: none;
+        }
+        
+        .faq-search-icon {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* FAQ Content Area */
+        .faq-container {
+            max-width: 1600px;
+            margin: 0 auto 120px;
+            padding: 0 var(--page-margin);
+        }
+        
+        /* Override tab link color for active state to match theme */
+        .account-tabs {
+            margin-bottom: 40px;
+        }
+
+        /* Still Need Help CTA */
+        .faq-cta {
+            text-align: center;
+            padding: 80px var(--page-margin);
+            background: #FFFFFF;
+            border-top: 1px solid #E3DFD9;
+        }
+        
+        .faq-cta h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        
+        .faq-cta p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+        
+        .faq-cta .btn {
+            padding: 16px 40px;
+            transition: all 0.3s ease;
+            color: #FFFFFF !important;
+        }
+
+        .faq-cta .btn:hover {
+            background-color: #FFFFFF !important;
+            border-color: #D9291C !important;
+            color: #D9291C !important;
+        }
+        
+        /* Hide all tab panes by default except active */
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-link {
+            color: #999 !important;
+        }
+        .tab-link:hover, .tab-link.active {
+            color: #000 !important;
+        }
+    </style>
+</head>
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <section class="faq-hero">
+        <h1 class="faq-title">How can we help?</h1>
+        <p class="faq-subtitle">Search our knowledge base or browse categories below.</p>
+        
+        <div class="faq-search-wrapper">
+            <svg class="faq-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="faq-search" class="faq-search-input" placeholder="Ask a question...">
+        </div>
+    </section>
+
+    <div class="faq-container">
+        <!-- Category Tabs -->
+        <nav class="account-tabs">
+            <a href="#popular" class="tab-link active" data-tab="popular">Popular</a>
+            <a href="#shipping" class="tab-link" data-tab="shipping">Shipping & Tracking</a>
+            <a href="#orders" class="tab-link" data-tab="orders">Order & Payment</a>
+            <a href="#returns" class="tab-link" data-tab="returns">Return, Refund & Damage</a>
+            <a href="#account" class="tab-link" data-tab="account">Account & Loyalty</a>
+            <a href="#collaboration" class="tab-link" data-tab="collaboration">Collaboration & Contact</a>
+        </nav>
+
+        <!-- Tab Content: Popular (Default) -->
+        <div class="tab-pane active" id="popular-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How long does shipping take?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Shipping time depends on your location and the available delivery service. Orders are usually prepared and shipped according to our processing schedule. Please refer to the Shipping Policy for more details.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I cancel my order?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>You may request a cancellation if your order has not yet been prepared or shipped. Once your order has entered the shipping process, cancellation may no longer be possible.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What is Mark?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Mark is Nubie’s reward system. You can collect Marks through purchases or brand activities, then use them to redeem special benefits, discounts, or member experiences.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I return my product?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Returns depend on the conditions stated in our Return Policy. In general, fragrance and personal care products may have return limitations, especially if the product has been opened or used.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Shipping & Tracking -->
+        <div class="tab-pane" id="shipping-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How can I track my number?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p data-i18n="faq.aTrackNumber">You will receive an email containing your tracking number as soon as your package has been shipped. You can track your order on the <strong>Track Order</strong> page on the Nubie website using the tracking number you receive after shipment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Where can I track my order?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p data-i18n="faq.aTrackOrder">You can track your order on the <strong>Track Order</strong> page on the Nubie website using the tracking number you receive after shipment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How long does shipping take?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Shipping time depends on your location and the available delivery service. Orders are usually prepared and shipped according to our processing schedule. Please refer to the Shipping Policy for more details.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What should I do if my parcel is lost or delivered to the wrong address?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Please contact our support team with your order number, tracking number, and details of the issue so we can help investigate with the shipping carrier.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Order & Payment -->
+        <div class="tab-pane" id="orders-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Where can I order Nubie?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>You can order directly through the Nubie website. Select your product, add it to cart, and follow the checkout steps.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What payment methods are available?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Available payment methods depend on the options shown at checkout. These may include credit/debit card, PromptPay, bank transfer, or other supported payment methods.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Will I receive an order confirmation email?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Yes. After your order is placed successfully, you should receive an order confirmation email with your product details, shipping address, and related information. If you do not see it, please check your spam or junk folder.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I change my shipping address after placing an order?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>If your order has not been shipped yet, please contact our support team as soon as possible. Once the order has entered the shipping process, we may no longer be able to change the address.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I cancel my order?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>You may request a cancellation if your order has not yet been prepared or shipped. Once your order has entered the shipping process, cancellation may no longer be possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Return, Refund & Damage -->
+        <div class="tab-pane" id="returns-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I return my product?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Returns depend on the conditions stated in our Return Policy. In general, fragrance and personal care products may have return limitations, especially if the product has been opened or used.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What should I do if I receive the wrong product?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Please contact our support team with your order number, photos of the product received, and details of the issue. We will review the case and help resolve it.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What should I do if the product arrives damaged or broken?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>If your product arrives damaged, please take photos of the parcel box, product, and damaged area. Contact our support team within the required timeframe so we can assist you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I get a refund?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Refunds depend on the condition of your order and our Refund Policy. If your case is eligible, we will process the refund through the original payment method or another approved method.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Account & Loyalty -->
+        <div class="tab-pane" id="account-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Do I need to create an account before purchasing?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Not necessarily. If guest checkout is available, you can purchase without creating an account. However, creating an account helps you track orders and access member benefits more easily.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What are Nubie’s membership tiers?</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Nubie has two membership tiers:</p>
+                            <ul>
+                                <li data-i18n="faq.aMembershipFirst"><strong>First Circle</strong> — A permanent, exclusive tier reserved for the first 100 purchasing customers.</li>
+                                <li data-i18n="faq.aMembershipStarter"><strong>Starter</strong> — The standard tier for all customers who purchase after the first 100.</li>
+                            </ul>
+                            <p>Your tier is assigned automatically on your first purchase and remains with you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What is The Nubie?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>"The Nubie" is an alias given to every member after their first purchase. It represents your place in the Nubie community. First Circle members — the first 100 — carry this alias as founding members of the brand.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Collaboration & Contact -->
+        <div class="tab-pane" id="collaboration-pane">
+            <div class="minimal-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How can I contact Nubie?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>You can contact Nubie through the Contact page on our website or through our official social media channels such as Instagram, TikTok, or LINE Official Account if available.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How can I contact Nubie for collaboration?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Please send your details through the Contact page and select Collaboration, or reach us through the official email listed on the website. Our team will respond if the opportunity fits Nubie’s brand direction.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How long does it take to receive a reply?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div>
+                            <p>Our team usually replies within the stated business hours. During product launches, campaign periods, or holidays, response time may be slightly longer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- No Results Message -->
+        <div id="no-results" style="display: none; text-align: center; padding: 40px; color: #999;">
+            No questions found matching your search.
+        </div>
+    </div>
+
+    <section class="faq-cta">
+        <h2>Still need help?</h2>
+        <p>Our customer service team is available Monday through Friday to assist you.</p>
+        <a href="mailto:support@nubie.com" class="btn btn-dark btn-pill">Contact Support</a>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="script.js"></script>
+    <script src="footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Accordion Logic
+            const accordions = document.querySelectorAll('.accordion-item');
+            accordions.forEach(acc => {
+                const header = acc.querySelector('.accordion-header');
+                header.addEventListener('click', () => {
+                    // Close others
+                    accordions.forEach(other => {
+                        if (other !== acc && other.classList.contains('active')) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current
+                    acc.classList.toggle('active');
+                });
+            });
+
+            // 2. Tab Logic
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            const searchInput = document.getElementById('faq-search');
+            const noResults = document.getElementById('no-results');
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Reset search when switching tabs
+                    searchInput.value = '';
+                    filterFAQs('');
+                    
+                    // Remove active from all
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabPanes.forEach(p => p.classList.remove('active'));
+                    
+                    // Add active to clicked
+                    link.classList.add('active');
+                    const tabId = link.getAttribute('data-tab');
+                    document.getElementById(tabId + '-pane').classList.add('active');
+                });
+            });
+
+            // 3. Search Logic
+            function filterFAQs(query) {
+                query = query.toLowerCase().trim();
+                let hasVisibleItems = false;
+                
+                // If searching, show all items regardless of tabs, but hide tabs
+                const tabsNav = document.querySelector('.account-tabs');
+                
+                if (query.length > 0) {
+                    tabsNav.style.display = 'none';
+                    tabPanes.forEach(pane => pane.style.display = 'block'); // Show all panes for searching
+                    
+                    accordions.forEach(acc => {
+                        const qText = acc.querySelector('.accordion-header').textContent.toLowerCase();
+                        const aText = acc.querySelector('.accordion-content').textContent.toLowerCase();
+                        
+                        if (qText.includes(query) || aText.includes(query)) {
+                            acc.style.display = 'block';
+                            hasVisibleItems = true;
+                        } else {
+                            acc.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Reset to normal tab view
+                    tabsNav.style.display = 'flex';
+                    tabPanes.forEach(pane => {
+                        pane.style.display = ''; // Let CSS classes handle display
+                    });
+                    
+                    accordions.forEach(acc => {
+                        acc.style.display = 'block';
+                        // Collapse all on reset
+                        acc.classList.remove('active');
+                    });
+                    hasVisibleItems = true; // Default state
+                }
+                
+                noResults.style.display = hasVisibleItems ? 'none' : 'block';
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                filterFAQs(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

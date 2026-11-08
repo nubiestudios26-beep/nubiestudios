@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Policies | Nubie</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        /* Enforce 400 weight and pure black for consistency */
+        body,
+        .policy-content {
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .policy-title,
+        .section-header {
+            font-weight: 600 !important;
+            color: #1C1813 !important;
+        }
+
+        .policies-hero {
+            padding: 184px var(--page-margin) 40px;
+            text-align: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .policy-title {
+            font-size: 24px;
+            font-weight: 400 !important;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .effective-date {
+            font-size: 13px;
+            color: #666666 !important;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .policies-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--page-margin) 112px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .account-tabs {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 56px;
+        }
+
+        .account-tabs .tab-link {
+            padding: 0 0 16px 0;
+            margin: 0 24px;
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .account-tabs .tab-link:hover {
+            color: #000;
+        }
+
+        .account-tabs .tab-link.active {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .account-tabs .tab-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #D9291C;
+        }
+
+        .policy-content-wrapper {
+            max-width: 800px;
+            /* Optimal reading width */
+            width: 100%;
+        }
+
+        .policy-intro {
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            color: #1C1813;
+        }
+
+        .policy-section {
+            margin-bottom: 14px;
+        }
+
+        .section-header {
+            font-size: 14px;
+            margin-bottom: 14px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .subsection-header {
+            font-size: 13px;
+            font-weight: 600 !important;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .policy-text {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #1C1813 !important;
+            margin-bottom: 20px;
+        }
+
+        .policy-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 30px;
+        }
+
+        .policy-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #1C1813 !important;
+        }
+
+        .policy-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #ccc;
+        }
+
+        .contact-box {
+            background: #FFFFFF;
+            border: 1px solid #E3DFD9;
+            padding: 40px;
+            margin-top: 80px;
+        }
+
+        .contact-box h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .contact-detail {
+            display: flex;
+            gap: 40px;
+            font-size: 14px;
+        }
+
+        .contact-item span {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        /* Tab switching logic */
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .policies-hero {
+                padding: 120px 24px 40px;
+            }
+
+            .policies-container {
+                padding: 0 24px 100px;
+            }
+
+            .contact-detail {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .account-tabs {
+                flex-wrap: wrap;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main>
+        <section class="policies-hero">
+            <h1 class="policy-title" id="page-title">Terms & Conditions</h1>
+            <p class="effective-date">Effective date: 02/05/2026</p>
+        </section>
+
+        <div class="policies-container">
+            <nav class="account-tabs">
+                <a href="#terms" class="tab-link active" data-tab="terms">Terms & Conditions</a>
+                <a href="#terms2" class="tab-link" data-tab="terms2">Terms &amp; Conditions 2</a>
+                <a href="#privacy" class="tab-link" data-tab="privacy">Privacy Policy</a>
+                <a href="#privacy2" class="tab-link" data-tab="privacy2">Privacy Policy 2</a>
+                <a href="#cookie" class="tab-link" data-tab="cookie">Cookie Policy</a>
+                <a href="#cookie2" class="tab-link" data-tab="cookie2">Cookie Policy 2</a>
+                <a href="#safety" class="tab-link" data-tab="safety">Safety Disclaimer</a>
+                <a href="#safety2" class="tab-link" data-tab="safety2">Safety Disclaimer 2</a>
+                <a href="#shipping2" class="tab-link" data-tab="shipping2">Shipping Policy 2</a>
+                <a href="#returns2" class="tab-link" data-tab="returns2">Return &amp; Refund Policy 2</a>
+            </nav>
+
+            <div class="policy-content-wrapper">
+                <!-- Terms Content -->
+                <div class="tab-pane active" id="terms-pane">
+
+                    <div class="policy-intro" data-i18n="terms.intro">
+                        Welcome to Nubie. These Terms & Conditions govern your access to and use of the Nubie website,
+                        products, services, checkout system, content, and any related features provided through our
+                        website.
+                        <br><br>
+                        By accessing our website or placing an order with Nubie, you agree to these Terms & Conditions.
+                        If you do not agree with any part of these terms, please do not use our website or purchase our
+                        products.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. About Nubie</h2>
+                        <p class="policy-text">Nubie is a fragrance brand offering fragrance mist and related products.
+                            Our brand belief is that being new is not a weakness, but a form of courage.</p>
+                        <ul class="policy-list">
+                            <li>Website owner / operator: Nattawut Rahethan</li>
+                            <li>Brand name: Nubie</li>
+                            <li>Contact email: nubiestudios26@gmail.com</li>
+                            <li>Business location: Bangkok, Thailand</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Use of Our Website</h2>
+                        <p class="policy-text">You agree to use the Nubie website only for lawful purposes. You must not
+                            use the website in a way that may damage, disable, overload, or impair the website or
+                            interfere with other users.</p>
+                        <p class="policy-text">You agree not to:</p>
+                        <ul class="policy-list">
+                            <li>Use the website for fraudulent or illegal activities</li>
+                            <li>Attempt to access systems, data, or accounts without permission</li>
+                            <li>Copy, reproduce, or misuse Nubie content, images, logo, design, or product information
+                            </li>
+                            <li>Upload or transmit harmful code, spam, or malicious content</li>
+                            <li>Provide false, inaccurate, or misleading information when placing an order</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Product Information</h2>
+                        <p class="policy-text">We aim to present product information as accurately as possible,
+                            including descriptions, images, scent notes, size, usage instructions, and pricing. However,
+                            product photos, colors, packaging, and visual details may appear slightly different
+                            depending on lighting, display settings, or production updates.</p>
+                        <p class="policy-text">Fragrance experience may vary from person to person depending on skin
+                            type, body chemistry, weather, environment, and application method.</p>
+                        <p class="policy-text">Nubie does not guarantee that scent longevity, intensity, or personal
+                            preference will be the same for every customer.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Product Use and Safety</h2>
+                        <p class="policy-text">Nubie fragrance is intended for external body use only unless
+                            otherwise stated on the product label.</p>
+                        <p class="policy-text">Please follow these safety guidelines:</p>
+                        <ul class="policy-list">
+                            <li>Do not apply to the face, eyes, lips, or intimate areas</li>
+                            <li>Do not apply to broken, irritated, inflamed, or freshly treated skin</li>
+                            <li>Avoid use immediately after shaving, waxing, or laser treatment</li>
+                            <li>Patch test before use if you have sensitive skin</li>
+                            <li>Stop using immediately if irritation occurs</li>
+                            <li>Keep away from children and pets</li>
+                            <li>Keep away from heat, flame, and direct sunlight</li>
+                            <li>Store in a cool, dry place</li>
+                        </ul>
+                        <p class="policy-text">Nubie is not responsible for damage or irritation caused by misuse,
+                            incorrect application, allergic reaction, or failure to follow product instructions.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Orders</h2>
+                        <p class="policy-text">When you place an order through our website, you agree that all
+                            information provided is accurate and complete. This includes your name, phone number, email
+                            address, shipping address, billing details, and payment information.</p>
+                        <p class="policy-text">After placing an order, you may receive an order confirmation by email or
+                            another official communication channel.</p>
+                        <p class="policy-text">An order confirmation does not always mean that the order has been
+                            accepted or shipped. Nubie reserves the right to cancel or refuse any order if:</p>
+                        <ul class="policy-list">
+                            <li>Product is out of stock</li>
+                            <li>Payment cannot be verified</li>
+                            <li>Customer information is incomplete or incorrect</li>
+                            <li>Fraudulent or suspicious activity is detected</li>
+                            <li>There is an error in price, product description, or system display</li>
+                            <li>The order violates these Terms & Conditions</li>
+                        </ul>
+                        <p class="policy-text">If we cancel an order after payment has been made, we will arrange a
+                            refund according to our refund process.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">6. Pricing and Payment</h2>
+                        <p class="policy-text">All prices shown on the website are listed in [currency, e.g. THB],
+                            unless otherwise stated.</p>
+                        <p class="policy-text">Prices may change without prior notice. Promotions, discounts, and offers
+                            may be available for a limited time and may be subject to specific conditions.</p>
+                        <p class="policy-text">Available payment methods may include:</p>
+                        <ul class="policy-list">
+                            <li>Credit / debit card</li>
+                            <li>PromptPay</li>
+                            <li>Bank transfer</li>
+                            <li>Other payment methods shown at checkout</li>
+                        </ul>
+                        <p class="policy-text">Your order will be processed only after payment has been completed or
+                            verified, depending on the selected payment method.</p>
+                        <p class="policy-text">Nubie is not responsible for delays caused by incorrect payment details,
+                            failed payment, bank processing time, or third-party payment service issues.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">7. Discount Codes and Promotions</h2>
+                        <p class="policy-text">Discount codes, promotional offers, gifts, rewards, or special campaigns
+                            may be subject to additional terms.</p>
+                        <p class="policy-text">Unless stated otherwise:</p>
+                        <ul class="policy-list">
+                            <li>Discounts cannot be exchanged for cash</li>
+                            <li>Discounts cannot be applied retroactively after an order is placed</li>
+                            <li>Promotions may have expiry dates</li>
+                            <li>Promotions may be limited to selected products or customers</li>
+                            <li>Nubie reserves the right to modify, suspend, or cancel promotions at any time</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">8. Shipping and Delivery</h2>
+                        <p class="policy-text">Shipping and delivery are governed by our Shipping Policy.</p>
+                        <p class="policy-text">Customers are responsible for providing accurate shipping information.
+                            Nubie is not responsible for failed delivery, delivery delay, additional fees, or lost
+                            parcels caused by incorrect or incomplete shipping information provided by the customer.</p>
+                        <p class="policy-text">Once the parcel has been handed over to the shipping carrier, delivery
+                            time may depend on the carrier, destination, weather, public holidays, and other factors
+                            outside Nubie’s control.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">9. Cancellation</h2>
+                        <p class="policy-text">You may request to cancel an order by contacting Nubie support as soon as
+                            possible.</p>
+                        <p class="policy-text">Cancellation may be possible only if the order has not yet been packed,
+                            prepared, shipped, or processed by our fulfillment system.</p>
+                        <p class="policy-text">Once the order has been shipped, cancellation may no longer be available.
+                            In that case, the order will be handled according to our Return & Refund Policy.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">10. Returns and Refunds</h2>
+                        <p class="policy-text">Returns and refunds are governed by our Return & Refund Policy.</p>
+                        <p class="policy-text">For hygiene and safety reasons, fragrance and personal care products may
+                            not be eligible for return or refund if they have been opened, used, damaged, altered, or
+                            are no longer in original condition.</p>
+                        <p class="policy-text">If the item you received is incorrect, defective, damaged during
+                            delivery, or has another valid issue, please contact us within the required timeframe with
+                            supporting evidence.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">11. Account and Membership</h2>
+                        <p class="policy-text">If Nubie offers customer accounts, loyalty rewards, Mark points,
+                            membership tiers, or other member benefits, you are responsible for keeping your account
+                            information secure.</p>
+                        <p class="policy-text">You must not share your account login details with others. Nubie is not
+                            responsible for loss or damage caused by unauthorized access due to your failure to protect
+                            your account information.</p>
+                        <p class="policy-text">Nubie may suspend or terminate accounts that show suspicious activity,
+                            abuse of rewards, fraud, or violation of these Terms & Conditions.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">12. Mark Rewards and Tier Benefits</h2>
+                        <p class="policy-text">If Nubie offers a Mark reward system or membership tiers, rewards and
+                            benefits may be subject to separate loyalty terms.</p>
+                        <p class="policy-text">Nubie reserves the right to adjust earning rates, redemption values, tier
+                            conditions, benefits, expiry periods, or campaign rules with reasonable notice where
+                            applicable.</p>
+                        <p class="policy-text">Marks, rewards, or member benefits are not cash and cannot be
+                            transferred, exchanged for money, or sold unless specifically stated.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">13. Intellectual Property</h2>
+                        <p class="policy-text">All content on the Nubie website, including brand name, logo, product
+                            names, images, graphics, layout, text, copy writing, design, icons, packaging visuals, and
+                            other brand elements, belongs to Nubie or its licensors.</p>
+                        <p class="policy-text">You may not copy, reproduce, modify, distribute, sell, or use Nubie
+                            content for commercial purposes without written permission.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">14. User Content and Reviews</h2>
+                        <p class="policy-text">If you submit reviews, photos, feedback, comments, or other content to
+                            Nubie, you confirm that the content is accurate, lawful, and does not violate the rights of
+                            others.</p>
+                        <p class="policy-text">By submitting content, you allow Nubie to use, display, repost, edit, or
+                            share the content for website, social media, marketing, or brand communication purposes,
+                            unless you request otherwise in writing.</p>
+                        <p class="policy-text">Nubie reserves the right to remove content that is offensive, misleading,
+                            false, abusive, unlawful, or unrelated to the product experience.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">15. Third-Party Services</h2>
+                        <p class="policy-text">Our website may use third-party services such as payment gateways,
+                            shipping carriers, analytics tools, tracking tools, embedded order tracking systems, email
+                            providers, or advertising platforms.</p>
+                        <p class="policy-text">Nubie is not responsible for service interruptions, errors, delays, data
+                            handling, or actions caused by third-party providers. Your use of third-party services may
+                            also be subject to their own terms and privacy policies.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">16. Limitation of Liability</h2>
+                        <p class="policy-text">To the fullest extent permitted by applicable law, Nubie will not be
+                            responsible for indirect, incidental, special, or consequential damages arising from your
+                            use of our website, products, services, or inability to use them.</p>
+                        <p class="policy-text">Nubie’s liability for any claim related to an order shall not exceed the
+                            amount paid by you for the specific product involved in that claim, unless otherwise
+                            required by applicable law.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">17. Changes to These Terms</h2>
+                        <p class="policy-text">Nubie may update these Terms & Conditions from time to time. The updated
+                            version will be posted on this page with a new effective date.</p>
+                        <p class="policy-text">By continuing to use our website after changes are posted, you agree to
+                            the updated terms.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">18. Governing Law</h2>
+                        <p class="policy-text">These Terms & Conditions are governed by the laws of Thailand, unless
+                            otherwise required by applicable law.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">19. Contact Us</h2>
+                        <p class="policy-text">For questions about these Terms & Conditions, please contact:</p>
+                        <ul class="policy-list">
+                            <li>Nubie Support</li>
+                            <li>Email: nubiestudios26@gmail.com</li>
+                            <li>LINE Official: nubie.studio</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Terms & Conditions 2 Content (Bilingual: English + ภาษาไทย) -->
+                <div class="tab-pane" id="terms2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            Thank you for choosing Nubie. This agreement sets out the simple, fair rules for using our
+                            website and buying from us — from browsing and creating an account, to placing an order and
+                            wearing your fragrance. We have written it in plain language so nothing feels hidden.
+                            <br><br>
+                            The moment you shop with us or use this site, you're agreeing to what follows. If any part of
+                            it doesn't sit right with you, we'd ask that you don't place an order until it does.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. Who You're Dealing With</h2>
+                            <p class="policy-text">Nubie is an independent fragrance house built on a single idea: being
+                                new is not a weakness — it's a quiet kind of courage. We make fragrance mist and a small
+                                family of scented objects, and we stand behind every one of them.</p>
+                            <ul class="policy-list">
+                                <li>Owner and operator: Nattawut Rahethan</li>
+                                <li>Brand: Nubie</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>Based in: Bangkok, Thailand</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. Using This Website Fairly</h2>
+                            <p class="policy-text">This site is here for one reason — to help you discover and buy Nubie.
+                                We just ask that you use it honestly and in good faith, and that you don't do anything
+                                that would break it, slow it down, or spoil it for the next person.</p>
+                            <p class="policy-text">In practice, that means not using the site for anything dishonest or
+                                against the law, and not trying to reach systems, data, or accounts that aren't yours. It
+                                also means not taking our words, photos, logo, or designs and passing them off as your
+                                own, not sending in harmful code, spam, or anything malicious, and not giving us details
+                                you know to be false or misleading when you order.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. What We Show You About Our Products</h2>
+                            <p class="policy-text">We describe every product — its notes, size, how to wear it, and its
+                                price — as truthfully as we can. That said, a screen is not a bottle: colours,
+                                packaging, and small visual details can shift with your lighting, your display, or a
+                                fresh production run.</p>
+                            <p class="policy-text">Scent is personal, too. How a fragrance opens, lasts, and settles will
+                                depend on your skin, your body chemistry, the weather, and how you apply it.</p>
+                            <p class="policy-text">So while we describe our fragrances honestly, we can't promise the same
+                                strength, longevity, or feeling for everyone.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Wearing Nubie Safely</h2>
+                            <p class="policy-text">Unless a label tells you otherwise, Nubie fragrance is made for the
+                                outside of your body only. A little care keeps it a pleasure:</p>
+                            <ul class="policy-list">
+                                <li>Keep it away from your face, eyes, lips, and intimate areas</li>
+                                <li>Don't apply it to broken, irritated, inflamed, or freshly treated skin</li>
+                                <li>Give it a pause after shaving, waxing, or laser treatment</li>
+                                <li>If your skin is sensitive, patch test a small area first</li>
+                                <li>Stop straight away if you notice any irritation</li>
+                                <li>Store it out of reach of children and pets</li>
+                                <li>Keep it clear of heat, flame, and direct sun</li>
+                                <li>A cool, dry spot is its happy place</li>
+                            </ul>
+                            <p class="policy-text">We can't take responsibility for irritation or damage that comes from
+                                misuse, an allergic reaction, or not following the guidance on the label.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. Placing an Order</h2>
+                            <p class="policy-text">When you check out, you're confirming that the details you've given us
+                                — name, phone, email, delivery and billing address, and payment — are correct and
+                                complete. Getting these right is what lets your order reach you.</p>
+                            <p class="policy-text">Once you've ordered, we'll usually send a confirmation by email or
+                                another official channel. That confirmation is a receipt, not a guarantee that the order
+                                has been accepted or shipped. Occasionally we may need to pause or decline an order — for
+                                instance, if the product has sold out, your payment can't be confirmed, or your details
+                                are incomplete or don't quite add up. The same applies if something about the order looks
+                                fraudulent or suspicious, if a price, description, or system display turns out to be
+                                wrong, or if the order goes against these terms.</p>
+                            <p class="policy-text">If we cancel after you've already paid, we'll refund you through our
+                                normal refund process — no fuss.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. Prices and Paying</h2>
+                            <p class="policy-text">Unless we say otherwise, every price on this site is in Thai Baht
+                                (THB). Prices can change, and offers or discounts may run for a limited time with their
+                                own small print.</p>
+                            <p class="policy-text">Depending on the day, you may be able to pay by:</p>
+                            <ul class="policy-list">
+                                <li>Credit or debit card</li>
+                                <li>PromptPay</li>
+                                <li>Bank transfer</li>
+                                <li>Any other method shown at checkout</li>
+                            </ul>
+                            <p class="policy-text">We'll begin preparing your order once payment is complete or confirmed,
+                                depending on how you chose to pay. We can't be held responsible for hold-ups caused by a
+                                wrong payment detail, a failed transaction, your bank's processing time, or a payment
+                                provider's own systems.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. Codes, Gifts, and Promotions</h2>
+                            <p class="policy-text">Discount codes, gifts, rewards, and seasonal campaigns are lovely, and
+                                they usually come with a few conditions. Unless a specific promotion says otherwise,
+                                discounts have no cash value and can't be swapped for money or applied to an order once
+                                it's already placed. Promotions may also expire, may apply only to certain products or
+                                customers, and may be changed, paused, or ended whenever we need to.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. Getting It to You</h2>
+                            <p class="policy-text">The full details of how we ship live in our Shipping Policy. In short:
+                                please give us an accurate address, because a parcel can only go where you send it.</p>
+                            <p class="policy-text">We can't be responsible for a failed delivery, a delay, extra fees, or
+                                a lost parcel that traces back to an address that was wrong or incomplete. And once your
+                                order is in the carrier's hands, timing can depend on the carrier, the destination, the
+                                weather, and public holidays — things none of us fully control.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. Changed Your Mind?</h2>
+                            <p class="policy-text">If you need to cancel, reach out to us as soon as you can. We can
+                                usually cancel while an order is still waiting to be packed and prepared.</p>
+                            <p class="policy-text">Once it's on its way, cancelling may no longer be possible — at that
+                                point it becomes a matter for our Return &amp; Refund Policy instead.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. Returns and Refunds</h2>
+                            <p class="policy-text">Returns and refunds follow our Return &amp; Refund Policy. Because
+                                fragrance and personal care are hygiene products, an item that's been opened, used,
+                                altered, or is no longer in its original condition usually can't be returned.</p>
+                            <p class="policy-text">If what arrived is the wrong item, faulty, or was damaged on the way to
+                                you, tell us within the stated window and send a photo or two — we'll make it right.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. Your Account</h2>
+                            <p class="policy-text">If you create an account or join our rewards — Mark points, tiers, and
+                                the rest — looking after your login is your part of the deal. Please keep it to yourself.</p>
+                            <p class="policy-text">We can't cover losses caused by someone getting into an account you
+                                didn't keep secure. And we may pause or close any account tied to suspicious activity,
+                                reward abuse, fraud, or a breach of these terms.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. Mark Rewards and Tiers</h2>
+                            <p class="policy-text">Where we run Mark rewards or membership tiers, they come with their own
+                                loyalty terms. We may fine-tune earning rates, redemption values, tier conditions,
+                                perks, or expiry, giving reasonable notice where it makes sense to.</p>
+                            <p class="policy-text">Marks and member perks are a thank-you, not currency — they can't be
+                                transferred, cashed out, or sold unless we say so.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">13. What Belongs to Us</h2>
+                            <p class="policy-text">Everything that makes Nubie feel like Nubie — the name, logo, product
+                                names, photography, graphics, layout, words, design, icons, and packaging — belongs to
+                                us or to those who license it to us.</p>
+                            <p class="policy-text">You're welcome to enjoy it; you just can't copy, adapt, resell, or use
+                                it commercially without our written say-so.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">14. Reviews and Anything You Share</h2>
+                            <p class="policy-text">If you leave a review, photo, or comment, you're confirming it's
+                                truthful, lawful, and yours to share. Thank you — it means a lot.</p>
+                            <p class="policy-text">By sharing it with us, you're letting us feature, repost, lightly edit,
+                                or reshare it across our site, social channels, and marketing, unless you ask us in
+                                writing not to.</p>
+                            <p class="policy-text">We may take down anything that's offensive, misleading, abusive,
+                                unlawful, or simply unrelated to the fragrance itself.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">15. The Services Behind the Scenes</h2>
+                            <p class="policy-text">To run a smooth shop, we lean on trusted outside partners — payment
+                                gateways, couriers, analytics and tracking tools, order-tracking widgets, email
+                                providers, and ad platforms.</p>
+                            <p class="policy-text">We can't answer for their outages, errors, delays, or how they handle
+                                data, and using them may also bring their own terms and privacy policies into play.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">16. Where Our Responsibility Ends</h2>
+                            <p class="policy-text">As far as the law allows, Nubie won't be liable for indirect,
+                                incidental, or knock-on losses arising from using — or not being able to use — our site,
+                                products, or services.</p>
+                            <p class="policy-text">And for any claim tied to an order, our responsibility won't go beyond
+                                what you actually paid for the product in question, unless the law requires more.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">17. Updates to This Page</h2>
+                            <p class="policy-text">These terms may evolve as Nubie grows. When they do, the new version
+                                lives here with a fresh effective date — and carrying on with the site after that means
+                                you're happy with the update.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">18. The Law We Follow</h2>
+                            <p class="policy-text">This agreement is governed by the laws of Thailand, except where other
+                                applicable law says otherwise.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">19. Talk to Us</h2>
+                            <p class="policy-text">Questions about any of this? We're real people and happy to help:</p>
+                            <ul class="policy-list">
+                                <li>Nubie Support</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            ขอบคุณที่เลือก Nubie ข้อตกลงนี้คือกติกาที่เรียบง่ายและเป็นธรรมสำหรับการใช้งานเว็บไซต์
+                            และการสั่งซื้อกับเรา ตั้งแต่การเลือกชม การสมัครสมาชิก ไปจนถึงการสั่งซื้อและการใช้น้ำหอมของคุณ
+                            เราเขียนด้วยภาษาที่เข้าใจง่าย เพื่อให้ทุกอย่างโปร่งใส ไม่มีอะไรซ่อนเร้น
+                            <br><br>
+                            เมื่อคุณเลือกซื้อสินค้าหรือใช้งานเว็บไซต์นี้ ถือว่าคุณยอมรับเนื้อหาต่อไปนี้แล้ว
+                            หากมีส่วนใดที่คุณยังไม่สบายใจ เราขอให้คุณยังไม่ทำการสั่งซื้อจนกว่าจะสบายใจ
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. คุณกำลังติดต่อกับใคร</h2>
+                            <p class="policy-text">Nubie คือแบรนด์น้ำหอมอิสระที่ก่อตั้งขึ้นบนความเชื่อเพียงหนึ่งเดียวว่า
+                                “การเป็นสิ่งใหม่ไม่ใช่ความอ่อนแอ แต่คือความกล้าหาญอย่างเงียบ ๆ”
+                                เราสร้างสรรค์สเปรย์น้ำหอมและผลิตภัณฑ์กลิ่นหอมกลุ่มเล็ก ๆ และเราพร้อมรับผิดชอบต่อทุกชิ้นที่เราทำ</p>
+                            <ul class="policy-list">
+                                <li>เจ้าของและผู้ดูแล: ณัฐวุฒิ ระเห็จหาญ (Nattawut Rahethan)</li>
+                                <li>แบรนด์: Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>ที่ตั้ง: กรุงเทพมหานคร ประเทศไทย</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. การใช้งานเว็บไซต์อย่างเป็นธรรม</h2>
+                            <p class="policy-text">เว็บไซต์นี้มีขึ้นเพื่อเหตุผลเดียว คือช่วยให้คุณได้ค้นพบและเลือกซื้อ Nubie
+                                เราเพียงขอให้คุณใช้งานด้วยความสุจริตและด้วยเจตนาที่ดี และไม่ทำสิ่งใดที่จะทำให้ระบบเสียหาย
+                                ทำงานช้าลง หรือรบกวนผู้ใช้งานคนถัดไป</p>
+                            <p class="policy-text">ในทางปฏิบัติ นั่นหมายถึงการไม่ใช้เว็บไซต์เพื่อสิ่งที่ไม่สุจริตหรือผิดกฎหมาย
+                                และไม่พยายามเข้าถึงระบบ ข้อมูล หรือบัญชีที่ไม่ใช่ของคุณ อีกทั้งไม่นำถ้อยคำ รูปภาพ โลโก้
+                                หรืองานออกแบบของเราไปใช้ราวกับเป็นของตนเอง ไม่ส่งโค้ดที่เป็นอันตราย สแปม หรือสิ่งที่มุ่งร้ายเข้ามา
+                                และไม่ให้ข้อมูลที่คุณรู้อยู่แล้วว่าเป็นเท็จหรือทำให้เข้าใจผิดเมื่อสั่งซื้อ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. สิ่งที่เราแสดงเกี่ยวกับสินค้า</h2>
+                            <p class="policy-text">เราอธิบายสินค้าทุกชิ้น ทั้งกลิ่น ขนาด วิธีใช้ และราคา
+                                อย่างตรงไปตรงมาที่สุดเท่าที่จะทำได้ อย่างไรก็ตาม หน้าจอย่อมไม่เหมือนขวดจริง
+                                สี บรรจุภัณฑ์ และรายละเอียดทางสายตาเล็ก ๆ อาจเปลี่ยนไปตามแสง หน้าจอของคุณ
+                                หรือรอบการผลิตใหม่</p>
+                            <p class="policy-text">กลิ่นก็เป็นเรื่องเฉพาะบุคคลเช่นกัน การเปิดตัว ความคงทน และการอยู่ตัวของกลิ่น
+                                ขึ้นอยู่กับผิว เคมีของร่างกาย สภาพอากาศ และวิธีที่คุณใช้</p>
+                            <p class="policy-text">ดังนั้น แม้เราจะอธิบายกลิ่นอย่างซื่อตรง
+                                แต่เราไม่อาจรับประกันความเข้มข้น ความคงทน หรือความรู้สึกที่เหมือนกันสำหรับทุกคน</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. การใช้ Nubie อย่างปลอดภัย</h2>
+                            <p class="policy-text">หากฉลากไม่ได้ระบุเป็นอย่างอื่น น้ำหอม Nubie
+                                ทำขึ้นสำหรับใช้ภายนอกร่างกายเท่านั้น ความใส่ใจเพียงเล็กน้อยจะทำให้มันเป็นความสุขเสมอ:</p>
+                            <ul class="policy-list">
+                                <li>เก็บให้ห่างจากใบหน้า ดวงตา ริมฝีปาก และจุดซ่อนเร้น</li>
+                                <li>อย่าใช้บนผิวที่เป็นแผล ระคายเคือง อักเสบ หรือผิวที่เพิ่งผ่านการดูแลรักษา</li>
+                                <li>เว้นระยะสักหน่อยหลังโกนขน แว็กซ์ หรือทำเลเซอร์</li>
+                                <li>หากผิวแพ้ง่าย ทดสอบบนผิวบริเวณเล็ก ๆ ก่อน</li>
+                                <li>หยุดใช้ทันทีหากรู้สึกระคายเคือง</li>
+                                <li>เก็บให้พ้นมือเด็กและสัตว์เลี้ยง</li>
+                                <li>ให้ห่างจากความร้อน เปลวไฟ และแสงแดดโดยตรง</li>
+                                <li>ที่เย็นและแห้งคือที่อยู่ที่ดีที่สุดของมัน</li>
+                            </ul>
+                            <p class="policy-text">เราไม่อาจรับผิดชอบต่อการระคายเคืองหรือความเสียหายที่เกิดจากการใช้ผิดวิธี
+                                อาการแพ้ หรือการไม่ทำตามคำแนะนำบนฉลาก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. การสั่งซื้อ</h2>
+                            <p class="policy-text">เมื่อคุณชำระเงิน ถือว่าคุณยืนยันว่ารายละเอียดที่ให้ไว้ ทั้งชื่อ เบอร์โทร อีเมล
+                                ที่อยู่จัดส่งและใบเสร็จ รวมถึงการชำระเงิน ถูกต้องและครบถ้วน
+                                ความถูกต้องนี้เองที่ทำให้ออเดอร์เดินทางไปถึงคุณได้</p>
+                            <p class="policy-text">หลังสั่งซื้อ เราจะส่งการยืนยันทางอีเมลหรือช่องทางอย่างเป็นทางการอื่น
+                                การยืนยันนั้นคือใบรับ ไม่ใช่การรับประกันว่าออเดอร์ได้รับการตอบรับหรือจัดส่งแล้ว
+                                ในบางครั้งเราอาจต้องพักหรือปฏิเสธออเดอร์ เช่น เมื่อสินค้าหมด ไม่สามารถยืนยันการชำระเงินได้
+                                หรือข้อมูลของคุณไม่ครบถ้วนหรือไม่สอดคล้องกัน เช่นเดียวกันหากออเดอร์มีลักษณะที่ดูเป็นการฉ้อโกง
+                                หรือน่าสงสัย หากราคา คำอธิบาย หรือการแสดงผลของระบบเกิดผิดพลาด หรือหากออเดอร์ขัดกับข้อกำหนดเหล่านี้</p>
+                            <p class="policy-text">หากเรายกเลิกหลังจากที่คุณชำระเงินแล้ว
+                                เราจะคืนเงินให้ตามขั้นตอนการคืนเงินตามปกติ โดยไม่ยุ่งยาก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. ราคาและการชำระเงิน</h2>
+                            <p class="policy-text">หากไม่ได้ระบุเป็นอย่างอื่น ราคาทุกรายการบนเว็บไซต์นี้เป็นสกุลเงินบาทไทย
+                                (THB) ราคาอาจเปลี่ยนแปลงได้ และข้อเสนอหรือส่วนลดอาจมีระยะเวลาจำกัดพร้อมเงื่อนไขเฉพาะ</p>
+                            <p class="policy-text">ในแต่ละช่วง คุณอาจชำระเงินได้ด้วย:</p>
+                            <ul class="policy-list">
+                                <li>บัตรเครดิตหรือบัตรเดบิต</li>
+                                <li>พร้อมเพย์ (PromptPay)</li>
+                                <li>โอนเงินผ่านธนาคาร</li>
+                                <li>ช่องทางอื่นที่แสดงในหน้าชำระเงิน</li>
+                            </ul>
+                            <p class="policy-text">เราจะเริ่มเตรียมออเดอร์เมื่อการชำระเงินเสร็จสมบูรณ์หรือได้รับการยืนยันแล้ว
+                                ขึ้นอยู่กับวิธีที่คุณเลือก เราไม่อาจรับผิดชอบต่อความล่าช้าที่เกิดจากข้อมูลการชำระเงินที่ผิด
+                                รายการที่ล้มเหลว ระยะเวลาดำเนินการของธนาคาร หรือระบบของผู้ให้บริการชำระเงิน</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. โค้ด ของแถม และโปรโมชัน</h2>
+                            <p class="policy-text">รหัสส่วนลด ของแถม รางวัล และแคมเปญตามเทศกาลเป็นเรื่องน่ายินดี
+                                และมักมาพร้อมเงื่อนไขเล็กน้อย เว้นแต่โปรโมชันนั้นจะระบุไว้เป็นอย่างอื่น ส่วนลดจะไม่มีมูลค่าเป็นเงินสด
+                                แลกเป็นเงินไม่ได้ และใช้กับออเดอร์ที่สั่งซื้อไปแล้วย้อนหลังไม่ได้ นอกจากนี้โปรโมชันอาจมีวันหมดอายุ
+                                อาจใช้ได้เฉพาะบางสินค้าหรือลูกค้าบางกลุ่ม และเราอาจเปลี่ยนแปลง พัก หรือยุติได้เมื่อจำเป็น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. การส่งถึงมือคุณ</h2>
+                            <p class="policy-text">รายละเอียดการจัดส่งทั้งหมดอยู่ในนโยบายการจัดส่งของเรา (Shipping Policy)
+                                กล่าวสั้น ๆ คือ โปรดให้ที่อยู่ที่ถูกต้อง เพราะพัสดุจะไปได้เฉพาะที่ที่คุณส่งไปเท่านั้น</p>
+                            <p class="policy-text">เราไม่อาจรับผิดชอบต่อการจัดส่งที่ล้มเหลว ความล่าช้า ค่าใช้จ่ายเพิ่มเติม
+                                หรือพัสดุสูญหายที่มีสาเหตุจากที่อยู่ที่ผิดหรือไม่ครบถ้วน
+                                และเมื่อออเดอร์อยู่ในมือผู้ให้บริการขนส่งแล้ว ระยะเวลาอาจขึ้นอยู่กับผู้ขนส่ง ปลายทาง
+                                สภาพอากาศ และวันหยุดราชการ ซึ่งเป็นสิ่งที่ไม่มีใครควบคุมได้ทั้งหมด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. เปลี่ยนใจหรือเปล่า</h2>
+                            <p class="policy-text">หากคุณต้องการยกเลิก โปรดติดต่อเราให้เร็วที่สุด
+                                โดยทั่วไปเรายกเลิกให้ได้ในขณะที่ออเดอร์ยังรอการแพ็กและจัดเตรียมอยู่</p>
+                            <p class="policy-text">เมื่อออเดอร์ออกเดินทางแล้ว การยกเลิกอาจทำไม่ได้อีก
+                                ในจุดนั้นจะกลายเป็นเรื่องของนโยบายการคืนสินค้าและคืนเงินของเราแทน</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. การคืนสินค้าและการคืนเงิน</h2>
+                            <p class="policy-text">การคืนสินค้าและการคืนเงินเป็นไปตามนโยบายการคืนสินค้าและคืนเงินของเรา
+                                (Return &amp; Refund Policy) เนื่องจากน้ำหอมและผลิตภัณฑ์ดูแลส่วนบุคคลเป็นสินค้าเชิงสุขอนามัย
+                                สินค้าที่ถูกเปิด ใช้แล้ว ดัดแปลง หรือไม่อยู่ในสภาพเดิม จึงมักไม่สามารถคืนได้</p>
+                            <p class="policy-text">หากสินค้าที่ได้รับไม่ถูกต้อง ชำรุด หรือเสียหายระหว่างส่งถึงคุณ
+                                โปรดแจ้งเราภายในระยะเวลาที่กำหนดพร้อมส่งรูปประกอบสักสองสามภาพ แล้วเราจะจัดการให้เรียบร้อย</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. บัญชีของคุณ</h2>
+                            <p class="policy-text">หากคุณสมัครบัญชีหรือเข้าร่วมรางวัลของเรา ทั้งคะแนน Mark ระดับสมาชิก และอื่น ๆ
+                                การดูแลข้อมูลเข้าสู่ระบบคือหน้าที่ในส่วนของคุณ โปรดเก็บไว้เป็นความลับ</p>
+                            <p class="policy-text">เราไม่อาจรับผิดชอบต่อความสูญเสียที่เกิดจากการที่มีผู้อื่นเข้าถึงบัญชี
+                                ที่คุณไม่ได้ดูแลให้ปลอดภัย และเราอาจพักหรือปิดบัญชีใด ๆ ที่เชื่อมโยงกับกิจกรรมน่าสงสัย
+                                การใช้รางวัลในทางที่ผิด การฉ้อโกง หรือการละเมิดข้อกำหนดเหล่านี้</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. รางวัล Mark และระดับสมาชิก</h2>
+                            <p class="policy-text">ในกรณีที่เรามีรางวัล Mark หรือระดับสมาชิก
+                                สิ่งเหล่านี้จะมาพร้อมเงื่อนไขของโปรแกรมสะสมคะแนนโดยเฉพาะ เราอาจปรับอัตราการสะสม
+                                มูลค่าการแลก เงื่อนไขระดับ สิทธิประโยชน์ หรือวันหมดอายุ
+                                โดยแจ้งล่วงหน้าตามสมควรเมื่อเหมาะสม</p>
+                            <p class="policy-text">Mark และสิทธิประโยชน์สมาชิกคือคำขอบคุณ ไม่ใช่เงินตรา
+                                จึงโอน แลกเป็นเงิน หรือขายไม่ได้ เว้นแต่เราจะระบุไว้</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">13. สิ่งที่เป็นของเรา</h2>
+                            <p class="policy-text">ทุกสิ่งที่ทำให้ Nubie เป็น Nubie ทั้งชื่อ โลโก้ ชื่อสินค้า ภาพถ่าย กราฟิก
+                                เลย์เอาต์ ถ้อยคำ งานออกแบบ ไอคอน และบรรจุภัณฑ์ ล้วนเป็นของเราหรือของผู้ที่ให้สิทธิ์แก่เรา</p>
+                            <p class="policy-text">คุณยินดีเพลิดเพลินกับมันได้ เพียงแต่ไม่สามารถคัดลอก ดัดแปลง ขายต่อ
+                                หรือนำไปใช้ในเชิงพาณิชย์โดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษรจากเรา</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">14. รีวิวและสิ่งที่คุณแบ่งปัน</h2>
+                            <p class="policy-text">หากคุณเขียนรีวิว ส่งรูป หรือแสดงความคิดเห็น ถือว่าคุณยืนยันว่าเนื้อหานั้น
+                                เป็นความจริง ถูกกฎหมาย และเป็นของคุณที่จะแบ่งปันได้ ขอบคุณมาก มันมีความหมายกับเรา</p>
+                            <p class="policy-text">การแบ่งปันกับเราถือว่าคุณอนุญาตให้เรานำไปนำเสนอ โพสต์ซ้ำ ปรับแก้เล็กน้อย
+                                หรือแชร์ต่อบนเว็บไซต์ ช่องทางโซเชียล และการตลาดของเรา
+                                เว้นแต่คุณจะแจ้งเป็นลายลักษณ์อักษรว่าไม่ต้องการ</p>
+                            <p class="policy-text">เราอาจนำเนื้อหาที่ไม่เหมาะสม ทำให้เข้าใจผิด ก้าวร้าว ผิดกฎหมาย
+                                หรือไม่เกี่ยวข้องกับตัวน้ำหอมออก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">15. บริการเบื้องหลัง</h2>
+                            <p class="policy-text">เพื่อให้ร้านดำเนินไปอย่างราบรื่น เราพึ่งพาพันธมิตรภายนอกที่ไว้ใจได้
+                                ทั้งระบบชำระเงิน ผู้ให้บริการขนส่ง เครื่องมือวิเคราะห์และติดตาม วิดเจ็ตติดตามคำสั่งซื้อ
+                                ผู้ให้บริการอีเมล และแพลตฟอร์มโฆษณา</p>
+                            <p class="policy-text">เราไม่อาจรับผิดชอบต่อการหยุดชะงัก ข้อผิดพลาด ความล่าช้า
+                                หรือวิธีที่พวกเขาจัดการข้อมูล และการใช้บริการเหล่านั้น
+                                อาจทำให้ข้อกำหนดและนโยบายความเป็นส่วนตัวของพวกเขาเข้ามาเกี่ยวข้องด้วย</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">16. ขอบเขตความรับผิดชอบของเรา</h2>
+                            <p class="policy-text">ภายในขอบเขตที่กฎหมายอนุญาต Nubie จะไม่รับผิดต่อความเสียหายทางอ้อม
+                                ที่เกิดโดยบังเอิญ หรือที่เป็นผลสืบเนื่อง อันเกิดจากการใช้ หรือการไม่สามารถใช้ เว็บไซต์
+                                สินค้า หรือบริการของเรา</p>
+                            <p class="policy-text">และสำหรับข้อเรียกร้องใด ๆ ที่เกี่ยวกับออเดอร์
+                                ความรับผิดของเราจะไม่เกินจำนวนที่คุณชำระจริงสำหรับสินค้านั้น
+                                เว้นแต่กฎหมายจะกำหนดให้มากกว่านั้น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">17. การปรับปรุงหน้านี้</h2>
+                            <p class="policy-text">ข้อกำหนดเหล่านี้อาจเปลี่ยนแปลงไปพร้อมการเติบโตของ Nubie เมื่อมีการเปลี่ยนแปลง
+                                เวอร์ชันใหม่จะอยู่ที่หน้านี้พร้อมวันที่มีผลบังคับใช้ใหม่
+                                และการที่คุณใช้งานเว็บไซต์ต่อไปหลังจากนั้น ถือว่าคุณยอมรับการปรับปรุงนั้น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">18. กฎหมายที่เรายึดถือ</h2>
+                            <p class="policy-text">ข้อตกลงนี้อยู่ภายใต้บังคับของกฎหมายแห่งประเทศไทย
+                                เว้นแต่กฎหมายอื่นที่ใช้บังคับจะกำหนดไว้เป็นอย่างอื่น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">19. พูดคุยกับเรา</h2>
+                            <p class="policy-text">มีคำถามเกี่ยวกับเรื่องเหล่านี้ไหม เราเป็นคนจริง ๆ และยินดีช่วยเสมอ:</p>
+                            <ul class="policy-list">
+                                <li>ฝ่ายบริการลูกค้า Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Privacy Content -->
+                <div class="tab-pane" id="privacy-pane">
+
+                    <div class="policy-intro" data-i18n="privacy.intro">
+                        This Privacy Policy explains how Nubie collects, uses, stores, discloses, and protects your
+                        personal data when you visit our website, place an order, contact us, create an account, join
+                        our loyalty program, or interact with our brand.<br><br>
+                        By using our website or providing your personal data to Nubie, you acknowledge that you have
+                        read and understood this Privacy Policy.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. Who We Are</h2>
+                        <ul class="policy-list">
+                            <li>Website owner / operator: Nattawut Rahethan</li>
+                            <li>Brand name: Nubie</li>
+                            <li>Contact email: nubiestudios26@gmail.com</li>
+                            <li>Business location: Bangkok, Thailand</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Personal Data We Collect</h2>
+                        <p class="policy-text">We may collect the following types of personal data:</p>
+
+                        <h3 class="subsection-header">Order and Delivery Information</h3>
+                        <ul class="policy-list">
+                            <li>Full name</li>
+                            <li>Phone number</li>
+                            <li>Email address</li>
+                            <li>Shipping address</li>
+                            <li>Billing address</li>
+                            <li>Order details</li>
+                            <li>Payment status</li>
+                            <li>Delivery tracking information</li>
+                        </ul>
+
+                        <h3 class="subsection-header">Account and Membership Information</h3>
+                        <ul class="policy-list">
+                            <li>Login information</li>
+                            <li>Purchase history</li>
+                            <li>Mark balance</li>
+                            <li>Tier status</li>
+                            <li>Reward activity</li>
+                            <li>Birthday month or date, if provided voluntarily</li>
+                            <li>Preferences and communication settings</li>
+                        </ul>
+
+                        <h3 class="subsection-header">Payment Information</h3>
+                        <p class="policy-text">Payment information may be processed by third-party payment providers.
+                            Nubie may receive payment status, transaction reference, or confirmation details, but we do
+                            not store full card numbers unless explicitly supported and secured by a certified payment
+                            provider.</p>
+
+                        <h3 class="subsection-header">Communication Information</h3>
+                        <ul class="policy-list">
+                            <li>Messages sent through contact forms</li>
+                            <li>Customer support conversations</li>
+                            <li>Product questions</li>
+                            <li>Review submissions</li>
+                            <li>Collaboration inquiries</li>
+                        </ul>
+
+                        <h3 class="subsection-header">Website and Technical Information</h3>
+                        <ul class="policy-list">
+                            <li>IP address</li>
+                            <li>Device type</li>
+                            <li>Browser type</li>
+                            <li>Pages visited</li>
+                            <li>Time spent on website</li>
+                            <li>Click behavior</li>
+                            <li>Referral source</li>
+                            <li>Cookies and similar tracking data</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. How We Collect Personal Data</h2>
+                        <p class="policy-text">We may collect your personal data when you:</p>
+                        <ul class="policy-list">
+                            <li>Visit our website</li>
+                            <li>Create an account</li>
+                            <li>Place an order</li>
+                            <li>Make a payment</li>
+                            <li>Contact customer support</li>
+                            <li>Subscribe to newsletters</li>
+                            <li>Join loyalty or reward programs</li>
+                            <li>Leave reviews or feedback</li>
+                            <li>Interact with our social media or ads</li>
+                            <li>Accept cookies or tracking technologies</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Why We Use Your Personal Data</h2>
+                        <p class="policy-text">We use your personal data for the following purposes:</p>
+                        <ul class="policy-list">
+                            <li>To process and fulfill your order</li>
+                            <li>To confirm payment</li>
+                            <li>To arrange shipping and delivery</li>
+                            <li>To provide tracking information</li>
+                            <li>To respond to customer support inquiries</li>
+                            <li>To manage your account</li>
+                            <li>To operate Mark rewards and membership tiers</li>
+                            <li>To send order-related notifications</li>
+                            <li>To send marketing communications if you have consented or where legally permitted</li>
+                            <li>To improve our website, products, and customer experience</li>
+                            <li>To prevent fraud, abuse, and unauthorized transactions</li>
+                            <li>To comply with legal and regulatory obligations</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Legal Basis for Processing Personal Data</h2>
+                        <p class="policy-text">Depending on the situation, Nubie may process your personal data based
+                            on:</p>
+                        <ul class="policy-list">
+                            <li>Contractual necessity, such as processing orders and delivery</li>
+                            <li>Legal obligation, such as tax or accounting records</li>
+                            <li>Consent, such as newsletter subscription or certain cookies</li>
+                            <li>Legitimate interest, such as fraud prevention, service improvement, and customer support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">6. Sharing Personal Data with Third Parties</h2>
+                        <p class="policy-text">We may share your personal data with trusted third parties only where
+                            necessary, such as:</p>
+                        <ul class="policy-list">
+                            <li>Payment service providers</li>
+                            <li>Shipping carriers</li>
+                            <li>Website hosting providers</li>
+                            <li>E-commerce platform providers</li>
+                            <li>Email and SMS service providers</li>
+                            <li>Analytics providers</li>
+                            <li>Advertising platforms</li>
+                            <li>Customer support tools</li>
+                            <li>Legal, tax, accounting, or regulatory advisors</li>
+                        </ul>
+                        <p class="policy-text">We do not sell your personal data to third parties.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">7. International Data Transfer</h2>
+                        <p class="policy-text">Some third-party tools or platforms we use may process or store data
+                            outside Thailand. When this happens, we will take reasonable steps to ensure that your
+                            personal data is protected according to applicable data protection requirements.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">8. Cookies and Tracking Technologies</h2>
+                        <p class="policy-text">Nubie may use cookies and similar technologies to:</p>
+                        <ul class="policy-list">
+                            <li>Keep the website functioning properly</li>
+                            <li>Remember preferences</li>
+                            <li>Analyze website traffic</li>
+                            <li>Improve user experience</li>
+                            <li>Measure marketing performance</li>
+                            <li>Provide personalized or retargeted advertising</li>
+                        </ul>
+                        <p class="policy-text">You may control or disable cookies through your browser settings. Some
+                            website features may not function properly if cookies are disabled.</p>
+                        <p class="policy-text">For more details, please see our Cookie Policy.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">9. Marketing Communications</h2>
+                        <p class="policy-text">If you subscribe to our newsletter or agree to receive marketing
+                            communications, we may send you updates about products, launches, campaigns, rewards, or
+                            brand content.</p>
+                        <p class="policy-text">You may unsubscribe at any time using the unsubscribe link in our emails
+                            or by contacting us.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">10. Data Retention</h2>
+                        <p class="policy-text">We retain personal data only as long as necessary for the purposes
+                            described in this Privacy Policy, including order fulfillment, customer service, accounting,
+                            legal compliance, fraud prevention, and business records.</p>
+                        <p class="policy-text">Retention periods may vary depending on the type of data and legal
+                            requirements.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">11. Data Security</h2>
+                        <p class="policy-text">We take reasonable technical and organizational measures to protect your
+                            personal data from unauthorized access, loss, misuse, alteration, or disclosure.</p>
+                        <p class="policy-text">However, no online system is completely secure. You are responsible for
+                            keeping your account login details confidential.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">12. Your Rights</h2>
+                        <p class="policy-text">Subject to applicable law, you may have rights to:</p>
+                        <ul class="policy-list">
+                            <li>Access your personal data</li>
+                            <li>Request correction of inaccurate data</li>
+                            <li>Request deletion of personal data</li>
+                            <li>Request restriction of processing</li>
+                            <li>Object to certain processing</li>
+                            <li>Withdraw consent where processing is based on consent</li>
+                            <li>Request data portability where applicable</li>
+                            <li>Lodge a complaint with the relevant authority</li>
+                        </ul>
+                        <p class="policy-text">To exercise your rights, please contact us using the details below.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">13. Children’s Privacy</h2>
+                        <p class="policy-text">Nubie does not knowingly collect personal data from children without
+                            appropriate consent. If you believe a child has provided personal data to us, please contact
+                            us so we can take appropriate action.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">14. Updates to This Privacy Policy</h2>
+                        <p class="policy-text">We may update this Privacy Policy from time to time. The updated version
+                            will be posted on this page with a new effective date.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">15. Contact Us</h2>
+                        <p class="policy-text">For policy-related questions or requests, please contact:</p>
+                        <ul class="policy-list">
+                            <li>Nubie Support</li>
+                            <li>Email: nubiestudios26@gmail.com</li>
+                            <li>LINE Official: nubie.studio</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Privacy Policy 2 Content (Bilingual — follows the global bottom-right switcher) -->
+                <div class="tab-pane" id="privacy2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            Your trust is the whole point, so here's a plain-spoken account of the data we hold and what
+                            we do with it. This covers what happens when you browse, order, create an account, join our
+                            rewards, reach out to us, or simply spend time with the brand.
+                            <br><br>
+                            By using our site or sharing your details with us, you're confirming you've read and are
+                            comfortable with what follows. If anything here raises a question, please ask — we'd rather
+                            explain than leave you guessing.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. Who's Looking After Your Data</h2>
+                            <p class="policy-text">Nubie is the one responsible for the personal data described here.
+                                If you ever want to reach a real person about any of it, start with us:</p>
+                            <ul class="policy-list">
+                                <li>Owner and operator: Nattawut Rahethan</li>
+                                <li>Brand: Nubie</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>Based in: Bangkok, Thailand</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. What We Collect</h2>
+                            <p class="policy-text">We only ask for what we genuinely need to send you an order and look
+                                after you afterwards. In practice, that falls into a few groups.</p>
+
+                            <h3 class="subsection-header">To get your order to you</h3>
+                            <ul class="policy-list">
+                                <li>Your name</li>
+                                <li>Phone number</li>
+                                <li>Email address</li>
+                                <li>Delivery and billing address</li>
+                                <li>Order details, payment status, and tracking information</li>
+                            </ul>
+
+                            <h3 class="subsection-header">If you have an account or join rewards</h3>
+                            <ul class="policy-list">
+                                <li>Login details</li>
+                                <li>Purchase history</li>
+                                <li>Your Mark balance, tier, and reward activity</li>
+                                <li>Your birthday, only if you choose to share it</li>
+                                <li>Preferences and communication settings</li>
+                            </ul>
+
+                            <h3 class="subsection-header">When you pay</h3>
+                            <p class="policy-text">Payments are handled by trusted providers. We may see the status of a
+                                transaction and a reference for it, but we don't hold your full card number ourselves
+                                unless a certified provider securely supports that.</p>
+
+                            <h3 class="subsection-header">When you talk to us</h3>
+                            <p class="policy-text">Messages through our contact form, support conversations, product
+                                questions, reviews, and collaboration enquiries — whatever you send our way.</p>
+
+                            <h3 class="subsection-header">As you use the site</h3>
+                            <p class="policy-text">Some information is gathered automatically as you browse: your IP
+                                address, device and browser type, the pages you visit and how long you stay, where you
+                                came from, and data from cookies and similar tools.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. How It Reaches Us</h2>
+                            <p class="policy-text">Most of what we hold, you give us directly — by visiting the site,
+                                creating an account, placing an order, paying, contacting support, subscribing to our
+                                newsletter, joining rewards, or leaving a review. The rest is picked up quietly in the
+                                background as you interact with our site, our social channels, our ads, and any cookies
+                                you accept.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Why We Use It</h2>
+                            <p class="policy-text">Everything we do with your data comes back to running the shop well and
+                                treating you fairly. Specifically, we use it to:</p>
+                            <ul class="policy-list">
+                                <li>Process and fulfil your order</li>
+                                <li>Confirm payment and arrange delivery</li>
+                                <li>Keep you updated with tracking and order notifications</li>
+                                <li>Answer your questions and look after your account</li>
+                                <li>Run Mark rewards and membership tiers</li>
+                                <li>Send marketing only where you've said yes or the law allows it</li>
+                                <li>Improve our products, site, and the experience overall</li>
+                                <li>Guard against fraud, abuse, and unauthorised transactions</li>
+                                <li>Meet our legal and tax obligations</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. The Legal Grounds</h2>
+                            <p class="policy-text">Depending on the situation, we rely on your <strong>consent</strong>
+                                (for things like the newsletter or certain cookies), on <strong>contractual
+                                    necessity</strong> (to actually process and deliver your order), on <strong>legal
+                                    obligation</strong> (for tax and accounting records), and on our <strong>legitimate
+                                    interest</strong> (to prevent fraud, support you, and improve what we offer).</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. Who We Share It With</h2>
+                            <p class="policy-text">We never sell your personal data. We only pass it to trusted partners
+                                where it's genuinely needed to run the shop — the kind you'd expect:</p>
+                            <ul class="policy-list">
+                                <li>Payment providers and shipping carriers</li>
+                                <li>Website hosting and e-commerce platform providers</li>
+                                <li>Email and SMS services</li>
+                                <li>Analytics and advertising platforms</li>
+                                <li>Customer support tools</li>
+                                <li>Legal, tax, and accounting advisors</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. Data That Travels</h2>
+                            <p class="policy-text">A few of the tools we rely on may process or store data outside
+                                Thailand. When that happens, we take reasonable steps to make sure your data stays
+                                protected to the standard it deserves, wherever it lives.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. Cookies, Briefly</h2>
+                            <p class="policy-text">We use cookies and similar tools to keep the site working, remember
+                                your preferences, understand our traffic, improve your experience, and measure how our
+                                marketing is doing. You can control or switch them off in your browser, though a few
+                                features may not behave as smoothly without them. Our Cookie Policy has the full story.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. Marketing You Can Leave Anytime</h2>
+                            <p class="policy-text">If you've opted in, we may send you the occasional word on new
+                                releases, launches, campaigns, and rewards. There's an unsubscribe link in every email,
+                                and you can step away whenever you like — no hard feelings.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. How Long We Keep It</h2>
+                            <p class="policy-text">We hold your data only for as long as it's genuinely useful — to
+                                fulfil orders, support you, keep proper accounts, meet legal duties, and prevent fraud.
+                                Once a reason no longer applies, that data's time with us comes to an end.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. Keeping It Safe</h2>
+                            <p class="policy-text">We take sensible technical and organisational measures to protect your
+                                data from loss, misuse, or unauthorised access. No online system is ever perfectly
+                                secure, so please do your part too by keeping your login details to yourself.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. Your Rights</h2>
+                            <p class="policy-text">The data is yours, and the law gives you real say over it. Subject to
+                                local rules, you can ask to:</p>
+                            <ul class="policy-list">
+                                <li>See the personal data we hold about you</li>
+                                <li>Correct anything that's wrong</li>
+                                <li>Have your data deleted</li>
+                                <li>Limit or object to how we use it</li>
+                                <li>Withdraw consent you've previously given</li>
+                                <li>Take your data elsewhere, where that applies</li>
+                                <li>Raise a complaint with the relevant authority</li>
+                            </ul>
+                            <p class="policy-text">Just reach out using the details below and we'll help you exercise
+                                any of these.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">13. Children</h2>
+                            <p class="policy-text">Nubie isn't meant for children, and we don't knowingly collect their
+                                data without the right consent. If you think a child has shared information with us,
+                                please tell us so we can put it right.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">14. Updates to This Page</h2>
+                            <p class="policy-text">As we grow, this policy may change. When it does, the new version lives
+                                here with a fresh effective date, so it's always worth a glance if it's been a while.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">15. Talk to Us</h2>
+                            <p class="policy-text">Questions or requests about your data? We're happy to help:</p>
+                            <ul class="policy-list">
+                                <li>Nubie Support</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            ความไว้วางใจของคุณคือหัวใจของทุกอย่าง เราจึงขออธิบายอย่างตรงไปตรงมาว่าเราเก็บข้อมูลอะไรบ้าง
+                            และนำไปใช้ทำอะไร เนื้อหานี้ครอบคลุมสิ่งที่เกิดขึ้นเมื่อคุณเลือกชม สั่งซื้อ สมัครสมาชิก
+                            เข้าร่วมรางวัลของเรา ติดต่อเรา หรือเพียงใช้เวลาอยู่กับแบรนด์
+                            <br><br>
+                            เมื่อคุณใช้งานเว็บไซต์หรือให้ข้อมูลกับเรา ถือว่าคุณได้อ่านและสบายใจกับเนื้อหาต่อไปนี้แล้ว
+                            หากมีสิ่งใดที่ทำให้สงสัย โปรดถามเราได้เสมอ เรายินดีอธิบายมากกว่าจะปล่อยให้คุณเดา
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. ใครเป็นผู้ดูแลข้อมูลของคุณ</h2>
+                            <p class="policy-text">Nubie คือผู้รับผิดชอบข้อมูลส่วนบุคคลที่กล่าวถึงในที่นี้
+                                หากคุณต้องการติดต่อคนจริง ๆ เกี่ยวกับเรื่องใด เริ่มต้นที่เราได้เลย:</p>
+                            <ul class="policy-list">
+                                <li>เจ้าของและผู้ดูแล: ณัฐวุฒิ ระเห็จหาญ (Nattawut Rahethan)</li>
+                                <li>แบรนด์: Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>ที่ตั้ง: กรุงเทพมหานคร ประเทศไทย</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. เราเก็บข้อมูลอะไรบ้าง</h2>
+                            <p class="policy-text">เราขอเฉพาะสิ่งที่จำเป็นจริง ๆ เพื่อจัดส่งออเดอร์และดูแลคุณหลังจากนั้น
+                                ซึ่งแบ่งออกได้เป็นไม่กี่กลุ่ม</p>
+
+                            <h3 class="subsection-header">เพื่อส่งออเดอร์ถึงคุณ</h3>
+                            <ul class="policy-list">
+                                <li>ชื่อของคุณ</li>
+                                <li>หมายเลขโทรศัพท์</li>
+                                <li>อีเมล</li>
+                                <li>ที่อยู่จัดส่งและที่อยู่ใบเสร็จ</li>
+                                <li>รายละเอียดออเดอร์ สถานะการชำระเงิน และข้อมูลติดตามพัสดุ</li>
+                            </ul>
+
+                            <h3 class="subsection-header">หากคุณมีบัญชีหรือเข้าร่วมรางวัล</h3>
+                            <ul class="policy-list">
+                                <li>ข้อมูลเข้าสู่ระบบ</li>
+                                <li>ประวัติการซื้อ</li>
+                                <li>คะแนน Mark ระดับสมาชิก และกิจกรรมรางวัลของคุณ</li>
+                                <li>วันเกิดของคุณ เฉพาะเมื่อคุณเลือกที่จะบอกเรา</li>
+                                <li>ความชอบและการตั้งค่าการรับข่าวสาร</li>
+                            </ul>
+
+                            <h3 class="subsection-header">เมื่อคุณชำระเงิน</h3>
+                            <p class="policy-text">การชำระเงินดำเนินการโดยผู้ให้บริการที่เชื่อถือได้
+                                เราอาจเห็นสถานะของรายการและหมายเลขอ้างอิง แต่เราไม่เก็บหมายเลขบัตรเต็มของคุณไว้เอง
+                                เว้นแต่ผู้ให้บริการที่ได้รับการรับรองจะรองรับอย่างปลอดภัย</p>
+
+                            <h3 class="subsection-header">เมื่อคุณพูดคุยกับเรา</h3>
+                            <p class="policy-text">ข้อความผ่านแบบฟอร์มติดต่อ บทสนทนากับฝ่ายบริการ คำถามเกี่ยวกับสินค้า
+                                รีวิว และการติดต่อเพื่อร่วมงาน ทุกสิ่งที่คุณส่งมาถึงเรา</p>
+
+                            <h3 class="subsection-header">ขณะที่คุณใช้งานเว็บไซต์</h3>
+                            <p class="policy-text">ข้อมูลบางอย่างถูกเก็บโดยอัตโนมัติขณะที่คุณเลือกชม เช่น หมายเลข IP
+                                ประเภทอุปกรณ์และเบราว์เซอร์ หน้าที่คุณเข้าชมและระยะเวลาที่อยู่ ที่มาของการเข้าชม
+                                และข้อมูลจากคุกกี้และเครื่องมือที่คล้ายกัน</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. ข้อมูลมาถึงเราอย่างไร</h2>
+                            <p class="policy-text">ข้อมูลส่วนใหญ่ที่เรามี คุณให้เราโดยตรง ทั้งการเข้าชมเว็บไซต์ สมัครบัญชี
+                                สั่งซื้อ ชำระเงิน ติดต่อฝ่ายบริการ สมัครรับข่าวสาร เข้าร่วมรางวัล หรือเขียนรีวิว
+                                ส่วนที่เหลือถูกเก็บอย่างเงียบ ๆ เบื้องหลังขณะที่คุณมีปฏิสัมพันธ์กับเว็บไซต์ ช่องทางโซเชียล
+                                โฆษณาของเรา และคุกกี้ที่คุณยอมรับ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. เรานำข้อมูลไปใช้ทำไม</h2>
+                            <p class="policy-text">ทุกสิ่งที่เราทำกับข้อมูลของคุณล้วนย้อนกลับมาที่การดำเนินร้านให้ดี
+                                และปฏิบัติต่อคุณอย่างเป็นธรรม โดยเฉพาะเราใช้ข้อมูลเพื่อ:</p>
+                            <ul class="policy-list">
+                                <li>ดำเนินการและจัดส่งออเดอร์ของคุณ</li>
+                                <li>ยืนยันการชำระเงินและจัดการการจัดส่ง</li>
+                                <li>แจ้งข้อมูลติดตามพัสดุและการแจ้งเตือนเกี่ยวกับออเดอร์</li>
+                                <li>ตอบคำถามและดูแลบัญชีของคุณ</li>
+                                <li>ดำเนินรางวัล Mark และระดับสมาชิก</li>
+                                <li>ส่งการตลาดเฉพาะเมื่อคุณยินยอมหรือกฎหมายอนุญาต</li>
+                                <li>พัฒนาสินค้า เว็บไซต์ และประสบการณ์โดยรวม</li>
+                                <li>ป้องกันการฉ้อโกง การใช้ในทางที่ผิด และรายการที่ไม่ได้รับอนุญาต</li>
+                                <li>ปฏิบัติตามหน้าที่ทางกฎหมายและภาษี</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. ฐานทางกฎหมาย</h2>
+                            <p class="policy-text">ขึ้นอยู่กับสถานการณ์ เราอาศัย <strong>ความยินยอม</strong> ของคุณ
+                                (สำหรับสิ่งต่าง ๆ เช่น จดหมายข่าวหรือคุกกี้บางประเภท) อาศัย
+                                <strong>ความจำเป็นตามสัญญา</strong> (เพื่อดำเนินการและจัดส่งออเดอร์ของคุณจริง ๆ) อาศัย
+                                <strong>หน้าที่ตามกฎหมาย</strong> (สำหรับบันทึกด้านภาษีและบัญชี) และอาศัย
+                                <strong>ประโยชน์อันชอบธรรม</strong> ของเรา (เพื่อป้องกันการฉ้อโกง ดูแลคุณ
+                                และพัฒนาสิ่งที่เรานำเสนอ)</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. เราแบ่งปันข้อมูลกับใคร</h2>
+                            <p class="policy-text">เราไม่เคยขายข้อมูลส่วนบุคคลของคุณ เราส่งต่อให้เฉพาะพันธมิตรที่เชื่อถือได้
+                                เท่าที่จำเป็นต่อการดำเนินร้าน ซึ่งเป็นกลุ่มที่คุณคาดหมายได้:</p>
+                            <ul class="policy-list">
+                                <li>ผู้ให้บริการชำระเงินและผู้ให้บริการขนส่ง</li>
+                                <li>ผู้ให้บริการโฮสติ้งและแพลตฟอร์มอีคอมเมิร์ซ</li>
+                                <li>ผู้ให้บริการอีเมลและ SMS</li>
+                                <li>แพลตฟอร์มวิเคราะห์และโฆษณา</li>
+                                <li>เครื่องมือบริการลูกค้า</li>
+                                <li>ที่ปรึกษาด้านกฎหมาย ภาษี และบัญชี</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. ข้อมูลที่เดินทางข้ามพรมแดน</h2>
+                            <p class="policy-text">เครื่องมือบางอย่างที่เราใช้อาจประมวลผลหรือจัดเก็บข้อมูลนอกประเทศไทย
+                                เมื่อเป็นเช่นนั้น เราจะดำเนินขั้นตอนตามสมควรเพื่อให้ข้อมูลของคุณยังคงได้รับการปกป้อง
+                                ตามมาตรฐานที่ควรจะเป็น ไม่ว่าจะอยู่ที่ใด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. เรื่องคุกกี้ โดยย่อ</h2>
+                            <p class="policy-text">เราใช้คุกกี้และเครื่องมือที่คล้ายกันเพื่อให้เว็บไซต์ทำงานได้
+                                จดจำความชอบของคุณ เข้าใจปริมาณการเข้าชม พัฒนาประสบการณ์ และวัดผลการตลาดของเรา
+                                คุณสามารถควบคุมหรือปิดคุกกี้ได้ในเบราว์เซอร์ แม้บางฟีเจอร์อาจทำงานได้ไม่ราบรื่นนัก
+                                เมื่อไม่มีคุกกี้ นโยบายคุกกี้ของเรามีรายละเอียดทั้งหมด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. การตลาดที่คุณเลิกรับได้ทุกเมื่อ</h2>
+                            <p class="policy-text">หากคุณเลือกรับข่าวสาร เราอาจส่งเรื่องราวเกี่ยวกับสินค้าใหม่ การเปิดตัว
+                                แคมเปญ และรางวัลเป็นครั้งคราว ทุกอีเมลมีลิงก์ยกเลิกการรับ
+                                และคุณสามารถเลิกรับได้ทุกเมื่อที่ต้องการ โดยเราไม่ถือสาแต่อย่างใด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. เราเก็บข้อมูลไว้นานแค่ไหน</h2>
+                            <p class="policy-text">เราเก็บข้อมูลของคุณไว้เพียงเท่าที่ยังมีประโยชน์จริง ๆ ทั้งเพื่อจัดส่งออเดอร์
+                                ดูแลคุณ จัดทำบัญชีอย่างถูกต้อง ปฏิบัติตามหน้าที่ทางกฎหมาย และป้องกันการฉ้อโกง
+                                เมื่อเหตุผลนั้นหมดไป เวลาของข้อมูลนั้นกับเราก็สิ้นสุดลง</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. การเก็บรักษาให้ปลอดภัย</h2>
+                            <p class="policy-text">เราใช้มาตรการทางเทคนิคและการจัดการที่เหมาะสมเพื่อปกป้องข้อมูลของคุณ
+                                จากการสูญหาย การใช้ในทางที่ผิด หรือการเข้าถึงโดยไม่ได้รับอนุญาต
+                                ไม่มีระบบออนไลน์ใดปลอดภัยสมบูรณ์แบบ จึงขอให้คุณช่วยดูแลในส่วนของคุณด้วย
+                                โดยเก็บข้อมูลเข้าสู่ระบบไว้เป็นความลับ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. สิทธิของคุณ</h2>
+                            <p class="policy-text">ข้อมูลนี้เป็นของคุณ และกฎหมายให้สิทธิคุณอย่างแท้จริงในการจัดการกับมัน
+                                ภายใต้กฎเกณฑ์ในท้องถิ่น คุณสามารถขอ:</p>
+                            <ul class="policy-list">
+                                <li>ดูข้อมูลส่วนบุคคลที่เรามีเกี่ยวกับคุณ</li>
+                                <li>แก้ไขสิ่งที่ไม่ถูกต้อง</li>
+                                <li>ให้ลบข้อมูลของคุณ</li>
+                                <li>จำกัดหรือคัดค้านวิธีที่เราใช้ข้อมูล</li>
+                                <li>ถอนความยินยอมที่เคยให้ไว้</li>
+                                <li>ขอย้ายข้อมูลไปที่อื่น ในกรณีที่ทำได้</li>
+                                <li>ยื่นเรื่องร้องเรียนต่อหน่วยงานที่เกี่ยวข้อง</li>
+                            </ul>
+                            <p class="policy-text">เพียงติดต่อเราตามรายละเอียดด้านล่าง
+                                แล้วเราจะช่วยคุณใช้สิทธิเหล่านี้</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">13. เด็ก</h2>
+                            <p class="policy-text">Nubie ไม่ได้มีไว้สำหรับเด็ก
+                                และเราไม่เก็บข้อมูลของเด็กโดยรู้เห็นหากปราศจากความยินยอมที่ถูกต้อง
+                                หากคุณคิดว่ามีเด็กแบ่งปันข้อมูลกับเรา โปรดแจ้งเราเพื่อที่เราจะแก้ไขให้ถูกต้อง</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">14. การปรับปรุงหน้านี้</h2>
+                            <p class="policy-text">เมื่อเราเติบโตขึ้น นโยบายนี้อาจเปลี่ยนแปลง เมื่อมีการเปลี่ยนแปลง
+                                เวอร์ชันใหม่จะอยู่ที่หน้านี้พร้อมวันที่มีผลบังคับใช้ใหม่
+                                จึงควรแวะดูสักครั้งหากผ่านไปนานแล้ว</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">15. พูดคุยกับเรา</h2>
+                            <p class="policy-text">มีคำถามหรือคำขอเกี่ยวกับข้อมูลของคุณไหม เรายินดีช่วยเสมอ:</p>
+                            <ul class="policy-list">
+                                <li>ฝ่ายบริการลูกค้า Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Cookie Content -->
+                <div class="tab-pane" id="cookie-pane">
+                    <div class="policy-intro">
+                        This Cookie Policy explains how Nubie uses cookies and similar technologies on our website.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. What Are Cookies?</h2>
+                        <p class="policy-text">Cookies are small text files stored on your device when you visit a
+                            website. Cookies help websites remember information, improve functionality, analyze traffic,
+                            and support marketing activities.</p>
+                        <p class="policy-text">Similar technologies may include pixels, tags, scripts, local storage,
+                            and tracking identifiers.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Types of Cookies We Use</h2>
+                        <h3 class="subsection-header">Strictly Necessary Cookies</h3>
+                        <p class="policy-text">These cookies are required for the website to function properly. They may
+                            support features such as cart, checkout, login, security, and order processing.</p>
+                        <p class="policy-text">These cookies cannot usually be disabled through our website because the
+                            website may not work properly without them.</p>
+
+                        <h3 class="subsection-header">Performance and Analytics Cookies</h3>
+                        <p class="policy-text">These cookies help us understand how visitors use the website, such as
+                            which pages are visited, how long users stay, and which areas need improvement.</p>
+                        <p class="policy-text">Examples may include Google Analytics or similar analytics tools.</p>
+
+                        <h3 class="subsection-header">Functional Cookies</h3>
+                        <p class="policy-text">These cookies help remember your preferences, such as language, region,
+                            or previous choices, to improve your website experience.</p>
+
+                        <h3 class="subsection-header">Marketing and Advertising Cookies</h3>
+                        <p class="policy-text">These cookies may be used to measure campaign performance, personalize
+                            ads, retarget visitors, or understand advertising effectiveness.</p>
+                        <p class="policy-text">Examples may include Meta Pixel, TikTok Pixel, Google Ads tags, or other
+                            advertising technologies.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Why We Use Cookies</h2>
+                        <p class="policy-text">Nubie may use cookies to:</p>
+                        <ul class="policy-list">
+                            <li>Make the website work properly</li>
+                            <li>Remember items in your cart</li>
+                            <li>Support checkout and payment flow</li>
+                            <li>Improve website speed and experience</li>
+                            <li>Analyze website traffic</li>
+                            <li>Measure marketing performance</li>
+                            <li>Show relevant ads</li>
+                            <li>Prevent fraud and improve security</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Third-Party Cookies</h2>
+                        <p class="policy-text">Some cookies may be set by third-party services used on the Nubie
+                            website, such as analytics providers, payment providers, advertising platforms, embedded
+                            tools, or social media platforms.</p>
+                        <p class="policy-text">These third parties may process data according to their own privacy
+                            policies.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Managing Cookies</h2>
+                        <p class="policy-text">You can control or delete cookies through your browser settings. You may
+                            also be able to manage cookie preferences through our cookie banner or preference center if
+                            available.</p>
+                        <p class="policy-text">If you disable some cookies, certain website features may not work
+                            properly, including cart, checkout, login, or personalized experience.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">6. Updates to This Cookie Policy</h2>
+                        <p class="policy-text">We may update this Cookie Policy from time to time. The updated version
+                            will be posted on this page with a new effective date.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">7. Contact Us</h2>
+                        <p class="policy-text">For questions about cookies, please contact:</p>
+                        <ul class="policy-list">
+                            <li>Nubie Support</li>
+                            <li>Email: nubiestudios26@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cookie Policy 2 Content (Bilingual — follows the global bottom-right switcher) -->
+                <div class="tab-pane" id="cookie2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            Cookies sound mysterious, but they're just small helpers that let this site remember you and
+                            work the way you'd expect. Here's a plain look at the ones we use, why they're there, and how
+                            to take control of them.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. What a Cookie Actually Is</h2>
+                            <p class="policy-text">A cookie is a small text file that a website tucks onto your device
+                                when you visit. It helps the site remember things, run smoothly, understand its traffic,
+                                and support its marketing. When we say "cookies" here, we also mean the family of similar
+                                tools — pixels, tags, scripts, local storage, and tracking identifiers — that do much the
+                                same job.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. The Kinds We Use</h2>
+
+                            <h3 class="subsection-header">The essential ones</h3>
+                            <p class="policy-text">These keep the basics working — your cart, checkout, login, security,
+                                and order processing. The site can't really function without them, so they can't usually
+                                be switched off from here.</p>
+
+                            <h3 class="subsection-header">The ones that help us learn</h3>
+                            <p class="policy-text">Performance and analytics cookies show us how the site is used — which
+                                pages people visit, how long they stay, and where things could be better. Tools like
+                                Google Analytics fall into this group.</p>
+
+                            <h3 class="subsection-header">The ones that remember you</h3>
+                            <p class="policy-text">Functional cookies hold onto your preferences — things like language
+                                or region — so the site feels familiar each time you return.</p>
+
+                            <h3 class="subsection-header">The ones for marketing</h3>
+                            <p class="policy-text">Marketing cookies help us measure campaigns, personalise ads, and
+                                understand what's working. Meta Pixel, TikTok Pixel, and Google Ads tags are typical
+                                examples.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. Why We Bother</h2>
+                            <p class="policy-text">In short, cookies help us:</p>
+                            <ul class="policy-list">
+                                <li>Keep the site working properly</li>
+                                <li>Remember what's in your cart</li>
+                                <li>Support checkout and payment</li>
+                                <li>Make the site faster and nicer to use</li>
+                                <li>Understand our traffic and measure marketing</li>
+                                <li>Show you ads that are actually relevant</li>
+                                <li>Guard against fraud and keep things secure</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Cookies From Others</h2>
+                            <p class="policy-text">Some cookies aren't set by us at all, but by the services we rely on —
+                                analytics providers, payment providers, advertising platforms, embedded tools, and social
+                                media. Those partners handle data under their own privacy policies, not ours.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. Staying in Control</h2>
+                            <p class="policy-text">You're always in charge. You can control or delete cookies through your
+                                browser settings, and manage your preferences through our cookie banner or preference
+                                centre where one's available. Just know that turning some off may make parts of the site
+                                — cart, checkout, login, or a more personal experience — work less smoothly.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. Updates to This Page</h2>
+                            <p class="policy-text">We may refresh this Cookie Policy now and then. When we do, the new
+                                version lives here with an updated effective date.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. Talk to Us</h2>
+                            <p class="policy-text">Questions about cookies? We're happy to help:</p>
+                            <ul class="policy-list">
+                                <li>Nubie Support</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            คุกกี้ฟังดูลึกลับ แต่แท้จริงแล้วมันคือผู้ช่วยตัวเล็ก ๆ ที่ทำให้เว็บไซต์นี้จดจำคุณได้
+                            และทำงานได้อย่างที่คุณคาดหวัง นี่คือคำอธิบายอย่างตรงไปตรงมาว่าเราใช้คุกกี้ชนิดใดบ้าง
+                            เพราะเหตุใด และคุณจะควบคุมมันได้อย่างไร
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. คุกกี้คืออะไรกันแน่</h2>
+                            <p class="policy-text">คุกกี้คือไฟล์ข้อความขนาดเล็กที่เว็บไซต์ฝากไว้บนอุปกรณ์ของคุณเมื่อคุณเข้าชม
+                                มันช่วยให้เว็บไซต์จดจำสิ่งต่าง ๆ ทำงานได้อย่างราบรื่น เข้าใจปริมาณการเข้าชม
+                                และสนับสนุนการตลาด เมื่อเราพูดว่า “คุกกี้” ในที่นี้ เรายังหมายรวมถึงเครื่องมือกลุ่มเดียวกัน
+                                ทั้งพิกเซล แท็ก สคริปต์ ที่จัดเก็บในเครื่อง และตัวระบุสำหรับติดตาม
+                                ซึ่งทำหน้าที่คล้าย ๆ กัน</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. ชนิดที่เราใช้</h2>
+
+                            <h3 class="subsection-header">ชนิดที่จำเป็น</h3>
+                            <p class="policy-text">คุกกี้กลุ่มนี้ทำให้สิ่งพื้นฐานทำงานได้ ทั้งตะกร้าสินค้า การชำระเงิน
+                                การเข้าสู่ระบบ ความปลอดภัย และการดำเนินการออเดอร์ เว็บไซต์แทบทำงานไม่ได้หากขาดมัน
+                                จึงมักไม่สามารถปิดจากที่นี่ได้</p>
+
+                            <h3 class="subsection-header">ชนิดที่ช่วยให้เราเรียนรู้</h3>
+                            <p class="policy-text">คุกกี้ด้านประสิทธิภาพและการวิเคราะห์ช่วยให้เราเห็นว่าเว็บไซต์ถูกใช้อย่างไร
+                                ทั้งหน้าที่ผู้คนเข้าชม ระยะเวลาที่อยู่ และจุดที่ควรปรับปรุง เครื่องมืออย่าง Google Analytics
+                                อยู่ในกลุ่มนี้</p>
+
+                            <h3 class="subsection-header">ชนิดที่จดจำคุณ</h3>
+                            <p class="policy-text">คุกกี้ด้านฟังก์ชันเก็บความชอบของคุณไว้ เช่น ภาษาหรือภูมิภาค
+                                เพื่อให้เว็บไซต์รู้สึกคุ้นเคยทุกครั้งที่คุณกลับมา</p>
+
+                            <h3 class="subsection-header">ชนิดสำหรับการตลาด</h3>
+                            <p class="policy-text">คุกกี้ด้านการตลาดช่วยให้เราวัดผลแคมเปญ ปรับโฆษณาให้เหมาะกับคุณ
+                                และเข้าใจว่าสิ่งใดได้ผล ตัวอย่างที่พบบ่อยคือ Meta Pixel, TikTok Pixel และแท็ก Google Ads</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. ทำไมเราจึงใช้</h2>
+                            <p class="policy-text">กล่าวสั้น ๆ คุกกี้ช่วยให้เรา:</p>
+                            <ul class="policy-list">
+                                <li>ทำให้เว็บไซต์ทำงานได้อย่างถูกต้อง</li>
+                                <li>จดจำสิ่งที่อยู่ในตะกร้าของคุณ</li>
+                                <li>รองรับการชำระเงินและการทำรายการ</li>
+                                <li>ทำให้เว็บไซต์เร็วขึ้นและใช้งานได้ดีขึ้น</li>
+                                <li>เข้าใจปริมาณการเข้าชมและวัดผลการตลาด</li>
+                                <li>แสดงโฆษณาที่ตรงกับคุณจริง ๆ</li>
+                                <li>ป้องกันการฉ้อโกงและรักษาความปลอดภัย</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. คุกกี้จากผู้อื่น</h2>
+                            <p class="policy-text">คุกกี้บางส่วนไม่ได้ตั้งค่าโดยเราเลย แต่มาจากบริการที่เราพึ่งพา
+                                ทั้งผู้ให้บริการวิเคราะห์ ผู้ให้บริการชำระเงิน แพลตฟอร์มโฆษณา เครื่องมือที่ฝังไว้
+                                และโซเชียลมีเดีย พันธมิตรเหล่านั้นจัดการข้อมูลภายใต้นโยบายความเป็นส่วนตัวของพวกเขาเอง
+                                ไม่ใช่ของเรา</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. คุณคือผู้ควบคุม</h2>
+                            <p class="policy-text">คุณควบคุมได้เสมอ คุณสามารถจัดการหรือลบคุกกี้ได้ผ่านการตั้งค่าเบราว์เซอร์
+                                และจัดการความชอบของคุณผ่านแบนเนอร์คุกกี้หรือศูนย์ตั้งค่าเมื่อมีให้ใช้ เพียงพึงทราบว่า
+                                การปิดคุกกี้บางส่วนอาจทำให้บางส่วนของเว็บไซต์ ทั้งตะกร้า การชำระเงิน การเข้าสู่ระบบ
+                                หรือประสบการณ์ที่เป็นส่วนตัว ทำงานได้ไม่ราบรื่นนัก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. การปรับปรุงหน้านี้</h2>
+                            <p class="policy-text">เราอาจปรับปรุงนโยบายคุกกี้นี้เป็นครั้งคราว เมื่อมีการเปลี่ยนแปลง
+                                เวอร์ชันใหม่จะอยู่ที่หน้านี้พร้อมวันที่มีผลบังคับใช้ใหม่</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. พูดคุยกับเรา</h2>
+                            <p class="policy-text">มีคำถามเกี่ยวกับคุกกี้ไหม เรายินดีช่วยเสมอ:</p>
+                            <ul class="policy-list">
+                                <li>ฝ่ายบริการลูกค้า Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Safety Disclaimer Content -->
+                <div class="tab-pane" id="safety-pane">
+                    <div class="policy-intro">
+                        Nubie fragrance mist is designed for external body use only. Please read product labels,
+                        ingredient information, warnings, and usage instructions before use.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. External Use Only</h2>
+                        <p class="policy-text">Do not ingest. Do not apply to eyes, lips, face, intimate areas, broken
+                            skin, irritated skin, inflamed skin, or freshly treated skin.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Patch Test Recommended</h2>
+                        <p class="policy-text">If you have sensitive skin, allergies, or a history of irritation from
+                            fragrance products, please patch test on a small area before full use.</p>
+                        <p class="policy-text">Stop using immediately if redness, itching, burning, swelling, rash, or
+                            discomfort occurs.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Individual Results May Vary</h2>
+                        <p class="policy-text">Scent performance, longevity, intensity, and development may vary
+                            depending on skin type, body chemistry, environment, weather, application method, and
+                            personal perception.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Storage and Handling</h2>
+                        <p class="policy-text">Store in a cool, dry place away from direct sunlight, heat, flame,
+                            sparks, and high humidity.</p>
+                        <p class="policy-text">Keep out of reach of children and pets.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. No Medical Claims</h2>
+                        <p class="policy-text">Nubie products are not intended to diagnose, treat, cure, or prevent any
+                            disease or medical condition.</p>
+                        <p class="policy-text">If you have medical concerns, allergies, pregnancy-related concerns, or
+                            skin conditions, please consult a qualified healthcare professional before use.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Disclaimer 2 Content (Bilingual — follows the global bottom-right switcher) -->
+                <div class="tab-pane" id="safety2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            Your fragrance should only ever feel good, and a few simple habits keep it that way. Nubie
+                            fragrance mist is made for the outside of your body only. Please take a moment with the label,
+                            ingredients, and usage notes before your first spritz.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. Skin, Not Anywhere Else</h2>
+                            <p class="policy-text">Nubie is for spritzing onto skin — never for swallowing. Keep it away
+                                from your eyes, lips, and face, from intimate areas, and from any skin that's broken,
+                                irritated, inflamed, or freshly treated. When in doubt, choose a calm patch of skin.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. Do a Quick Patch Test</h2>
+                            <p class="policy-text">If your skin runs sensitive, you have allergies, or fragrance has
+                                bothered you before, test a small area first and give it a little time. If you notice
+                                redness, itching, burning, swelling, a rash, or any discomfort, stop using it straight
+                                away.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. Everyone's Skin Is Different</h2>
+                            <p class="policy-text">How a scent behaves — how strong it is, how long it lasts, and how it
+                                unfolds — shifts from person to person. Your skin type, body chemistry, the weather, how
+                                you apply it, and simply how you perceive scent all play a part.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Where to Keep It</h2>
+                            <p class="policy-text">Give your bottle a cool, dry home, out of direct sunlight and away from
+                                heat, flame, sparks, and humidity. And please keep it well out of reach of children and
+                                pets.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. A Fragrance, Not a Remedy</h2>
+                            <p class="policy-text">Nubie is made to be worn and enjoyed — it isn't designed to diagnose,
+                                treat, cure, or prevent any illness or condition. If you have a medical concern, an
+                                allergy, a skin condition, or you're pregnant, please check with a qualified healthcare
+                                professional before use.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            น้ำหอมของคุณควรให้ความรู้สึกดีเสมอ และนิสัยง่าย ๆ ไม่กี่อย่างก็ช่วยรักษาความรู้สึกนั้นไว้ได้
+                            สเปรย์น้ำหอม Nubie ทำขึ้นสำหรับใช้ภายนอกร่างกายเท่านั้น โปรดใช้เวลาสักครู่อ่านฉลาก ส่วนผสม
+                            และคำแนะนำการใช้ ก่อนการฉีดครั้งแรก
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. ใช้บนผิว ไม่ใช่ที่อื่น</h2>
+                            <p class="policy-text">Nubie มีไว้ฉีดลงบนผิว ไม่ใช่สำหรับกลืนกิน เก็บให้ห่างจากดวงตา ริมฝีปาก
+                                และใบหน้า จากจุดซ่อนเร้น และจากผิวที่เป็นแผล ระคายเคือง อักเสบ หรือเพิ่งผ่านการดูแลรักษา
+                                หากไม่แน่ใจ ให้เลือกบริเวณผิวที่ปกติดี</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. ทดสอบการแพ้สักนิด</h2>
+                            <p class="policy-text">หากผิวของคุณแพ้ง่าย มีอาการภูมิแพ้ หรือเคยมีปัญหากับน้ำหอมมาก่อน
+                                ให้ทดสอบบนผิวบริเวณเล็ก ๆ ก่อนและรอสักครู่ หากพบรอยแดง อาการคัน แสบร้อน บวม ผื่น
+                                หรือความรู้สึกไม่สบายผิว ให้หยุดใช้ทันที</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. ผิวของแต่ละคนไม่เหมือนกัน</h2>
+                            <p class="policy-text">กลิ่นจะแสดงตัวอย่างไร ทั้งความเข้มข้น ความคงทน และการค่อย ๆ เผยตัว
+                                ล้วนแตกต่างกันไปในแต่ละคน สภาพผิว เคมีของร่างกาย สภาพอากาศ วิธีที่คุณฉีด
+                                และการรับรู้กลิ่นของคุณเอง ล้วนมีส่วนทั้งสิ้น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. ควรเก็บไว้ที่ไหน</h2>
+                            <p class="policy-text">ให้ขวดน้ำหอมของคุณอยู่ในที่เย็นและแห้ง พ้นจากแสงแดดโดยตรง และห่างจากความร้อน
+                                เปลวไฟ ประกายไฟ และความชื้น และโปรดเก็บให้พ้นมือเด็กและสัตว์เลี้ยงอย่างมิดชิด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. คือน้ำหอม ไม่ใช่ยารักษา</h2>
+                            <p class="policy-text">Nubie สร้างขึ้นเพื่อการสวมใส่และการเพลิดเพลิน ไม่ได้ออกแบบมาเพื่อวินิจฉัย
+                                รักษา บำบัด หรือป้องกันโรคหรือภาวะใด ๆ หากคุณมีข้อกังวลด้านสุขภาพ อาการภูมิแพ้ ภาวะผิวหนัง
+                                หรือกำลังตั้งครรภ์ โปรดปรึกษาบุคลากรทางการแพทย์ที่มีคุณสมบัติก่อนใช้</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Shipping Policy 2 Content (Bilingual — follows the global bottom-right switcher) -->
+                <div class="tab-pane" id="shipping2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            Once you've ordered, our job is to get your fragrance to you safely and keep you in the loop
+                            the whole way. Here's how we prepare, ship, and support every order placed through our site.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. Getting Your Order Ready</h2>
+                            <p class="policy-text">We usually prepare orders within 1–3 business days once your payment is
+                                confirmed, setting aside weekends, public holidays, launches, and the occasional busy
+                                spell. During our busier moments — a campaign or a new release — packing may take a little
+                                longer, and we appreciate your patience.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. Where We Ship</h2>
+                            <p class="policy-text">For now, Nubie ships within Thailand only. If your location isn't
+                                offered at checkout, get in touch before ordering and we'll see what's possible.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. How It Travels</h2>
+                            <p class="policy-text">The delivery options open to you depend on where you are and what
+                                you've ordered, and you'll always see the choices and fees at checkout before you pay.
+                                Depending on the day, that may include:</p>
+                            <ul class="policy-list">
+                                <li>Standard delivery</li>
+                                <li>Express delivery</li>
+                                <li>Same-day delivery in selected areas, where available</li>
+                                <li>Other courier services</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Shipping Fees</h2>
+                            <p class="policy-text">Your shipping fee is worked out from the method you choose, your
+                                address, the order value and weight, and any promotion in play. When an order meets the
+                                conditions of a campaign — a minimum spend, say — free shipping may be on the table.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. When to Expect It</h2>
+                            <p class="policy-text">Delivery time comes down to where you are and which carrier is
+                                handling the parcel. As a rough guide:</p>
+                            <ul class="policy-list">
+                                <li>Bangkok and nearby areas: about 1–3 business days after shipment</li>
+                                <li>Other provinces in Thailand: about 2–5 business days after shipment</li>
+                            </ul>
+                            <p class="policy-text">These are estimates, not promises — couriers, weather, holidays, and
+                                address hiccups can all shift the timing, and those are beyond our control.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. Following Your Parcel</h2>
+                            <p class="policy-text">As soon as your order ships, we'll send a tracking number by email,
+                                SMS, LINE, your account dashboard, or another official channel, and you can follow it on
+                                our Track Order page. Give it 24–48 hours to start updating after the parcel reaches the
+                                carrier.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. Getting the Address Right</h2>
+                            <p class="policy-text">A parcel can only go where you send it, so please double-check your
+                                address at checkout. We can't take responsibility for delays, failed delivery, loss, or
+                                extra fees that come from an address that was wrong or incomplete. Need to change it?
+                                Message us right away — we can usually update it only before the order is packed or
+                                shipped.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. If Delivery Doesn't Work Out</h2>
+                            <p class="policy-text">If the carrier can't complete delivery — a wrong address, no one to
+                                receive it, a refused parcel, or no reply to their contact — it may come back to us. A
+                                further shipping fee may apply to send it out again.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. Lost or Running Late</h2>
+                            <p class="policy-text">If your parcel seems delayed or lost, send us your order number and
+                                tracking number and we'll chase it up with the carrier. Investigation times and the final
+                                word tend to follow the carrier's own process, so a little patience helps.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. If It Arrives Damaged</h2>
+                            <p class="policy-text">If your parcel turns up damaged, a few photos or a short video go a
+                                long way. Capture the outer box, the shipping label, the inner packaging, the product
+                                itself, and the damaged area, then reach out within 24–48 hours of receiving it so we can
+                                look into it.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. Orders Beyond Thailand</h2>
+                            <p class="policy-text">Should international shipping ever apply, any customs duties, import
+                                taxes, or local fees charged by the destination country are the customer's
+                                responsibility. We can't answer for customs delays, import restrictions, rejected
+                                parcels, or charges set by local authorities.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. Shipping Support</h2>
+                            <p class="policy-text">Anything about your delivery? We're here:</p>
+                            <ul class="policy-list">
+                                <li>Nubie Support</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            เมื่อคุณสั่งซื้อแล้ว หน้าที่ของเราคือส่งน้ำหอมถึงมือคุณอย่างปลอดภัย และคอยแจ้งความคืบหน้าตลอดทาง
+                            นี่คือวิธีที่เราเตรียม จัดส่ง และดูแลทุกออเดอร์ที่สั่งผ่านเว็บไซต์ของเรา
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. การเตรียมออเดอร์ของคุณ</h2>
+                            <p class="policy-text">โดยทั่วไปเราเตรียมออเดอร์ภายใน 1–3 วันทำการเมื่อยืนยันการชำระเงินแล้ว
+                                โดยไม่นับวันหยุดสุดสัปดาห์ วันหยุดราชการ ช่วงเปิดตัวสินค้า และช่วงที่มีงานยุ่งเป็นพิเศษ
+                                ในช่วงที่เรายุ่งกว่าปกติ เช่น แคมเปญหรือสินค้าใหม่ การแพ็กอาจใช้เวลานานขึ้นเล็กน้อย
+                                และเราขอบคุณสำหรับความอดใจรอ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. เราจัดส่งที่ไหน</h2>
+                            <p class="policy-text">ในขณะนี้ Nubie จัดส่งภายในประเทศไทยเท่านั้น
+                                หากไม่มีพื้นที่ของคุณให้เลือกในหน้าชำระเงิน โปรดติดต่อเราก่อนสั่งซื้อ
+                                แล้วเราจะดูว่าพอจะทำได้อย่างไร</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. พัสดุเดินทางอย่างไร</h2>
+                            <p class="policy-text">ตัวเลือกการจัดส่งที่คุณเลือกได้ขึ้นอยู่กับพื้นที่ของคุณและสิ่งที่คุณสั่ง
+                                และคุณจะเห็นตัวเลือกพร้อมค่าจัดส่งในหน้าชำระเงินก่อนจ่ายเสมอ ในแต่ละช่วงอาจมี:</p>
+                            <ul class="policy-list">
+                                <li>การจัดส่งแบบมาตรฐาน</li>
+                                <li>การจัดส่งแบบด่วน</li>
+                                <li>การจัดส่งภายในวันในบางพื้นที่ เมื่อมีให้บริการ</li>
+                                <li>บริการขนส่งอื่น ๆ</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. ค่าจัดส่ง</h2>
+                            <p class="policy-text">ค่าจัดส่งคำนวณจากวิธีที่คุณเลือก ที่อยู่ของคุณ มูลค่าและน้ำหนักของออเดอร์
+                                และโปรโมชันที่มีอยู่ เมื่อออเดอร์เข้าเงื่อนไขของแคมเปญ เช่น ยอดซื้อขั้นต่ำ
+                                ก็อาจได้รับการจัดส่งฟรี</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. คาดว่าจะได้รับเมื่อใด</h2>
+                            <p class="policy-text">ระยะเวลาจัดส่งขึ้นอยู่กับพื้นที่ของคุณและผู้ให้บริการขนส่งที่ดูแลพัสดุ
+                                โดยประมาณคร่าว ๆ คือ:</p>
+                            <ul class="policy-list">
+                                <li>กรุงเทพฯ และพื้นที่ใกล้เคียง: ประมาณ 1–3 วันทำการหลังจัดส่ง</li>
+                                <li>จังหวัดอื่นในประเทศไทย: ประมาณ 2–5 วันทำการหลังจัดส่ง</li>
+                            </ul>
+                            <p class="policy-text">ตัวเลขเหล่านี้เป็นเพียงการประมาณ ไม่ใช่คำมั่น ทั้งผู้ขนส่ง สภาพอากาศ
+                                วันหยุด และปัญหาเรื่องที่อยู่ ล้วนทำให้เวลาเปลี่ยนได้ และอยู่นอกเหนือการควบคุมของเรา</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. การติดตามพัสดุ</h2>
+                            <p class="policy-text">ทันทีที่ออเดอร์ของคุณจัดส่ง เราจะส่งหมายเลขติดตามทางอีเมล SMS LINE
+                                แดชบอร์ดบัญชีของคุณ หรือช่องทางอย่างเป็นทางการอื่น และคุณติดตามได้ที่หน้าติดตามคำสั่งซื้อ
+                                โปรดเผื่อเวลา 24–48 ชั่วโมงให้ข้อมูลเริ่มอัปเดตหลังพัสดุถึงมือผู้ขนส่ง</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. การให้ที่อยู่ที่ถูกต้อง</h2>
+                            <p class="policy-text">พัสดุไปได้เฉพาะที่ที่คุณส่งไป โปรดตรวจที่อยู่ให้ดีในหน้าชำระเงิน
+                                เราไม่อาจรับผิดชอบต่อความล่าช้า การจัดส่งที่ล้มเหลว การสูญหาย หรือค่าใช้จ่ายเพิ่มเติม
+                                ที่เกิดจากที่อยู่ที่ผิดหรือไม่ครบถ้วน ต้องการแก้ไขใช่ไหม ทักหาเราทันที
+                                โดยทั่วไปเราแก้ไขให้ได้ก่อนที่ออเดอร์จะถูกแพ็กหรือจัดส่งเท่านั้น</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. หากการจัดส่งไม่สำเร็จ</h2>
+                            <p class="policy-text">หากผู้ขนส่งไม่สามารถส่งพัสดุได้ ทั้งที่อยู่ผิด ไม่มีผู้รับ พัสดุถูกปฏิเสธ
+                                หรือไม่มีการตอบกลับผู้ขนส่ง พัสดุอาจถูกส่งคืนมาที่เรา
+                                และอาจมีค่าจัดส่งเพิ่มเติมสำหรับการส่งใหม่</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. สูญหายหรือล่าช้า</h2>
+                            <p class="policy-text">หากพัสดุของคุณดูล่าช้าหรือสูญหาย ส่งหมายเลขออเดอร์และหมายเลขติดตามมาให้เรา
+                                แล้วเราจะตามเรื่องกับผู้ขนส่งให้ ระยะเวลาการตรวจสอบและคำตอบสุดท้าย
+                                มักเป็นไปตามขั้นตอนของผู้ขนส่ง จึงขอความอดใจรอสักหน่อย</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. หากได้รับพัสดุที่เสียหาย</h2>
+                            <p class="policy-text">หากพัสดุของคุณมาถึงในสภาพเสียหาย ภาพถ่ายหรือวิดีโอสั้น ๆ ช่วยได้มาก
+                                ถ่ายกล่องด้านนอก ฉลากการจัดส่ง บรรจุภัณฑ์ด้านใน ตัวสินค้า และบริเวณที่เสียหาย
+                                แล้วติดต่อเราภายใน 24–48 ชั่วโมงหลังได้รับ เพื่อที่เราจะตรวจสอบให้</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. ออเดอร์นอกประเทศไทย</h2>
+                            <p class="policy-text">หากมีการจัดส่งระหว่างประเทศ ภาษีศุลกากร ภาษีนำเข้า
+                                หรือค่าธรรมเนียมท้องถิ่นที่เรียกเก็บโดยประเทศปลายทาง เป็นความรับผิดชอบของลูกค้า
+                                เราไม่อาจรับผิดชอบต่อความล่าช้าทางศุลกากร ข้อจำกัดการนำเข้า พัสดุที่ถูกปฏิเสธ
+                                หรือค่าใช้จ่ายที่หน่วยงานท้องถิ่นกำหนด</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. ติดต่อเรื่องการจัดส่ง</h2>
+                            <p class="policy-text">มีเรื่องเกี่ยวกับการจัดส่งไหม เราพร้อมช่วยเสมอ:</p>
+                            <ul class="policy-list">
+                                <li>ฝ่ายบริการลูกค้า Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Return & Refund Policy 2 Content (Bilingual — follows the global bottom-right switcher) -->
+                <div class="tab-pane" id="returns2-pane">
+
+                    <!-- ============ ENGLISH ============ -->
+                    <div class="lang-block" data-lang-block="en">
+
+                        <div class="policy-intro">
+                            We want you to love what arrives — and if something's not right, we want to sort it out
+                            fairly. Here's how we handle returns, exchanges, damaged or incorrect items, cancellations,
+                            and refunds.
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. The Short Version</h2>
+                            <p class="policy-text">Because fragrance and personal care are hygiene products, returns are
+                                naturally a little limited. We're glad to accept returns, exchanges, or refunds where the
+                                conditions in this policy are met — and we'll always look at a genuine problem with an
+                                open mind.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. When a Return Is Possible</h2>
+                            <p class="policy-text">To be eligible for a return, a product generally needs to tick all of
+                                these:</p>
+                            <ul class="policy-list">
+                                <li>Bought directly from the Nubie website</li>
+                                <li>Return requested within 7 days of delivery</li>
+                                <li>Unused and unopened</li>
+                                <li>Seal, film, and original packaging still intact</li>
+                                <li>In its original condition</li>
+                                <li>Complete with all packaging, gifts, samples, cards, and proof of purchase</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. What We Can't Take Back</h2>
+                            <p class="policy-text">For hygiene and safety, a few things can't be returned:</p>
+                            <ul class="policy-list">
+                                <li>Anything opened or used</li>
+                                <li>Products with a broken seal or removed film</li>
+                                <li>Products damaged after delivery through handling</li>
+                                <li>Products without their original packaging</li>
+                                <li>Anything bought from unauthorised sellers</li>
+                                <li>Gift cards or digital products</li>
+                                <li>Promotional gifts, samples, or free items</li>
+                                <li>Anything marked final sale</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. Damaged or Faulty on Arrival</h2>
+                            <p class="policy-text">If your order arrives damaged, broken, leaking, or otherwise unusable,
+                                get in touch within 24–48 hours of delivery. To help us sort it quickly, please send your
+                                order number, name, and contact details, along with photos or a video of the shipping
+                                box, the product, the damaged area, and the shipping label, plus a quick note on what's
+                                wrong.</p>
+                            <p class="policy-text">Once we've had a look, we'll make it right with whichever fits best — a
+                                replacement, an exchange, a refund, store credit, or another suitable solution.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. Wrong Item Received</h2>
+                            <p class="policy-text">If the wrong product turns up, let us know within 3 days of delivery.
+                                Please leave it unopened and unused — we may ask for a photo before arranging an exchange
+                                or return.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. Change of Heart</h2>
+                            <p class="policy-text">Because of what these products are, we generally can't accept a return
+                                or refund for a change of mind once something's been opened, used, or unsealed. If it's
+                                still sealed, unused, and in original condition, we're happy to look at your request
+                                case by case under this policy.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. About the Scent Itself</h2>
+                            <p class="policy-text">Scent is deeply personal, and it lives differently on everyone. For
+                                that reason, we usually can't offer a return or refund simply because the fragrance isn't
+                                to your taste, feels different from what you pictured, lasts a certain way on your skin,
+                                or shifts with body chemistry or weather. A careful read of the scent description before
+                                buying really helps.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. Cancelling an Order</h2>
+                            <p class="policy-text">Need to cancel? Reach out as soon as you can. We can usually cancel
+                                while the order is still waiting to be packed and prepared — once it's shipped,
+                                cancelling may no longer be possible.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. Return Shipping Costs</h2>
+                            <p class="policy-text">Unless the return is down to our error — a wrong item, a fault, or
+                                verified shipping damage — return shipping is usually the customer's to cover. Original
+                                shipping fees may be non-refundable, except where the law says otherwise or the issue was
+                                ours.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. How Refunds Work</h2>
+                            <p class="policy-text">Once your return reaches us and we've checked it over, we'll let you
+                                know whether the refund is approved. If it is, we can refund through your original
+                                payment method, a bank transfer, store credit, or another way we agree on together.
+                                Refunds usually take about 7–14 business days, depending on your bank or payment
+                                provider.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. Partial Refunds</h2>
+                            <p class="policy-text">Sometimes a partial refund is the fair outcome — for instance, if a
+                                product doesn't come back in original condition, if items, gifts, or packaging are
+                                missing, if the damage wasn't ours, or if only part of the order had a problem.</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. How to Start a Request</h2>
+                            <p class="policy-text">To begin a return, exchange, or refund, message Nubie Support with your
+                                order number, name, the email or phone used for the order, the reason for your request,
+                                any photos or videos, and the solution you'd prefer. Reach us at:</p>
+                            <ul class="policy-list">
+                                <li>Nubie Support</li>
+                                <li>Email: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ============ ภาษาไทย ============ -->
+                    <div class="lang-block" data-lang-block="th" style="display:none;">
+
+                        <div class="policy-intro">
+                            เราอยากให้คุณรักสิ่งที่ได้รับ และหากมีอะไรไม่ถูกต้อง เราก็อยากแก้ไขให้อย่างเป็นธรรม
+                            นี่คือวิธีที่เราดูแลเรื่องการคืนสินค้า การเปลี่ยน สินค้าที่เสียหายหรือผิด การยกเลิก และการคืนเงิน
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">1. ฉบับย่อ</h2>
+                            <p class="policy-text">เนื่องจากน้ำหอมและผลิตภัณฑ์ดูแลส่วนบุคคลเป็นสินค้าเชิงสุขอนามัย
+                                การคืนสินค้าจึงมีข้อจำกัดอยู่บ้างตามธรรมชาติ เรายินดีรับคืน เปลี่ยน หรือคืนเงิน
+                                เมื่อเป็นไปตามเงื่อนไขในนโยบายนี้ และเราจะพิจารณาปัญหาที่เกิดขึ้นจริงด้วยใจที่เปิดกว้างเสมอ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">2. เมื่อใดที่คืนได้</h2>
+                            <p class="policy-text">เพื่อให้เข้าเกณฑ์การคืน โดยทั่วไปสินค้าต้องเป็นไปตามทุกข้อต่อไปนี้:</p>
+                            <ul class="policy-list">
+                                <li>ซื้อโดยตรงจากเว็บไซต์ Nubie</li>
+                                <li>ยื่นคำขอคืนภายใน 7 วันหลังได้รับสินค้า</li>
+                                <li>ยังไม่ได้ใช้และยังไม่ได้เปิด</li>
+                                <li>ซีล ฟิล์ม และบรรจุภัณฑ์เดิมยังอยู่ครบ</li>
+                                <li>อยู่ในสภาพเดิม</li>
+                                <li>มาพร้อมบรรจุภัณฑ์ ของแถม ตัวอย่าง การ์ด และหลักฐานการซื้อครบถ้วน</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">3. สิ่งที่เรารับคืนไม่ได้</h2>
+                            <p class="policy-text">ด้วยเหตุผลด้านสุขอนามัยและความปลอดภัย มีบางอย่างที่คืนไม่ได้:</p>
+                            <ul class="policy-list">
+                                <li>สิ่งที่เปิดหรือใช้แล้ว</li>
+                                <li>สินค้าที่ซีลแตกหรือฟิล์มถูกลอกออก</li>
+                                <li>สินค้าที่เสียหายหลังได้รับจากการใช้งาน</li>
+                                <li>สินค้าที่ไม่มีบรรจุภัณฑ์เดิม</li>
+                                <li>สิ่งที่ซื้อจากผู้ขายที่ไม่ได้รับอนุญาต</li>
+                                <li>บัตรของขวัญหรือสินค้าดิจิทัล</li>
+                                <li>ของแถม ตัวอย่าง หรือของฟรีจากโปรโมชัน</li>
+                                <li>สิ่งที่ระบุว่าเป็นการขายขาด (Final Sale)</li>
+                            </ul>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">4. เสียหายหรือชำรุดเมื่อมาถึง</h2>
+                            <p class="policy-text">หากออเดอร์ของคุณมาถึงในสภาพเสียหาย แตก รั่ว หรือใช้ไม่ได้
+                                ติดต่อเราภายใน 24–48 ชั่วโมงหลังได้รับ เพื่อให้เราจัดการได้รวดเร็ว โปรดส่งหมายเลขออเดอร์
+                                ชื่อ และข้อมูลติดต่อ พร้อมภาพถ่ายหรือวิดีโอของกล่องจัดส่ง ตัวสินค้า บริเวณที่เสียหาย
+                                และฉลากการจัดส่ง พร้อมคำอธิบายสั้น ๆ ว่าเกิดอะไรขึ้น</p>
+                            <p class="policy-text">เมื่อเราตรวจดูแล้ว เราจะแก้ไขให้ด้วยวิธีที่เหมาะสมที่สุด ทั้งการเปลี่ยนชิ้นใหม่
+                                การแลกเปลี่ยน การคืนเงิน เครดิตร้าน หรือทางออกอื่นที่เหมาะสม</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">5. ได้รับสินค้าผิด</h2>
+                            <p class="policy-text">หากได้รับสินค้าผิด แจ้งเราภายใน 3 วันหลังได้รับ โปรดอย่าเปิดหรือใช้
+                                เราอาจขอภาพถ่ายก่อนจัดการเปลี่ยนหรือคืนสินค้า</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">6. เปลี่ยนใจ</h2>
+                            <p class="policy-text">ด้วยลักษณะของสินค้าเหล่านี้ โดยทั่วไปเราไม่สามารถรับคืนหรือคืนเงินกรณีเปลี่ยนใจ
+                                เมื่อสินค้าถูกเปิด ใช้ หรือแกะซีลแล้ว หากยังปิดผนึก ไม่ได้ใช้ และอยู่ในสภาพเดิม
+                                เรายินดีพิจารณาคำขอของคุณเป็นกรณีไปตามนโยบายนี้</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">7. เรื่องของกลิ่นเอง</h2>
+                            <p class="policy-text">กลิ่นเป็นเรื่องเฉพาะบุคคลอย่างลึกซึ้ง และอยู่บนผิวของแต่ละคนต่างกัน
+                                ด้วยเหตุนี้ โดยทั่วไปเราจึงไม่สามารถรับคืนหรือคืนเงินเพียงเพราะกลิ่นไม่ถูกใจคุณ
+                                รู้สึกต่างจากที่จินตนาการไว้ อยู่บนผิวคุณในแบบหนึ่ง หรือเปลี่ยนไปตามเคมีของร่างกายหรือสภาพอากาศ
+                                การอ่านคำอธิบายกลิ่นอย่างละเอียดก่อนซื้อช่วยได้มาก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">8. การยกเลิกออเดอร์</h2>
+                            <p class="policy-text">ต้องการยกเลิกใช่ไหม ติดต่อเราให้เร็วที่สุด
+                                โดยทั่วไปเรายกเลิกให้ได้ขณะที่ออเดอร์ยังรอการแพ็กและจัดเตรียมอยู่ เมื่อจัดส่งแล้ว
+                                การยกเลิกอาจทำไม่ได้อีก</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">9. ค่าจัดส่งคืนสินค้า</h2>
+                            <p class="policy-text">เว้นแต่การคืนจะเกิดจากความผิดพลาดของเรา ทั้งสินค้าผิด ชำรุด
+                                หรือความเสียหายจากการจัดส่งที่ตรวจสอบแล้ว ค่าจัดส่งคืนมักเป็นความรับผิดชอบของลูกค้า
+                                ค่าจัดส่งเดิมอาจคืนไม่ได้ เว้นแต่กฎหมายกำหนดหรือปัญหานั้นเกิดจากเรา</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">10. การคืนเงินทำงานอย่างไร</h2>
+                            <p class="policy-text">เมื่อสินค้าคืนมาถึงเราและตรวจสอบเรียบร้อย เราจะแจ้งว่าการคืนเงินได้รับอนุมัติหรือไม่
+                                หากอนุมัติ เราคืนเงินได้ผ่านช่องทางการชำระเงินเดิม การโอนผ่านธนาคาร เครดิตร้าน
+                                หรือวิธีอื่นที่ตกลงร่วมกัน โดยทั่วไปการคืนเงินใช้เวลาประมาณ 7–14 วันทำการ
+                                ขึ้นอยู่กับธนาคารหรือผู้ให้บริการชำระเงินของคุณ</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">11. การคืนเงินบางส่วน</h2>
+                            <p class="policy-text">บางครั้งการคืนเงินบางส่วนคือผลลัพธ์ที่เป็นธรรม เช่น
+                                หากสินค้าไม่ได้กลับมาในสภาพเดิม หากมีสินค้า ของแถม หรือบรรจุภัณฑ์ขาดหายไป
+                                หากความเสียหายไม่ได้เกิดจากเรา หรือหากมีปัญหาเพียงบางส่วนของออเดอร์</p>
+                        </div>
+
+                        <div class="policy-section">
+                            <h2 class="section-header">12. วิธีเริ่มคำขอ</h2>
+                            <p class="policy-text">หากต้องการเริ่มการคืน เปลี่ยน หรือคืนเงิน ทักหาฝ่ายบริการลูกค้า Nubie
+                                พร้อมหมายเลขออเดอร์ ชื่อ อีเมลหรือเบอร์ที่ใช้สั่งซื้อ เหตุผลของคำขอ ภาพถ่ายหรือวิดีโอ (ถ้ามี)
+                                และทางออกที่คุณต้องการ ติดต่อเราได้ที่:</p>
+                            <ul class="policy-list">
+                                <li>ฝ่ายบริการลูกค้า Nubie</li>
+                                <li>อีเมล: nubiestudios26@gmail.com</li>
+                                <li>LINE Official: nubie.studio</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="cart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-link');
+            const panes = document.querySelectorAll('.tab-pane');
+            const pageTitle = document.getElementById('page-title');
+
+            // Function to switch tabs
+            function switchTab(tabId) {
+                // Remove active class from all
+                tabs.forEach(t => t.classList.remove('active'));
+                panes.forEach(p => p.classList.remove('active'));
+
+                // Add active class to target
+                const targetTab = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+                const targetPane = document.getElementById(`${tabId}-pane`);
+
+                if (targetTab && targetPane) {
+                    targetTab.classList.add('active');
+                    targetPane.classList.add('active');
+                    pageTitle.textContent = targetTab.textContent;
+
+                    // Scroll to top of tabs smoothly if needed, but for now just update
+                }
+            }
+
+            // Check URL hash for direct linking
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                if (['terms', 'terms2', 'privacy', 'privacy2', 'cookie', 'cookie2', 'safety', 'safety2', 'shipping2', 'returns2'].includes(hash)) {
+                    switchTab(hash);
+                }
+            }
+
+            // Add click listeners
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = tab.getAttribute('data-tab');
+                    switchTab(target);
+                    history.pushState(null, null, `#${target}`);
+                });
+            });
+
+            // Bilingual policy tabs follow the site's global (bottom-right) language switcher
+            function syncPolicyLanguage() {
+                const lang = (window.NubieI18n && window.NubieI18n.getLanguage()) || 'en';
+                document.querySelectorAll('.lang-block').forEach(block => {
+                    block.style.display =
+                        block.getAttribute('data-lang-block') === lang ? 'block' : 'none';
+                });
+                // The i18n auto-translator reclaims #page-title on every language change,
+                // so re-assert the active tab's label to keep the hero title correct.
+                const activeTab = document.querySelector('.tab-link.active');
+                if (activeTab) pageTitle.textContent = activeTab.textContent;
+            }
+            syncPolicyLanguage();
+            window.addEventListener('nubie:languagechange', syncPolicyLanguage);
+        });
+    </script>
+</body>
+
+</html>

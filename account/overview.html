@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="../cookie-consent-config.js"></script>
+    <script src="../cookie-consent.js"></script>
+    <link rel="stylesheet" href="../cookie-consent.css">
+    <script src="../cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | Overview</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main class="account-container">
+        <nav class="account-tabs">
+            <a href="overview.html" class="tab-link active">Overview</a>
+            <a href="orders.html" class="tab-link">Orders</a>
+            <a href="personal-data.html" class="tab-link">Personal Data</a>
+            <a href="stay-in-the-know.html" class="tab-link">Stay in the Know</a>
+            <a href="invite.html" class="tab-link">Invite</a>
+        </nav>
+
+        <div id="overview" class="tab-pane active">
+            <header class="account-header">
+                <h1>My Account</h1>
+            </header>
+            <div class="account-grid">
+                <aside class="account-sidebar">
+                    <section class="account-section profile-summary">
+                        <h2 class="user-name" id="display-name">Loading...</h2>
+                        <div class="user-info">
+                            <p id="display-phone">Loading...</p>
+                            <p id="display-email">Loading...</p>
+                        </div>
+                        <a href="javascript:void(0)" class="logout-link" id="logout-btn">Log out</a>
+                        <a href="personal-data.html" class="btn btn-dark btn-pill btn-auth-width" style="height: 44px; font-size: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none;">My Profile</a>
+                    </section>
+                    <section class="account-section stay-know">
+                        <h3>Stay in the Know</h3>
+                        <p class="preference-desc">
+                            Stay in the know. Receive personalized Nubie updates, launch announcements and exclusive access based on your interests by:
+                        </p>
+                        <ul class="preference-list">
+                            <li>Email</li>
+                            <li>Phone</li>
+                            <li>SMS / MMS</li>
+                            <li>Instant messaging</li>
+                        </ul>
+                        <p class="unsubscribe-note" data-i18n="accountOverview.unsubscribeFull">
+                            You can unsubscribe at any time by using the link in our emails, on your online account or by contacting our Client Care service <a href="#">here</a>.
+                        </p>
+                        <a href="stay-in-the-know.html" id="my-preferences-btn" class="btn btn-dark btn-pill btn-auth-width" style="height: 44px; font-size: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none;">My Preference</a>
+                    </section>
+                </aside>
+
+                <div class="account-main">
+                    <section class="account-section tier-summary">
+                        <h3 data-i18n="accountOverview.myTier">My Tier</h3>
+                        <div class="tier-card" id="tier-card">
+                            <h2 class="tier-name" id="loyalty-tier">—</h2>
+                            <p class="tier-desc" id="tier-description" data-i18n="accountOverview.joinCircle">Make your first purchase to join the Circle.</p>
+                        </div>
+                    </section>
+
+                    <section class="account-section orders-summary">
+                        <h3 data-i18n="accountOverview.recentOrder">Recent Order</h3>
+                        <p class="empty-msg" data-i18n="accountOverview.noOrders">No orders have been placed yet</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../i18n.js"></script>
+    <script src="../navbar.js"></script>
+    <script src="../script.js"></script>
+    <script src="../cart.js"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../footer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ordersSummary = document.querySelector('.orders-summary');
+            const SUPABASE_URL = 'https://qsbrjlhnklnfblqulzwn.supabase.co';
+            const SUPABASE_KEY = 'sb_publishable_N9ZhvV24PWSlXIDbDVC5sQ_Ee_3sulV';
+            const storageKey = 'sb-qsbrjlhnklnfblqulzwn-auth-token';
+
+            async function loadOverviewData() {
+                const storedSession = localStorage.getItem(storageKey);
+                if (!storedSession) return;
+
+                let sessionData;
+                try {
+                    sessionData = JSON.parse(storedSession);
+                } catch (e) { return; }
+
+                const token = sessionData.access_token;
+                const userId = sessionData.user?.id;
+                const userEmail = sessionData.user?.email;
+                if (!token || !userId) return;
+
+                const headers = {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                };
+
+                // Fetch tier data
+                fetchTierData(userId, headers);
+                // Fetch recent order
+                fetchRecentOrder(userEmail, headers);
+            }
+
+            async function fetchTierData(userId, headers) {
+                try {
+                    const res = await fetch(
+                        `${SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}&select=tier,alias`,
+                        { headers }
+                    );
+                    const profiles = await res.json();
+                    const profile = profiles?.[0];
+
+                    if (profile) {
+                        const t = window.NubieI18n ? window.NubieI18n.t : (key) => key;
+                        const tierCard = document.getElementById('tier-card');
+                        const tierName = document.getElementById('loyalty-tier');
+                        const tierDesc = document.getElementById('tier-description');
+                        const tier = profile.tier || 'Starter';
+
+                        // Reset tier card classes
+                        tierCard.classList.remove('is-black-edge', 'is-red-circle', 'is-starter');
+
+                        if (tier === 'First Circle' || tier === 'Black Edge') {
+                            tierCard.classList.add('is-black-edge');
+                            tierName.textContent = 'First Circle';
+                            tierDesc.textContent = t('accountOverview.tierFirstCircleDesc');
+                        } else if (tier === 'Rebel') {
+                            tierCard.classList.add('is-black-edge');
+                            tierName.textContent = 'Rebel';
+                            tierDesc.textContent = t('accountOverview.tierRebelDesc');
+                        } else if (tier === 'Riser') {
+                            tierCard.classList.add('is-red-circle');
+                            tierName.textContent = 'Riser';
+                            tierDesc.textContent = t('accountOverview.tierRiserDesc');
+                        } else if (tier === 'Starter' || tier === 'Stater' || tier === 'Red Circle') {
+                            tierCard.classList.add('is-starter');
+                            tierName.textContent = 'STARTER';
+                            tierDesc.textContent = t('accountOverview.tierStarterDesc');
+                        } else {
+                            // No tier yet
+                            tierCard.classList.add('is-starter');
+                            tierName.textContent = '—';
+                            tierDesc.textContent = t('accountOverview.joinCircle');
+                        }
+                    }
+                } catch (err) {
+                    console.warn("Could not fetch tier data:", err);
+                    const tierDesc = document.getElementById('tier-description');
+                    const t = window.NubieI18n ? window.NubieI18n.t : (key) => key;
+                    if (tierDesc) tierDesc.textContent = t('accountOverview.joinCircle');
+                }
+            }
+
+            async function fetchRecentOrder(userEmail, headers) {
+                try {
+                    const res = await fetch(
+                        `${SUPABASE_URL}/rest/v1/orders?user_email=eq.${userEmail}&select=*,order_items(*)&order=created_at.desc&limit=1`,
+                        { headers }
+                    );
+                    const orders = await res.json();
+
+                    if (Array.isArray(orders) && orders.length > 0) {
+                        const order = orders[0];
+                        const orderDate = new Date(order.created_at).toLocaleDateString();
+                        
+                        ordersSummary.innerHTML = `
+                            <h3 data-i18n="accountOverview.recentOrder">Recent Order</h3>
+                            <div style="margin-bottom: 20px;">
+                                <p style="font-size: 13px; font-weight: 500; margin-bottom: 5px;">Order #${order.order_number}</p>
+                                <p style="font-size: 11px; color: #999;">${orderDate} • ฿${parseFloat(order.total_amount).toLocaleString()}</p>
+                            </div>
+                            <a href="orders.html" style="font-size: 11px; text-decoration: underline; letter-spacing: 1px; text-transform: uppercase;" data-i18n="accountOverview.viewAllOrders">View All Orders</a>
+                        `;
+                    }
+                } catch (err) {
+                    console.warn("Could not fetch recent order:", err);
+                }
+            }
+
+            // Run immediately
+            loadOverviewData();
+
+            // --- 3D Tilt Tracking ---
+            const tierCardElement = document.querySelector('.tier-card');
+            if (tierCardElement) {
+                tierCardElement.addEventListener('mousemove', (e) => {
+                    if (tierCardElement.classList.contains('is-starter')) {
+                        return; // disable rotation for starter
+                    }
+                    const rect = tierCardElement.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8;
+                    const rotateY = ((x - centerX) / centerX) * 8;
+
+                    tierCardElement.style.setProperty('--rotate-x', `${rotateX}deg`);
+                    tierCardElement.style.setProperty('--rotate-y', `${rotateY}deg`);
+                });
+
+                tierCardElement.addEventListener('mouseleave', () => {
+                    if (tierCardElement.classList.contains('is-starter')) {
+                        return; // disable rotation for starter
+                    }
+                    tierCardElement.style.setProperty('--rotate-x', '0deg');
+                    tierCardElement.style.setProperty('--rotate-y', '0deg');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

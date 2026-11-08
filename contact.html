@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Nubie</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600 !important;
+            color: #1C1813 !important;
+        }
+
+        .contact-hero {
+            padding: 184px var(--page-margin) 40px;
+            text-align: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 36px;
+            font-weight: 300 !important;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .contact-subtitle {
+            font-size: 15px;
+            color: #666;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .contact-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--page-margin) 120px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Info Card */
+        .contact-info-card {
+            background: #FFFFFF;
+            border: 1px solid #E3DFD9;
+            padding: 48px;
+        }
+
+        .contact-info-overline {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .contact-info-name {
+            font-size: 22px;
+            font-weight: 600 !important;
+            margin-bottom: 32px;
+        }
+
+        .contact-detail-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px 0;
+            border-bottom: 1px solid #E3DFD9;
+        }
+
+        .contact-detail-row:first-of-type {
+            padding-top: 0;
+        }
+
+        .contact-detail-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .contact-detail-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(217, 41, 28, 0.08);
+            color: #D9291C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .contact-detail-text span {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            margin-bottom: 6px;
+        }
+
+        .contact-detail-text a,
+        .contact-detail-text p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1C1813;
+            text-decoration: none;
+        }
+
+        .contact-detail-text a:hover {
+            color: #D9291C;
+        }
+
+        /* Form */
+        .contact-form-wrapper h2 {
+            font-size: 20px;
+            font-weight: 600 !important;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .contact-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .contact-form textarea.form-input {
+            height: auto;
+            min-height: 120px;
+            resize: none;
+            padding-top: 10px;
+        }
+
+        .contact-form .btn {
+            margin-top: 12px;
+        }
+
+        .contact-form-note {
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .contact-form-note.visible {
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 56px;
+            }
+
+            .contact-hero {
+                padding: 120px 24px 40px;
+            }
+
+            .contact-container {
+                padding: 0 24px 100px;
+            }
+
+            .contact-info-card {
+                padding: 32px;
+            }
+
+            .contact-form .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main>
+        <section class="contact-hero">
+            <h1 class="contact-title" data-i18n="contact.title">Get in Touch</h1>
+            <p class="contact-subtitle" data-i18n="contact.subtitle">Questions about an order, a scent, or a collaboration? Reach out below — our
+                team is happy to help.</p>
+        </section>
+
+        <div class="contact-container">
+            <!-- Contact Info -->
+            <div class="contact-info-card">
+                <span class="contact-info-overline" data-i18n="contact.studio">Studio</span>
+                <h2 class="contact-info-name">Nubie Studio</h2>
+
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><i class="fas fa-location-dot"></i></div>
+                    <div class="contact-detail-text">
+                        <span data-i18n="contact.address">Address</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=131+Wat+Tha+Phra%2C+Bangkok+Yai%2C+Bangkok+10600"
+                            target="_blank" rel="noopener" data-i18n="contact.addressValue">
+                            131 Wat Tha Phra, Bangkok Yai,<br>Bangkok 10600
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
+                    <div class="contact-detail-text">
+                        <span data-i18n="contact.phone">Phone</span>
+                        <a href="tel:+66628455805">062-845-5805</a>
+                    </div>
+                </div>
+
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-detail-text">
+                        <span data-i18n="contact.email">Email</span>
+                        <a href="mailto:nubiestudios26@gmail.com">nubiestudios26@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-wrapper">
+                <h2 data-i18n="contact.sendMessage">Send a Message</h2>
+                <p class="contact-form-subtitle" data-i18n="contact.formSubtitle">Fill in the form and we'll get back to you as soon as we can.</p>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group-line">
+                            <label class="form-label" for="contact-name" data-i18n="contact.name">Name</label>
+                            <input type="text" id="contact-name" class="form-input" required>
+                        </div>
+                        <div class="form-group-line">
+                            <label class="form-label" for="contact-email" data-i18n="contact.email">Email</label>
+                            <input type="email" id="contact-email" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group-line">
+                        <label class="form-label" for="contact-subject" data-i18n="contact.subject">Subject</label>
+                        <input type="text" id="contact-subject" class="form-input">
+                    </div>
+
+                    <div class="form-group-line">
+                        <label class="form-label" for="contact-message" data-i18n="contact.message">Message</label>
+                        <textarea id="contact-message" class="form-input" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark btn-pill" data-i18n="contact.sendButton">Send Message</button>
+                    <p class="contact-form-note" id="contact-form-note" data-i18n="contact.sendingNote">Opening your email client to send this
+                        message to Nubie Studio…</p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const subject = document.getElementById('contact-subject').value.trim() || 'Website Inquiry';
+            const message = document.getElementById('contact-message').value.trim();
+
+            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+            const mailtoLink = `mailto:nubiestudios26@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailtoLink;
+            document.getElementById('contact-form-note').classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>

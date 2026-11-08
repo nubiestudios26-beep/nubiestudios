@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="cookie-consent-config.js"></script>
+    <script src="cookie-consent.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css">
+    <script src="cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Policies | Nubie</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        /* Enforce 400 weight and pure black for consistency */
+        body, .policy-content {
+            font-weight: 400 !important;
+            color: #1C1813 !important;
+        }
+
+        h1, h2, h3, h4, h5, h6, 
+        .policy-title, .section-header {
+            font-weight: 600 !important;
+            color: #1C1813 !important;
+        }
+
+        .policies-hero {
+            padding: 184px var(--page-margin) 40px;
+            text-align: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .policy-title {
+            font-size: 24px;
+            font-weight: 400 !important;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .effective-date {
+            font-size: 13px;
+            color: #666666 !important;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .policies-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--page-margin) 112px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .account-tabs {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 56px;
+        }
+        
+        .account-tabs .tab-link {
+            padding: 0 0 16px 0;
+            margin: 0 24px;
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .account-tabs .tab-link:hover {
+            color: #000;
+        }
+
+        .account-tabs .tab-link.active {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .account-tabs .tab-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #000;
+        }
+
+        .policy-content-wrapper {
+            max-width: 800px; /* Optimal reading width */
+            width: 100%;
+        }
+
+        .policy-intro {
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            color: #1C1813;
+        }
+
+        .policy-section {
+            margin-bottom: 14px;
+        }
+
+        .section-header {
+            font-size: 14px;
+            margin-bottom: 14px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .policy-text {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #1C1813 !important;
+            margin-bottom: 20px;
+        }
+
+        .policy-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 30px;
+        }
+
+        .policy-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #1C1813 !important;
+        }
+
+        .policy-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #ccc;
+        }
+
+        /* Tab switching logic */
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .policies-hero {
+                padding: 120px 24px 40px;
+            }
+            .policies-container {
+                padding: 0 24px 100px;
+            }
+            .account-tabs {
+                flex-wrap: wrap;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main>
+        <section class="policies-hero">
+            <h1 class="policy-title" id="page-title">Loyalty Terms</h1>
+            <p class="effective-date">Effective date: 02/05/2026</p>
+        </section>
+
+        <div class="policies-container">
+            <nav class="account-tabs">
+                <a href="#loyalty" class="tab-link active" data-tab="loyalty">Loyalty Terms</a>
+                <a href="#promotion" class="tab-link" data-tab="promotion">Promotion Terms</a>
+                <a href="#invite" class="tab-link" data-tab="invite">Invite Terms</a>
+            </nav>
+
+            <div class="policy-content-wrapper">
+                <!-- Loyalty Terms Content -->
+                <div class="tab-pane active" id="loyalty-pane">
+                    <div class="policy-intro">
+                        These Loyalty / Mark Terms apply to Nubie’s membership, Mark reward system, tier benefits, and related member experiences.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. About Mark</h2>
+                        <p class="policy-text">Mark is Nubie’s reward system. Members may earn Marks through purchases, brand activities, campaigns, or other actions defined by Nubie.</p>
+                        <p class="policy-text">Marks are not cash, have no monetary value outside Nubie, and cannot be exchanged for cash unless specifically stated.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Membership Tiers</h2>
+                        <p class="policy-text">Nubie membership tiers may include:</p>
+                        <ul class="policy-list">
+                            <li>First Circle</li>
+                            <li>Starter</li>
+                            <li>Riser</li>
+                            <li>Rebel</li>
+                        </ul>
+                        <p class="policy-text">Each tier may have different benefits, conditions, qualification rules, and validity periods.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Earning Marks</h2>
+                        <p class="policy-text">Members may earn Marks through eligible activities such as:</p>
+                        <ul class="policy-list">
+                            <li>Product purchases</li>
+                            <li>Account creation</li>
+                            <li>Birthday rewards</li>
+                            <li>Reviews</li>
+                            <li>Referrals</li>
+                            <li>Campaign participation</li>
+                            <li>Other brand activities</li>
+                        </ul>
+                        <p class="policy-text">Nubie may define earning rates and campaign rules from time to time.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Redeeming Marks</h2>
+                        <p class="policy-text">Marks may be redeemed for eligible rewards, discounts, gifts, member experiences, or other benefits made available by Nubie.</p>
+                        <p class="policy-text">Redemption conditions may vary by campaign, product, tier, or member status.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Expiry and Adjustment</h2>
+                        <p class="policy-text">Marks may expire after a certain period if not used. Nubie may adjust, cancel, or remove Marks if they were issued by mistake, obtained through fraud, system error, abuse, cancellation, refund, or violation of these terms.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">6. Returns and Refunds</h2>
+                        <p class="policy-text">If an order is canceled, returned, refunded, or partially refunded, any Marks earned from that order may be adjusted, deducted, or canceled.</p>
+                        <p class="policy-text">If Marks were used for a refunded order, the refund amount or Mark return may depend on the specific case and Nubie’s system rules.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">7. Changes to Loyalty Program</h2>
+                        <p class="policy-text">Nubie may modify, suspend, or terminate the Mark reward system, tier structure, benefits, earning rates, redemption rules, or expiry rules with reasonable notice where applicable.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">8. Abuse and Fraud</h2>
+                        <p class="policy-text">Nubie reserves the right to suspend or terminate membership, remove Marks, cancel rewards, or refuse benefits if abuse, fraud, resale activity, fake accounts, suspicious activity, or violation of these terms is detected.</p>
+                    </div>
+                </div>
+
+                <!-- Promotion Terms Content -->
+                <div class="tab-pane" id="promotion-pane">
+                    <div class="policy-intro">
+                        These Promotion Terms apply to discounts, campaigns, gifts, coupon codes, limited offers, bundles, free shipping, or special promotions offered by Nubie.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. General Promotion Rules</h2>
+                        <p class="policy-text">Promotions are valid only during the stated campaign period and while stocks last.</p>
+                        <p class="policy-text">Nubie reserves the right to modify, suspend, or cancel promotions if necessary due to system errors, stock issues, fraud, operational issues, or other reasonable causes.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. Discount Codes</h2>
+                        <p class="policy-text">Unless stated otherwise:</p>
+                        <ul class="policy-list">
+                            <li>Discount codes cannot be exchanged for cash</li>
+                            <li>Discount codes cannot be applied after an order has already been placed</li>
+                            <li>Discount codes may be limited to selected products</li>
+                            <li>Discount codes may have minimum purchase requirements</li>
+                            <li>Discount codes may not be combined with other promotions</li>
+                            <li>Discount codes may be limited to one use per customer</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Gifts and Free Items</h2>
+                        <p class="policy-text">Gifts, samples, or free items are available while stocks last and may not be exchanged for cash, returned, or refunded separately.</p>
+                        <p class="policy-text">If an order is canceled, returned, or refunded, the gift or free item may need to be returned in original condition.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Pricing Errors</h2>
+                        <p class="policy-text">If a promotion, discount, or price is displayed incorrectly due to system error, human error, or technical issue, Nubie reserves the right to correct the error, cancel the affected order, or contact the customer before processing.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Campaign Abuse</h2>
+                        <p class="policy-text">Nubie may cancel orders, refuse discounts, remove rewards, or suspend accounts if promotion abuse, fake accounts, multiple account misuse, suspicious activity, or resale behavior is detected.</p>
+                    </div>
+                </div>
+
+                <!-- Referral Terms Content -->
+                <div class="tab-pane" id="invite-pane">
+                    <div class="policy-intro">
+                        These Referral Terms apply to Nubie's "Share Nubie" referral program, including referral links, discount codes, gift codes, and milestone rewards.
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">1. Eligibility</h2>
+                        <p class="policy-text">The Share Nubie referral program is available to all registered Nubie account holders in good standing. You must have a valid Nubie account to generate a referral link and earn rewards.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">2. How It Works</h2>
+                        <p class="policy-text">Each member receives a unique referral link containing their personal referral code. When a friend clicks this link, registers for a Nubie account, and completes their first purchase, the referral is considered "completed." Both the referrer and the referred friend become eligible for rewards.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">3. Reward Structure</h2>
+                        <p class="policy-text">Rewards are issued based on the number of completed referrals (friends who made a purchase):</p>
+                        <ul class="policy-list">
+                            <li data-i18n="inviteTerms.milestone1"><strong>Milestone 1 (1st friend purchases):</strong> Both the referrer and friend receive a 15% discount code valid for their next order.</li>
+                            <li data-i18n="inviteTerms.milestone2"><strong>Milestone 2 (2nd friend purchases):</strong> The referrer receives a gift code to claim a Mini Gift Set with their next order.</li>
+                            <li data-i18n="inviteTerms.milestone3"><strong>Milestone 3 (3rd friend purchases):</strong> The referrer receives a gift code to claim a Discovery Set with their next order.</li>
+                        </ul>
+                        <p class="policy-text">Each referred friend always receives the same 15% discount code upon their first purchase, regardless of which milestone the referrer has reached.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">4. Code Types & Usage</h2>
+                        <p class="policy-text" data-i18n="inviteTerms.discountCodes"><strong>Discount Codes (SHARE15-XXXXXX):</strong> Apply at checkout in the promo code field for 15% off your order subtotal. One-time use. Expires 30 days from issue.</p>
+                        <p class="policy-text" data-i18n="inviteTerms.giftCodes"><strong>Gift Codes (GIFT-MINI-XXXXXX / GIFT-DISC-XXXXXX):</strong> Apply at checkout in the gift card field to claim the physical reward (Mini Gift Set or Discovery Set) with your order. One-time use. Expires 60 days from issue.</p>
+                        <p class="policy-text">Codes cannot be combined with other promotional offers unless explicitly stated. Codes have no cash value and cannot be resold or transferred.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">5. Reward Cap</h2>
+                        <p class="policy-text">Members may invite an unlimited number of friends. However, milestone rewards are capped at the first 3 friends who complete a purchase. Referrals beyond the 3rd completed purchase will not generate additional rewards for the referrer.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">6. Physical Gift Fulfillment</h2>
+                        <p class="policy-text">Mini Gift Sets and Discovery Sets are physical items. When you apply a gift code during checkout, the item will be included with your order shipment. Gift availability is subject to stock. Nubie reserves the right to substitute gifts of equal or greater value if stock is unavailable.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">7. Abuse Prevention</h2>
+                        <p class="policy-text">The following are prohibited and may result in referral removal, code invalidation, or account suspension:</p>
+                        <ul class="policy-list">
+                            <li>Self-referral (referring your own account or accounts you control)</li>
+                            <li>Creating fake or duplicate accounts to earn referral rewards</li>
+                            <li>Sharing referral codes on unauthorized coupon or deal-sharing websites</li>
+                            <li>Any fraudulent activity designed to exploit the referral program</li>
+                        </ul>
+                        <p class="policy-text">Each user can only be referred once. The first referral code used during registration is permanent and cannot be changed.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h2 class="section-header">8. Modifications</h2>
+                        <p class="policy-text">Nubie reserves the right to modify, suspend, or terminate the Share Nubie referral program at any time with reasonable notice. Any earned but unused rewards will remain valid until their expiration date.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="i18n.js"></script>
+    <script src="navbar.js"></script>
+    <script src="footer.js"></script>
+    <script src="cart.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-link');
+            const panes = document.querySelectorAll('.tab-pane');
+            const pageTitle = document.getElementById('page-title');
+
+            function switchTab(tabId) {
+                tabs.forEach(t => t.classList.remove('active'));
+                panes.forEach(p => p.classList.remove('active'));
+                
+                const targetTab = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+                const targetPane = document.getElementById(`${tabId}-pane`);
+                
+                if (targetTab && targetPane) {
+                    targetTab.classList.add('active');
+                    targetPane.classList.add('active');
+                    pageTitle.textContent = targetTab.textContent;
+                }
+            }
+
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                if (['loyalty', 'promotion', 'invite'].includes(hash)) {
+                    switchTab(hash);
+                }
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = tab.getAttribute('data-tab');
+                    switchTab(target);
+                    history.pushState(null, null, `#${target}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
