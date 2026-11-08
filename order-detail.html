@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="../cookie-consent-config.js"></script>
+    <script src="../cookie-consent.js"></script>
+    <link rel="stylesheet" href="../cookie-consent.css">
+    <script src="../cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | Order Detail</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .detail-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 60px auto;
+            padding: 0 64px;
+        }
+
+        .order-card {
+            cursor: default !important;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #111;
+        }
+
+        /* Reuse the order-card styles from style.css or define here if needed */
+        .order-card {
+            border: 1px solid #E3DFD9;
+            padding: 42px;
+            background: #FFFFFF;
+            cursor: default !important;
+        }
+
+        /* Typography Refinement */
+        .order-item-name,
+        .shipping-value,
+        .order-total-value,
+        .tracking-number-link {
+            font-size: 14px !important;
+        }
+
+        .order-item-details,
+        .shipping-label,
+        .order-date,
+        .order-total-label,
+        .tracking-info {
+            font-size: 12px !important;
+        }
+
+        .step-label,
+        .shipping-header,
+        .order-status-badge {
+            font-size: 10px !important;
+            letter-spacing: 1.5px;
+        }
+
+        .order-tracker {
+            border-top: none !important;
+            padding-top: 0 !important;
+            margin: 42px 0 !important;
+        }
+
+        .order-card-header {
+            border-bottom: none !important;
+            padding-bottom: 42px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .tracking-info {
+            margin-top: 56px !important;
+        }
+
+        .order-shipping-details {
+            margin-top: 42px !important;
+            padding-top: 42px !important;
+            border-top: 1px solid #E3DFD9;
+        }
+
+        .order-card-footer {
+            margin-top: 42px !important;
+            padding-top: 42px !important;
+            border-top: 1px solid #E3DFD9;
+        }
+
+        .price-summary {
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-line.total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #E3DFD9;
+        }
+
+        .billing-section {
+            margin-top: 42px !important;
+            padding-top: 42px !important;
+            border-top: 1px solid #E3DFD9;
+        }
+    </style>
+</head>
+
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main class="detail-container">
+        <a href="orders.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Orders</span>
+        </a>
+
+        <div id="order-detail-content">
+            <div style="text-align: center; padding: 100px 0;">
+                <p style="color: #999; font-size: 13px; letter-spacing: 1px;">LOADING ORDER DETAILS...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../i18n.js"></script>
+    <script src="../navbar.js"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const content = document.getElementById('order-detail-content');
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('id');
+
+            if (!orderId) {
+                window.location.href = 'orders.html';
+                return;
+            }
+
+            async function fetchOrderDetail() {
+                try {
+                    const storageKey = 'sb-qsbrjlhnklnfblqulzwn-auth-token';
+                    const storedSession = localStorage.getItem(storageKey);
+                    if (!storedSession) {
+                        window.location.href = '../login.html';
+                        return;
+                    }
+
+                    const sessionData = JSON.parse(storedSession);
+                    const token = sessionData.access_token;
+
+                    const response = await fetch(
+                        `https://qsbrjlhnklnfblqulzwn.supabase.co/rest/v1/orders?id=eq.${orderId}&select=*,order_items(*)`,
+                        {
+                            method: 'GET',
+                            headers: {
+                                'apikey': 'sb_publishable_N9ZhvV24PWSlXIDbDVC5sQ_Ee_3sulV',
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
+
+                    if (!response.ok) throw new Error("Failed to fetch order details");
+
+                    const data = await response.json();
+                    if (!data || data.length === 0) throw new Error("Order not found");
+
+                    const order = data[0];
+                    renderOrder(order);
+
+                } catch (err) {
+                    console.error(err);
+                    content.innerHTML = `<p style="color: #D9291C; text-align: center; padding: 100px 0;">${err.message}</p>`;
+                }
+            }
+
+            function renderOrder(order) {
+                const date = new Date(order.created_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                let statusLabel = (order.status || 'pending').toUpperCase();
+                if (statusLabel === 'PAID' || statusLabel === 'PENDING') statusLabel = 'ORDERED';
+                const statusClass = `status-${(order.status || 'pending').toLowerCase()}`;
+
+                const itemsHtml = order.order_items.map(item => {
+                    let imgUrl = item.image_url || '../assets/placeholder.jpg';
+                    if (imgUrl && !imgUrl.startsWith('http') && !imgUrl.startsWith('../') && !imgUrl.startsWith('/')) {
+                        imgUrl = '../' + imgUrl;
+                    }
+                    return `
+                        <div class="order-item-row">
+                            <img src="${imgUrl}" alt="${item.product_title}" class="order-item-img" onerror="this.src='../assets/placeholder.jpg'">
+                            <div class="order-item-info">
+                                <div class="order-item-name">${item.product_title}</div>
+                                <div class="order-item-details">${item.size || 'Standard'} &times; ${item.quantity}</div>
+                            </div>
+                            <div class="order-item-price">฿${parseFloat(item.price).toLocaleString()}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                const status = (order.status || 'pending').toLowerCase();
+                const steps = ['pending', 'processing', 'shipped', 'delivered'];
+                const stepLabels = ['Ordered', 'Preparing', 'In Transit', 'Arrived'];
+                const currentStepIndex = steps.indexOf(status === 'paid' ? 'pending' : status);
+                const isDelivered = status === 'delivered';
+
+                content.innerHTML = `
+                    <div class="order-card ${isDelivered ? 'is-delivered' : ''}">
+                        <div class="order-card-header">
+                            <div class="order-meta-left">
+                                <h4>Order #${order.order_number}</h4>
+                                <div class="order-date">${date}</div>
+                            </div>
+                            <div class="order-status-badge ${statusClass}">${statusLabel}</div>
+                        </div>
+                        
+                        <div class="order-tracker">
+                            <div class="tracker-stepper">
+                                ${stepLabels.map((label, index) => `
+                                    <div class="tracker-step ${index < currentStepIndex ? 'completed' : index === currentStepIndex ? 'active' : ''}">
+                                        <div class="step-dot"></div>
+                                        <span class="step-label">${label}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ${order.tracking_number ? `
+                                <div class="tracking-info">
+                                    <span>Carrier: ${order.carrier || 'Kerry Express'}</span>
+                                    <span>Tracking Number: <a href="#" class="tracking-number-link">${order.tracking_number}</a></span>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="order-items-summary">
+                            ${itemsHtml}
+                        </div>
+                        
+                        <div class="order-shipping-details">
+                            <div class="shipping-header">SHIPPING DETAILS</div>
+                            <div class="shipping-grid">
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Recipient</span>
+                                    <div class="shipping-value">${order.shipping_name || 'Not provided'}</div>
+                                </div>
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Address</span>
+                                    <div class="shipping-value">
+                                        ${order.shipping_address || ''}<br>
+                                        ${order.shipping_city || ''}, ${order.shipping_postcode || ''}<br>
+                                        ${order.shipping_country || ''}
+                                     </div>
+                                </div>
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Contact</span>
+                                    <div class="shipping-value">${order.shipping_phone || 'Not provided'}</div>
+                                </div>
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Payment</span>
+                                    <div class="shipping-value payment-method-display">
+                                        ${(order.payment_method === 'card') ? '<i class="fa-solid fa-credit-card"></i>' : '<i class="fa-solid fa-wallet"></i>'}
+                                        <span style="text-transform: capitalize;">${order.payment_method || 'Not provided'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="billing-section">
+                            <div class="shipping-header">BILLING ADDRESS</div>
+                            <div class="shipping-grid">
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Recipient</span>
+                                    <div class="shipping-value">${order.billing_name || order.shipping_name || 'Not provided'}</div>
+                                </div>
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Address</span>
+                                    <div class="shipping-value">
+                                        ${order.billing_address || order.shipping_address || ''}<br>
+                                        ${order.billing_city || order.shipping_city || ''}, ${order.billing_postcode || order.shipping_postcode || ''}<br>
+                                        ${order.billing_country || order.shipping_country || ''}
+                                    </div>
+                                </div>
+                                <div class="shipping-info-block">
+                                    <span class="shipping-label">Contact</span>
+                                    <div class="shipping-value">${order.billing_phone || order.shipping_phone || 'Not provided'}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-card-footer">
+                            <div class="price-summary">
+                                <div class="summary-line">
+                                    <span class="order-total-label">Subtotal</span>
+                                    <span class="order-total-value">฿${(parseFloat(order.total_amount) - (parseFloat(order.shipping_cost) || 0)).toLocaleString()}</span>
+                                </div>
+                                <div class="summary-line">
+                                    <span class="order-total-label">Shipping</span>
+                                    <span class="order-total-value">${(parseFloat(order.shipping_cost) || 0) > 0 ? `฿${parseFloat(order.shipping_cost).toLocaleString()}` : 'FREE'}</span>
+                                </div>
+                                <div class="summary-line total">
+                                    <span class="order-total-label" style="font-weight: 600; color: #111;">Total</span>
+                                    <div class="order-total-value" style="font-weight: 600; color: #111; font-size: 18px !important;">฿${parseFloat(order.total_amount).toLocaleString()}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            fetchOrderDetail();
+        });
+    </script>
+</body>
+
+</html>

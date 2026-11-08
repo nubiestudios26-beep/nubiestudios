@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Consent defaults must run before any tracking tags. -->
+    <script src="../cookie-consent-config.js"></script>
+    <script src="../cookie-consent.js"></script>
+    <link rel="stylesheet" href="../cookie-consent.css">
+    <script src="../cookie-preferences.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubie | Invite Friends</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ═══ Invite Friends Dashboard Styles ═══ */
+        .account-header {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            text-align: left !important;
+        }
+        .invite-dashboard {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .invite-intro {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        .ref-link-box {
+            margin-bottom: 40px;
+        }
+        .ref-link-row {
+            display: flex;
+            gap: 0;
+            border: 1px solid #E3DFD9;
+            overflow: hidden;
+        }
+        .ref-link-input {
+            flex: 1;
+            border: none !important;
+            padding: 14px 16px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            color: #333;
+            background: #FFFFFF;
+            outline: none;
+            font-family: monospace;
+        }
+        .ref-copy-btn {
+            background: #000;
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 12px;
+        }
+        .ref-copy-btn:hover { background: #333; }
+        .ref-copy-btn.copied {
+            background: #D9291C;
+        }
+        .ref-copied-msg {
+            display: none;
+            font-size: 11px;
+            color: #D9291C;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+        .ref-copied-msg.show { display: block; }
+ 
+        /* Milestone Tracker - Premium Sleek Order Progress Style */
+        .ref-milestones {
+            margin-bottom: 120px; /* Space for absolute milestone labels below the line */
+            margin-top: 40px;
+            padding: 0 40px; /* Spacing to prevent absolute labels from clipping */
+        }
+        .tier-progress-track {
+            position: relative;
+            height: 1px;
+            background: #F0F0F0;
+        }
+        .tier-progress-active {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: #D9291C;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+        .tier-milestone {
+            position: absolute;
+            top: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            transform: translate(-50%, -50%);
+        }
+        .milestone-dot {
+            width: 8px;
+            height: 8px;
+            background: #EAEAEA;
+            border-radius: 50%;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .tier-milestone.reached .milestone-dot {
+            background: #D9291C;
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 15px rgba(217, 41, 28, 0.3);
+        }
+        .tier-milestone.reached .milestone-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid rgba(217, 41, 28, 0.5);
+            border-radius: 50%;
+            animation: tierPulse 2s infinite;
+        }
+        @keyframes tierPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+        .milestone-info {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+        .milestone-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #999;
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+        .tier-milestone.reached .milestone-label {
+            color: #111;
+        }
+        .milestone-value {
+            font-size: 11px;
+            color: #bbb;
+            white-space: nowrap;
+        }
+        .tier-milestone.reached .milestone-value {
+            color: #D9291C;
+            font-weight: 600;
+        }
+ 
+        /* Status */
+        .ref-status {
+            margin-bottom: 32px;
+        }
+        .ref-status-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.7;
+        }
+        .ref-status-text .ref-highlight {
+            font-weight: 600;
+            color: #111;
+        }
+ 
+        /* Reward Codes */
+        .ref-rewards-list {
+            border-top: 1px solid #E3DFD9;
+            padding-top: 32px;
+            margin-bottom: 32px;
+        }
+        .ref-reward-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border: 1px solid #E3DFD9;
+            margin-bottom: 12px;
+            transition: border-color 0.3s ease;
+        }
+        .ref-reward-item:hover { border-color: #E3DFD9; }
+        .ref-reward-item.is-used {
+            opacity: 0.5;
+            background: #fafafa;
+        }
+        .ref-reward-code {
+            font-family: monospace;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #111;
+        }
+        .ref-reward-desc {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .ref-reward-badge {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 10px;
+            border: 1px solid;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .ref-reward-badge.discount {
+            color: #D9291C;
+            border-color: #D9291C;
+        }
+        .ref-reward-badge.gift {
+            color: #111;
+            border-color: #E3DFD9;
+        }
+        .ref-reward-badge.used {
+            color: #999;
+            border-color: #E3DFD9;
+        }
+        .ref-reward-copy-icon:hover {
+            color: #D9291C !important;
+        }
+
+        /* How It Works */
+        .invite-how {
+            border-top: 1px solid #E3DFD9;
+            padding-top: 32px;
+            margin-top: 8px;
+        }
+        .invite-how-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .invite-how-num {
+            font-size: 11px;
+            color: #D9291C;
+            font-weight: 600;
+            letter-spacing: 1px;
+            min-width: 24px;
+            padding-top: 2px;
+        }
+        .invite-how-text {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="minimal-grey-theme">
+    <div id="navbar-placeholder" data-nav-type="standard"></div>
+
+    <main class="account-container">
+        <nav class="account-tabs">
+            <a href="overview.html" class="tab-link">Overview</a>
+            <a href="orders.html" class="tab-link">Orders</a>
+            <a href="personal-data.html" class="tab-link">Personal Data</a>
+            <a href="stay-in-the-know.html" class="tab-link">Stay in the Know</a>
+            <a href="invite.html" class="tab-link active">Invite</a>
+        </nav>
+
+        <div class="tab-pane active">
+            <header class="account-header">
+                <h1 data-i18n="invite.title">Invite Friends</h1>
+            </header>
+
+            <div class="invite-dashboard">
+                <p class="invite-intro" data-i18n="invite.introSingle">
+                    Invite one friend to Nubie. When they make their first purchase, you become a <strong>Riser</strong> and earn a Mini Gift Set.
+                </p>
+
+                <!-- Inbound Referral Reward Box (only shown if the user was referred by a friend) -->
+                <div id="inbound-ref-box" style="display: none; margin-bottom: 32px; border-bottom: 1px solid #E3DFD9; padding-bottom: 20px;">
+                    <p style="font-size: 12px; color: #555; margin: 0; line-height: 1.6;">
+                        <span data-i18n="invite.invitedBy">You were invited by</span> <span id="inbound-referrer-email" style="font-weight: 500; color: #111;">...</span>.
+                    </p>
+                </div>
+
+                <!-- Invite Link -->
+                <div class="ref-link-box" id="ref-link-box">
+                    <label style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #999; display: block; margin-bottom: 8px;" data-i18n="invite.linkLabel">Your Invite Link</label>
+                    <div class="ref-link-row">
+                        <input type="text" id="ref-link-input" readonly value="Sign in to get your link" class="ref-link-input">
+                        <button id="ref-copy-btn" class="ref-copy-btn" onclick="copyInviteLink()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <span class="ref-copied-msg" id="ref-copied-msg" data-i18n="invite.linkCopied">Link copied!</span>
+                </div>
+
+                <!-- Tier Progress Tracker -->
+                <div class="ref-milestones" id="ref-milestones">
+                    <div class="tier-progress-track">
+                        <div class="tier-progress-line"></div>
+                        <div class="tier-progress-active" id="ref-progress-fill" style="width: 0%;"></div>
+
+                        <div class="tier-milestone reached" style="left: 0%;" id="ref-step-start">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-info">
+                                <span class="milestone-label">Starter</span>
+                                <span class="milestone-value">Registered</span>
+                            </div>
+                        </div>
+
+                        <div class="tier-milestone" style="left: 100%;" id="ref-step-1">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-info">
+                                <span class="milestone-label">Riser</span>
+                                <span class="milestone-value">Mini Gift Set</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="ref-status" id="ref-status">
+                    <p class="ref-status-text" id="ref-status-text" data-i18n="invite.startStatus">Share your invite link to get started.</p>
+                </div>
+
+                <!-- Reward Codes -->
+                <div class="ref-rewards-list" id="ref-rewards-list" style="display: none;">
+                    <h3 style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #999; margin-bottom: 20px; border-bottom: 0.5px solid rgba(0,0,0,0.05); padding-bottom: 12px;" data-i18n="invite.rewardCodes">Your Reward Codes</h3>
+                    <div id="ref-rewards-container"></div>
+                </div>
+
+                <!-- How It Works -->
+                <div class="invite-how">
+                    <h3 style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #999; margin-bottom: 24px; border-bottom: 0.5px solid rgba(0,0,0,0.05); padding-bottom: 12px;" data-i18n="invite.howItWorks">How It Works</h3>
+                    <div class="invite-how-step">
+                        <span class="invite-how-num">01</span>
+                        <span class="invite-how-text" data-i18n="invite.step1Single">Copy your personal invite link above and share it with one friend.</span>
+                    </div>
+                    <div class="invite-how-step">
+                        <span class="invite-how-num">02</span>
+                        <span class="invite-how-text" data-i18n="invite.step2Single">When they register using your link and make their first purchase, the invite is complete.</span>
+                    </div>
+                    <div class="invite-how-step">
+                        <span class="invite-how-num">03</span>
+                        <span class="invite-how-text" data-i18n="invite.step3Single">You become a <strong>Riser</strong> and receive a Mini Gift Set code — apply it in the gift card field at checkout.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../i18n.js"></script>
+    <script src="../navbar.js"></script>
+    <script src="../script.js"></script>
+    <script src="../cart.js"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../footer.js"></script>
+
+    <script>
+        // ═══ INVITE DASHBOARD LOGIC ═══
+        // Uses localStorage auth token (same proven pattern as orders page)
+        document.addEventListener('DOMContentLoaded', () => {
+            const SUPABASE_URL = 'https://qsbrjlhnklnfblqulzwn.supabase.co';
+            const SUPABASE_KEY = 'sb_publishable_N9ZhvV24PWSlXIDbDVC5sQ_Ee_3sulV';
+            const storageKey = 'sb-qsbrjlhnklnfblqulzwn-auth-token';
+
+            async function loadInviteData() {
+                const storedSession = localStorage.getItem(storageKey);
+                if (!storedSession) {
+                    console.log('[Invite] No session found');
+                    return;
+                }
+
+                let sessionData;
+                try {
+                    sessionData = JSON.parse(storedSession);
+                } catch (e) {
+                    console.warn('[Invite] Could not parse session');
+                    return;
+                }
+
+                const token = sessionData.access_token;
+                const userId = sessionData.user?.id;
+                if (!token || !userId) return;
+
+                const headers = {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                };
+
+                try {
+                    // 1. Fetch profile for referral_code, milestone, and referred_by
+                    const profileRes = await fetch(
+                        `${SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}&select=referral_code,referral_milestone,referred_by`,
+                        { headers }
+                    );
+                    const profiles = await profileRes.json();
+                    const profile = profiles?.[0];
+
+                    if (!profile) {
+                        console.warn('[Invite] No profile found');
+                        return;
+                    }
+
+                    // 1.5 Handle inbound referral (referred by someone)
+                    if (profile.referred_by) {
+                        try {
+                            const referrerRes = await fetch(
+                                `${SUPABASE_URL}/rest/v1/profiles?referral_code=eq.${profile.referred_by}&select=email`,
+                                { headers }
+                            );
+                            const referrers = await referrerRes.json();
+                            const referrerEmail = referrers?.[0]?.email || 'your friend';
+
+                            const inboundBox = document.getElementById('inbound-ref-box');
+                            const inboundEmail = document.getElementById('inbound-referrer-email');
+                            
+                            if (inboundBox && inboundEmail) {
+                                inboundEmail.textContent = referrerEmail;
+                                inboundBox.style.display = 'block';
+                            }
+                        } catch (inboundErr) {
+                            console.warn('[Invite] Error loading inbound referral:', inboundErr);
+                        }
+                    }
+
+                    // 2. Set invite link
+                    const refInput = document.getElementById('ref-link-input');
+                    const siteBase = window.location.origin;
+                    const t = window.NubieI18n ? window.NubieI18n.t : (key) => key;
+                    if (refInput && profile.referral_code) {
+                        refInput.value = `${siteBase}?ref=${profile.referral_code}`;
+                    } else if (refInput) {
+                        refInput.value = t('invite.codeUnavailable');
+                    }
+
+                    // 3. Count completed referrals
+                    const refRes = await fetch(
+                        `${SUPABASE_URL}/rest/v1/referrals?referrer_id=eq.${userId}&status=eq.completed&select=id`,
+                        { headers, method: 'HEAD' }
+                    );
+                    // Use content-range header for count, fallback to fetching data
+                    let completed = 0;
+                    const rangeHeader = refRes.headers.get('content-range');
+                    if (rangeHeader) {
+                        const match = rangeHeader.match(/\/(\d+)/);
+                        if (match) completed = parseInt(match[1], 10);
+                    } else {
+                        // Fallback: fetch the actual data
+                        const refDataRes = await fetch(
+                            `${SUPABASE_URL}/rest/v1/referrals?referrer_id=eq.${userId}&status=eq.completed&select=id`,
+                            { headers }
+                        );
+                        const refData = await refDataRes.json();
+                        completed = Array.isArray(refData) ? refData.length : 0;
+                    }
+
+                    const milestone = profile.referral_milestone || 0;
+
+                    // 4. Update tier progress tracker
+                    const progressFill = document.getElementById('ref-progress-fill');
+                    const progressPercent = completed >= 1 ? 100 : 0;
+                    if (progressFill) {
+                        setTimeout(() => { progressFill.style.width = progressPercent + '%'; }, 300);
+                    }
+
+                    const riserStep = document.getElementById('ref-step-1');
+                    if (riserStep && completed >= 1) {
+                        riserStep.classList.add('reached');
+                    }
+
+                    // 5. Update status text
+                    const statusText = document.getElementById('ref-status-text');
+                    if (statusText) {
+                        const t = window.NubieI18n ? window.NubieI18n.t : (key) => key;
+                        statusText.innerHTML = completed === 0 ? t('invite.statusZeroSingle') : t('invite.statusOneSingle');
+                    }
+
+                    // 6. Fetch and display reward codes
+                    const rewardsRes = await fetch(
+                        `${SUPABASE_URL}/rest/v1/referral_rewards?user_id=eq.${userId}&select=*&order=created_at.desc`,
+                        { headers }
+                    );
+                    const rewards = await rewardsRes.json();
+
+                    if (Array.isArray(rewards) && rewards.length > 0) {
+                        const rewardsList = document.getElementById('ref-rewards-list');
+                        const container = document.getElementById('ref-rewards-container');
+                        if (rewardsList && container) {
+                            rewardsList.style.display = 'block';
+                            container.innerHTML = '';
+
+                            rewards.forEach(reward => {
+                                const isUsed = reward.is_used;
+                                const isExpired = reward.expires_at && new Date(reward.expires_at) < new Date();
+                                const badgeClass = isUsed ? 'used' : reward.type === 'discount' ? 'discount' : 'gift';
+                                const badgeText = isUsed ? 'Used' : isExpired ? 'Expired' : reward.type === 'discount' ? '15% Off' : 'Gift';
+
+                                // Calculate remaining time left if active
+                                let timeLeftText = '';
+                                if (!isUsed && !isExpired && reward.expires_at) {
+                                    const expDate = new Date(reward.expires_at);
+                                    const diffMs = expDate - new Date();
+                                    if (diffMs > 0) {
+                                        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                                        if (diffDays >= 1) {
+                                            timeLeftText = `${diffDays}d left`;
+                                        } else {
+                                            const diffHours = Math.ceil(diffMs / (1000 * 60 * 60));
+                                            timeLeftText = `${diffHours}h left`;
+                                        }
+                                    }
+                                }
+
+                                 const item = document.createElement('div');
+                                 item.className = `ref-reward-item ${isUsed ? 'is-used' : ''}`;
+                                 item.innerHTML = `
+                                     <div>
+                                         <div class="ref-reward-type" style="font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 5px; font-weight: 500;">
+                                             ${reward.type === 'discount' ? 'Promocode' : 'Gift Code'}
+                                         </div>
+                                         <div class="ref-reward-code" style="display: flex; align-items: center; gap: 8px;">
+                                             <span style="font-weight: 600; letter-spacing: 0.5px;">${reward.code}</span>
+                                             <span class="ref-reward-copy-icon" onclick="copyRewardCode('${reward.code}', this)" style="cursor: pointer; color: #aaa; transition: color 0.2s; display: inline-flex; align-items: center;" title="Copy Code">
+                                                 <i class="far fa-copy" style="font-size: 11px; padding: 2px;"></i>
+                                             </span>
+                                         </div>
+                                         <div class="ref-reward-desc" style="margin-top: 4px;">${reward.description || ''}</div>
+                                     </div>
+                                     <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                                         <span class="ref-reward-badge ${badgeClass}">${badgeText}</span>
+                                         ${timeLeftText ? `<span class="ref-time-left" style="font-size: 10px; color: #D9291C; font-weight: 500; letter-spacing: 0.5px;">${timeLeftText}</span>` : ''}
+                                     </div>
+                                 `;
+                                 container.appendChild(item);
+                            });
+                        }
+                    }
+
+                } catch (err) {
+                    console.warn('[Invite] Dashboard error:', err);
+                }
+            }
+
+            // Run immediately
+            loadInviteData();
+        });
+
+        // Copy invite link
+        function copyInviteLink() {
+            const input = document.getElementById('ref-link-input');
+            const btn = document.getElementById('ref-copy-btn');
+            const msg = document.getElementById('ref-copied-msg');
+            if (!input || input.value.startsWith('Sign in') || input.value.startsWith('Code not')) return;
+
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                msg.classList.add('show');
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i>';
+                    msg.classList.remove('show');
+                }, 2500);
+            }).catch(() => {
+                input.select();
+                document.execCommand('copy');
+            });
+        }
+
+        // Copy individual reward code
+        function copyRewardCode(code, element) {
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHTML = element.innerHTML;
+                element.style.color = '#D9291C';
+                element.innerHTML = '<i class="fas fa-check" style="font-size: 11px; padding: 2px;"></i>';
+                
+                setTimeout(() => {
+                    element.style.color = '#aaa';
+                    element.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(() => {
+                const tempInput = document.createElement('input');
+                tempInput.value = code;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+            });
+        }
+    </script>
+</body>
+</html>
